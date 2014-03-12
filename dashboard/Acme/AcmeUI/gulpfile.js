@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var debug = require('gulp-debug');
 var clean = require('gulp-clean');
 var browserify = require('gulp-browserify');
 var hbsfy = require('hbsfy').configure({
@@ -6,9 +7,9 @@ var hbsfy = require('hbsfy').configure({
 });
 
 var paths = {
-  scripts: ['./src/main/js/'],
-  resources: './src/main/resoruces/',
-  output: './target'
+  src: './src/main/js/',
+  resources: './src/main/resources/',
+  target: './target'
 };
 
 gulp.task('default', function () {
@@ -16,26 +17,25 @@ gulp.task('default', function () {
 });
 
 gulp.task('clean', function () {
-  gulp.src(paths.output, {read: false})
+  gulp.src(paths.target, {read: false})
+    .pipe(debug())
     .pipe(clean());
 });
 
 gulp.task('build', function () {
-  gulp.src('./src/main/js/app.js')
+  gulp.src(paths.src.concat('app.js'))
+    .pipe(debug())
     .pipe(browserify({
-      transform: [hbsfy],
-      insertGlobals: true,
-      debug: ! gulp.env.production
+      transform: [hbsfy]
+      // ,
+      // insertGlobals: true,
+      // debug: ! gulp.env.production
     }))
-    .pipe(gulp.dest('./target'));
+    .pipe(gulp.dest(paths.target));
 });
 
-// gulp.task('copy', function () {
-//   gulp.src('src/main/resources/**/*.*')
-//     .pipe(gulp.dest('./target'));
-// });
-
 gulp.task('copy', function () {
-  gulp.src('**/*.*', {base: paths.resources})
-    .pipe(gulp.dest(paths.output));
+  gulp.src(paths.resources.concat('**/*.*'))
+    .pipe(debug())
+    .pipe(gulp.dest(paths.target));
 });
