@@ -1,6 +1,7 @@
 var gulp = require('gulp');
-var debug = require('gulp-debug');
 var clean = require('gulp-clean');
+var uglify = require('gulp-uglify');
+var debug = require('gulp-debug');
 var browserify = require('gulp-browserify');
 var hbsfy = require('hbsfy').configure({
   extensions: ['html']
@@ -23,14 +24,16 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build', function () {
-  gulp.src(paths.src.concat('app.js'))
+  gulp.src(paths.src.concat('app.js'), { read: false })
     .pipe(debug())
     .pipe(browserify({
-      transform: [hbsfy]
+      transform: [hbsfy],
       // ,
       // insertGlobals: true,
       // debug: ! gulp.env.production
+      debug: true
     }))
+    .pipe(uglify({ outSourceMap: true }))
     .pipe(gulp.dest(paths.target));
 });
 
