@@ -27,10 +27,9 @@ gulp.task('clean', function () {
 gulp.task('lint', function () {
   return gulp.src(paths.src.concat('**/*.js'))
     // .pipe(debug())
-    .pipe(jshint())
-    // .pipe(jshint('.jshintrc'));
-    // .pipe(jshint.reporter('default'));
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(jshint()) // .pipe(jshint('.jshintrc'));
+    .pipe(jshint.reporter('jshint-stylish')); // .pipe(jshint.reporter('default'));
+    // .pipe(jshint.reporter('fail')); // to fail the build when there's a problem
 });
 
 gulp.task('build', ['lint'], function () {
