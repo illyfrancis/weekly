@@ -1,5 +1,11 @@
 ## Set up
 
+### Mocha
+
+```
+npm install -g mocha
+```
+
 ### Dev dependency
 
 ```

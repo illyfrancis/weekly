@@ -3,6 +3,7 @@ var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
 var debug = require('gulp-debug');
+var mocha = require('gulp-mocha');
 var browserify = require('gulp-browserify');
 var hbsfy = require('hbsfy').configure({
   extensions: ['html']
@@ -30,6 +31,18 @@ gulp.task('lint', function () {
     .pipe(jshint()) // .pipe(jshint('.jshintrc'));
     .pipe(jshint.reporter('jshint-stylish')); // .pipe(jshint.reporter('default'));
     // .pipe(jshint.reporter('fail')); // to fail the build when there's a problem
+});
+
+gulp.task('test', function () {
+  gulp.src('./src/test/js/**.js')
+    // .pipe(mocha({reporter: 'landing'}));
+    // .pipe(mocha({reporter: 'spec'}));
+    // .pipe(mocha({reporter: 'dot'}));
+    // .pipe(mocha({reporter: 'nyan'}));
+    // .pipe(mocha({reporter: 'html'}));
+    // .pipe(mocha({reporter: 'html'}));
+    .pipe(mocha({reporter: 'markdown'}))
+    .pipe(gulp.dest('out.md'));
 });
 
 gulp.task('build', ['lint'], function () {
