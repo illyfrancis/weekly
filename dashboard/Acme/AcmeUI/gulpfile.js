@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
+var jshint = require('gulp-jshint');
 var debug = require('gulp-debug');
 var browserify = require('gulp-browserify');
 var hbsfy = require('hbsfy').configure({
@@ -18,14 +19,23 @@ gulp.task('default', function () {
 });
 
 gulp.task('clean', function () {
-  gulp.src(paths.target, {read: false})
+  return gulp.src(paths.target, {read: false})
     .pipe(debug())
     .pipe(clean());
 });
 
-gulp.task('build', function () {
+gulp.task('lint', function () {
+  return gulp.src(paths.src.concat('**/*.js'))
+    // .pipe(debug())
+    .pipe(jshint())
+    // .pipe(jshint('.jshintrc'));
+    // .pipe(jshint.reporter('default'));
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
+gulp.task('build', ['lint'], function () {
   gulp.src(paths.src.concat('app.js'), { read: false })
-    .pipe(debug())
+    // .pipe(debug())
     .pipe(browserify({
       transform: [hbsfy],
       // ,
