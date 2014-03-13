@@ -34,15 +34,21 @@ gulp.task('lint', function () {
 });
 
 gulp.task('test', function () {
-  gulp.src('./src/test/js/**.js')
-    // .pipe(mocha({reporter: 'landing'}));
-    // .pipe(mocha({reporter: 'spec'}));
-    // .pipe(mocha({reporter: 'dot'}));
-    // .pipe(mocha({reporter: 'nyan'}));
-    // .pipe(mocha({reporter: 'html'}));
-    // .pipe(mocha({reporter: 'html'}));
-    .pipe(mocha({reporter: 'markdown'}))
-    .pipe(gulp.dest('out.md'));
+  gulp.src('./src/test/js/**/*.js')
+    // .pipe(debug())
+    .pipe(mocha({reporter: 'spec'}))
+    // .pipe(mocha({reporter: 'landing'}))
+    // .pipe(mocha({reporter: 'dot'}))
+    // .pipe(mocha({reporter: 'nyan'}))
+    // .pipe(mocha({reporter: 'html'}))
+    // .pipe(mocha({reporter: 'html'}))
+    // .pipe(mocha({reporter: 'markdown'}))
+    .on('error', function (err) {
+      // handle the mocha errors so that they don't cloud the test results,
+      // or end the watch
+      console.log(err.toString());
+      this.emit('end');
+    });
 });
 
 gulp.task('build', ['lint'], function () {
@@ -50,12 +56,11 @@ gulp.task('build', ['lint'], function () {
     // .pipe(debug())
     .pipe(browserify({
       transform: [hbsfy],
-      // ,
       // insertGlobals: true,
       // debug: ! gulp.env.production
       debug: true
     }))
-    .pipe(uglify({ outSourceMap: true }))
+    // .pipe(uglify({ outSourceMap: true }))
     .pipe(gulp.dest(paths.target));
 });
 
