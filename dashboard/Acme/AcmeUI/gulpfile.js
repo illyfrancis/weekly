@@ -33,9 +33,21 @@ gulp.task('lint', function () {
     // .pipe(jshint.reporter('fail')); // to fail the build when there's a problem
 });
 
+gulp.task('test-single', function () {
+  gulp.src('./**/*.js', { cwd: './src/test/js' })
+    .pipe(debug())
+    .pipe(mocha({reporter: 'spec'}))
+    .on('error', function (err) {
+      // handle the mocha errors so that they don't cloud the test results,
+      // or end the watch
+      console.log(err.toString());
+      this.emit('end');
+    });
+});
+
 gulp.task('test', function () {
   gulp.src('./src/test/js/**/*.js')
-    // .pipe(debug())
+    .pipe(debug())
     .pipe(mocha({reporter: 'spec'}))
     // .pipe(mocha({reporter: 'landing'}))
     // .pipe(mocha({reporter: 'dot'}))
