@@ -51,6 +51,29 @@ gulp.task('test', function () {
     });
 });
 
+gulp.task('test-compile', function () {
+  gulp.src('./src/test/js/**/*.js', { read: false })
+    // .pipe(debug())
+    .pipe(browserify({
+      // external: 'backbone'
+      external: ['backbone', '../../../main/js/models/client']
+    }))
+    .pipe(gulp.dest(paths.target));
+});
+
+gulp.task('test-build', function () {
+  gulp.src(paths.src.concat('app.js'), { read: false })
+    // .pipe(debug())
+    .pipe(browserify({
+      transform: [hbsfy],
+      // exclude: 'backbone'
+      external: 'backbone'
+    }))
+    // .pipe(uglify({ outSourceMap: true }))
+    .pipe(gulp.dest(paths.target));
+});
+
+
 gulp.task('build', ['lint'], function () {
   gulp.src(paths.src.concat('app.js'), { read: false })
     // .pipe(debug())
