@@ -1,5 +1,5 @@
 var Backbone = require('backbone');
-var template = require('./templates/client.html');
+var template = require('../templates/client.html');
 
 var ClientView = Backbone.View.extend({
 
