@@ -67,8 +67,11 @@ gulp.task('test-compile', function () {
   gulp.src('./src/test/js/**/*.js', { read: false })
     // .pipe(debug())
     .pipe(browserify({
+      ignore: ['backbone'],
+      // external: './src/main/js/**/*'
+      external: '../../../src/main/js/models/client'
       // external: 'backbone'
-      external: ['backbone', '../../../main/js/models/client']
+      // external: ['backbone', '../../../main/js/models/client']
     }))
     .pipe(gulp.dest(paths.target));
 });

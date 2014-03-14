@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Client = require('../../main/js/models/client');
+var Client = require('../../../src/main/js/models/client');
 var _ = require('underscore');
 
 describe('Client', function () {
