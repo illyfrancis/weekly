@@ -3,8 +3,13 @@ var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
 var debug = require('gulp-debug');
+var rename = require('gulp-rename');
 var mocha = require('gulp-mocha');
-var browserify = require('gulp-browserify');
+var g_browserify = require('gulp-browserify');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream')
+var streamify = require('gulp-streamify');
+var buffer = require('gulp-buffer');
 var hbsfy = require('hbsfy').configure({
   extensions: ['html']
 });
@@ -64,28 +69,50 @@ gulp.task('test', function () {
 });
 
 gulp.task('test-compile', function () {
-  gulp.src('./src/test/js/**/*.js', { read: false })
+  // var b = browserify(['./src/test/js/**/*.js']);
+  var b = browserify(['./src/test/js/client.js']);
+  b.transform(hbsfy)
+    // .bundle({ debug: true })
+    .external('../../../src/main/js/models/client')
+    .external('backbone')
+    // .external('backbone')
+    .bundle()
+    .pipe(source('test_bundle.js'))
+    // .pipe(streamify(debug()))
+    // .pipe(streamify(uglify()))
     // .pipe(debug())
-    .pipe(browserify({
-      ignore: ['backbone'],
-      // external: './src/main/js/**/*'
-      external: '../../../src/main/js/models/client'
-      // external: 'backbone'
-      // external: ['backbone', '../../../main/js/models/client']
-    }))
-    .pipe(gulp.dest(paths.target));
+    .pipe(gulp.dest('./bundle'))
+});
+
+gulp.task('browserify', function() {
+  var b = browserify(paths.src.concat('app.js'));
+  b.transform(hbsfy)
+    // b.bundle({ debug: true })
+    .bundle()
+    .pipe(source('foo.js'))
+    // .pipe(streamify(debug()))
+    // .pipe(streamify(uglify()))
+    // .pipe(debug())
+    .pipe(gulp.dest('./bundle'))
 });
 
 gulp.task('test-build', function () {
-  gulp.src(paths.src.concat('app.js'), { read: false })
+  gulp.src('./src/test/js/**/*.js', { read: false })
     // .pipe(debug())
-    .pipe(browserify({
-      transform: [hbsfy],
-      // exclude: 'backbone'
-      external: 'backbone'
-    }))
+    .pipe(
+      g_browserify({
+        transform: [hbsfy],
+        // exclude: 'backbone'
+        external: 'backbone'
+      })
+      .on('prebundle', function (bundler) {
+        console.log('prebundle: ' + __dirname + " : " + bundler);
+        // bundler.require(__dirname + '../../../src/main/js/models/client', { expose: 'bogus' })
+        bundler.require('../../../src/main/js/models/client', { expose: 'bogus' })
+      })
+    )
     // .pipe(uglify({ outSourceMap: true }))
-    .pipe(gulp.dest(paths.target));
+    .pipe(gulp.dest('./test'));
 });
 
 
