@@ -9,4 +9,4 @@ var view = new ClientView({
   model: new Client()
 });
 
-view.render();
+// view.render();

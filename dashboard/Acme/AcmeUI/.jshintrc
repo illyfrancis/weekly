@@ -3,7 +3,8 @@
   "unused": true,
   "globals": { 
     "MY_GLOBAL": false,
-    // "require": true,
+    "require": true,
+    "describe": true,
     "module": true
   }
 }

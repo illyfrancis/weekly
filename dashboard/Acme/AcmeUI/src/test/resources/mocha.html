@@ -1,22 +1,29 @@
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Mocha Tests</title>
-  <link rel="stylesheet" href="mocha.css" />
-</head>
-<body>
-  <div id="mocha"></div>
-  <script src="jquery.js"></script>
-  <script src="expect.js"></script>
-  <script src="mocha.js"></script>
-  <script>mocha.setup('bdd')</script>
-  <script src="test.array.js"></script>
-  <script src="test.object.js"></script>
-  <script src="test.xhr.js"></script>
-  <script>
-    mocha.checkLeaks();
-    mocha.globals(['jQuery']);
-    mocha.run();
-  </script>
-</body>
+  <head>
+    <title>Mocha Tests</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <!-- 
+    <script src="chai.js"></script>
+    -->
+    <script>
+      mocha.ui('bdd');
+      mocha.reporter('html');
+      // expect = chai.expect;
+    </script>
+    <script src="main.js"></script>
+    <script src="test.js"></script>
+    <script>
+      if (window.mochaPhantomJS) { 
+        console.log('1....');
+        mochaPhantomJS.run(); }
+      else { 
+        console.log('2...');
+        mocha.run(); }
+    </script>
+  </body>
 </html>

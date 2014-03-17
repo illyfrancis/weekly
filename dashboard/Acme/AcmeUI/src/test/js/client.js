@@ -8,7 +8,6 @@ describe('Client', function () {
       assert.equal('ABC Co.', client.get('name'));
     });
     it('should do something', function () {
-      console.log('hellooooo : ' + _.values(module));
       assert.equal(true, true);
     });
   });
