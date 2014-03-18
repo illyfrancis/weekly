@@ -75,7 +75,7 @@ module.exports = function (grunt) {
           aliasMappings: [{
             cwd: '.',
             src: 'src/main/js/**/*.js',
-            dest: 'buz'
+            dest: '.'
           }],
           // debug: true
         }
@@ -84,7 +84,7 @@ module.exports = function (grunt) {
         src: ['src/test/js/**/*.js'],
         dest: 'target/test.js',
         options: {
-          external: ['src/main/**/*.js', 'backbone'],
+          external: ['src/main/js/**/*.js'],
           // ignore: 'backbone'
         }
       }

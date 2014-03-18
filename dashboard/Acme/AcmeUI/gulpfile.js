@@ -87,13 +87,43 @@ gulp.task('test-compile', function () {
 gulp.task('browserify', function() {
   var b = browserify(paths.src.concat('app.js'));
   b.transform(hbsfy)
+    .require('./src/main/js/models/client', { expose: 'bogus'})
     // b.bundle({ debug: true })
     .bundle()
-    .pipe(source('foo.js'))
+    .pipe(source('app.js'))
     // .pipe(streamify(debug()))
     // .pipe(streamify(uglify()))
     // .pipe(debug())
     .pipe(gulp.dest('./bundle'))
+});
+
+gulp.task('browserify-test', function() {
+  var b = browserify(['./src/test/js/client.js']);
+  b.transform(hbsfy)
+    .external('./src/main/js/models/client.js')
+    .external('backbone')
+    // b.bundle({ debug: true })
+    .bundle()
+    .pipe(source('test.js'))
+    .pipe(gulp.dest('./bundle'))
+});
+
+
+gulp.task('test-main', function () {
+  gulp.src('./src/main/js/app.js', { read: false })
+    .pipe(
+      g_browserify({
+        transform: [hbsfy]
+      })
+      .on('prebundle', function (bundler) {
+        console.log('> prebundle: dir [' + __dirname 
+          + "], file [" + __filename + "]");
+        // bundler.require(__dirname + '../../../src/main/js/models/client', { expose: 'bogus' })
+        // bundler.require('./src/main/js/**/*.js', { expose: 'bogus' })
+      })
+    )
+    // .pipe(uglify({ outSourceMap: true }))
+    .pipe(gulp.dest('./test-build'));
 });
 
 gulp.task('test-build', function () {
@@ -103,16 +133,16 @@ gulp.task('test-build', function () {
       g_browserify({
         transform: [hbsfy],
         // exclude: 'backbone'
-        external: 'backbone'
+        external: ['./src/main/js/models/client.js']
       })
-      .on('prebundle', function (bundler) {
-        console.log('prebundle: ' + __dirname + " : " + bundler);
-        // bundler.require(__dirname + '../../../src/main/js/models/client', { expose: 'bogus' })
-        bundler.require('../../../src/main/js/models/client', { expose: 'bogus' })
-      })
+      // .on('prebundle', function (bundler) {
+      //   console.log('prebundle: ' + __dirname + " : " + bundler);
+      //   // bundler.require(__dirname + '../../../src/main/js/models/client', { expose: 'bogus' })
+      //   bundler.require('../../../src/main/js/models/client', { expose: 'bogus' })
+      // })
     )
     // .pipe(uglify({ outSourceMap: true }))
-    .pipe(gulp.dest('./test'));
+    .pipe(gulp.dest('./test-build'));
 });
 
 
