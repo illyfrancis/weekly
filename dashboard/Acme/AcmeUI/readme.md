@@ -6,6 +6,31 @@
 npm install -g mocha
 ```
 
+### Mocha phantomjs
+
+```
+npm install -g mocha-phantomjs
+```
+
+Has dependency on Phantomjs. On Windows install by downloading directly, on others use `npm install -g phantomjs`.
+
+Also need to update the default spec runner with:
+
+```
+  <script>
+    if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
+    else { mocha.run(); }
+  </script>
+```
+
+Then run it by
+
+```
+$ mocha-phantomjs -R spec -p {path.to.phantomjs.exe} mocha.html
+```
+
+E.g. `$ mocha-phantomjs -p d:\apps\phantomjs-1.9.7-windows\phantomjs.exe -R spec target/mocha.html`
+
 ### Dev dependency
 
 ```
@@ -13,8 +38,8 @@ npm init
 
 npm install gulp --save-dev
 npm install gulp-clean --save-dev
-npm install gulp-browserify --save-dev
 npm install hbsfy --save-dev
+...
 ```
 
 ### Dependency
