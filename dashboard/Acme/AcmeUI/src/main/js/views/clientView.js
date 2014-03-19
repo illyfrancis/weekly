@@ -1,6 +1,7 @@
 /*global alert*/
 var Backbone = require('backbone');
 var template = require('../templates/client.html');
+var bootstrap = require('../../../../lib/bootstrap-3.1.1/js/bootstrap');
 
 var ClientView = Backbone.View.extend({
 
