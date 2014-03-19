@@ -1,4 +1,6 @@
+var args = require('yargs').argv;
 var gulp = require('gulp');
+var gulpif = require('gulp-if');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
@@ -27,6 +29,13 @@ var paths = {
   target: './target',
 };
 
+// gulp xxx --Env production
+var isProduction = args.Env === 'production';
+
+gulp.task('foo', function () {
+  console.log('prod : ' + isProduction);
+});
+
 gulp.task('lint', function () {
   return gulp.src(['gulpfile.js', paths.main.js, paths.test.js])
     .pipe(jshint())
@@ -34,8 +43,13 @@ gulp.task('lint', function () {
 });
 
 gulp.task('test', function () {
-  gulp.src(paths.test.js)
-    .pipe(mocha({reporter: 'spec'})) // nyan, markdown
+  gulp.src(paths.test.js, {read: false})
+    .pipe(mocha({
+      reporter: 'spec',
+      // globals: {
+      //   should: requier('should')
+      // }
+    })) // nyan, markdown
     .on('error', function (err) {
       console.log(err.toString());
       this.emit('end');
@@ -46,10 +60,9 @@ gulp.task('bundle', function () {
   var b = browserify();
   b.add(paths.main.app)
     .transform(hbsfy)
-    // .bundle()
-    .bundle({debug: ! gulp.env.production})
+    .bundle({debug: ! isProduction})
     .pipe(source('app.js'))
-    // .pipe(streamify(uglify()))
+    .pipe(streamify(gulpif(isProduction, uglify())))
     .pipe(gulp.dest(paths.target));
 });
 
