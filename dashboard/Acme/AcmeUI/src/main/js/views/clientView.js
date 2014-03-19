@@ -3,7 +3,7 @@ var template = require('../templates/client.html');
 
 var ClientView = Backbone.View.extend({
 
-  el: 'body',
+  // el: 'body',
 
   events: {
     'click': 'toggle'

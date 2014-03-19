@@ -15,85 +15,82 @@ var hbsfy = require('hbsfy').configure({
 });
 
 var paths = {
-  src: './src/main/js/',
-  resources: './src/main/resources/',
-  target: './target'
+  main: {
+    app: './src/main/js/app.js',
+    js: './src/main/js/**/*.js',
+    resources: './src/main/resources/**/*.*'
+  },
+  test: {
+    js: './src/test/js/**/*.js',
+    resources: './src/test/resources/**/*.*'
+  },
+  target: './target',
 };
 
-gulp.task('default', ['test', 'bundle-test', 'bundle-core', 'build'], function () {
-  console.log('default task');
-});
-
-gulp.task('clean', function () {
-  return gulp.src(paths.target, {read: false})
-    .pipe(debug())
-    .pipe(clean());
-});
-
 gulp.task('lint', function () {
-  return gulp.src(['./src/main/js/**/*.js', 'gulpfile.js', './src/test/js/**/*.js'])
-    // .pipe(debug())
-    .pipe(jshint()) // .pipe(jshint('.jshintrc'));
-    .pipe(jshint.reporter('jshint-stylish')); // .pipe(jshint.reporter('default'));
-    // .pipe(jshint.reporter('fail')); // to fail the build when there's a problem
+  return gulp.src(['gulpfile.js', paths.main.js, paths.test.js])
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('test', function () {
-  gulp.src('./src/test/js/**/*.js')
-    .pipe(mocha({ reporter: 'spec' }))
-    // .pipe(mocha({reporter: 'nyan'}))
-    // .pipe(mocha({reporter: 'markdown'}))
+  gulp.src(paths.test.js)
+    .pipe(mocha({reporter: 'spec'})) // nyan, markdown
     .on('error', function (err) {
       console.log(err.toString());
       this.emit('end');
     });
 });
 
-gulp.task('build', function () {
+gulp.task('bundle', function () {
   var b = browserify();
-  b.add('./src/main/js/app.js')
+  b.add(paths.main.app)
     .transform(hbsfy)
-    .bundle() // .bundle({ debug: ! gulp.env.production })
+    // .bundle()
+    .bundle({debug: ! gulp.env.production})
     .pipe(source('app.js'))
-    .pipe(streamify(uglify()))
-    .pipe(gulp.dest('./target'));
+    // .pipe(streamify(uglify()))
+    .pipe(gulp.dest(paths.target));
 });
 
 gulp.task('bundle-test', function () {
   var b = browserify();
-  // externalize core
-  glob.sync('./src/main/js/**/*.js').forEach(function (file) {
+  glob.sync(paths.main.js).forEach(function (file) {
     b.external(file);
   });
-  // add all tests
-  glob.sync('./src/test/js/**/*.js').forEach(function (file) {
+  glob.sync(paths.test.js).forEach(function (file) {
     b.add(file);
   });
-
   b.bundle()
-    .pipe(source('bundle_test.js'))
-    .pipe(gulp.dest('./target'));
+    .pipe(source('tests.js'))
+    .pipe(gulp.dest(paths.target));
 });
 
 gulp.task('bundle-core', function () {
   var b = browserify();
-  // export core modules
-  glob.sync('./src/main/js/**/*.js').forEach(function (file) {
-    b.require(file, { expose: '.' });
-  });
-  // add individual modules instead of single main
-  glob.sync('./src/main/js/**/*.js').forEach(function (file) {
+  glob.sync(paths.main.js).forEach(function (file) {
     b.add(file);
+    b.require(file, {expose: '.'});
   });
-  // b.add('./src/main/js/app.js')
   b.transform(hbsfy)
     .bundle()
-    .pipe(source('bundle_core.js'))
-    .pipe(gulp.dest('./target'));
-});
-
-gulp.task('copy', function () {
-  gulp.src(paths.resources.concat('**/*.*'))
-    .pipe(debug())
+    .pipe(source('core.js'))
     .pipe(gulp.dest(paths.target));
 });
+
+gulp.task('copy-resources', function () {
+  return gulp.src([paths.main.resources, paths.test.resources])
+    .pipe(gulp.dest(paths.target));
+});
+
+gulp.task('clean', function () {
+  return gulp.src(paths.target, {read: false})
+    .pipe(clean());
+});
+
+gulp.task('test-build', ['bundle-core', 'bundle-test']);
+
+gulp.task('default', ['test', 'bundle-test', 'bundle-core', 'bundle'], function () {
+  console.log('default task');
+});
+

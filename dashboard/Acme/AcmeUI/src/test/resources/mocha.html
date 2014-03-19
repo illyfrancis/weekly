@@ -1,29 +1,19 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Mocha Tests</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+    <title>Mocha</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mocha.css" />
   </head>
   <body>
     <div id="mocha"></div>
-    <script src="../node_modules/mocha/mocha.js"></script>
-    <!-- 
-    <script src="chai.js"></script>
-    -->
+    <script src="mocha.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <script src="core.js"></script>
+    <script src="tests.js"></script>
     <script>
-      mocha.ui('bdd');
-      mocha.reporter('html');
-      // expect = chai.expect;
-    </script>
-    <script src="main.js"></script>
-    <script src="test.js"></script>
-    <script>
-      if (window.mochaPhantomJS) { 
-        console.log('1....');
-        mochaPhantomJS.run(); }
-      else { 
-        console.log('2...');
-        mocha.run(); }
+      mocha.run();
     </script>
   </body>
 </html>
