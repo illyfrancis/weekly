@@ -1,21 +1,22 @@
+// var buffer = require('gulp-buffer');
+// var changed = require('gulp-changed');
+// var debug = require('gulp-debug');
+// var rename = require('gulp-rename');
 var args = require('yargs').argv;
+var browserify = require('browserify');
+var clean = require('gulp-clean');
+var glob = require('glob');
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
-var clean = require('gulp-clean');
-var uglify = require('gulp-uglify');
+var gutil = require('gulp-util');
+var hbsfy = require('hbsfy').configure({extensions: ['html']});
 var jshint = require('gulp-jshint');
-var debug = require('gulp-debug');
-var rename = require('gulp-rename');
 var mocha = require('gulp-mocha');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream')
+var source = require('vinyl-source-stream');
 var streamify = require('gulp-streamify');
-var buffer = require('gulp-buffer');
-var glob = require('glob');
-var hbsfy = require('hbsfy').configure({
-  extensions: ['html']
-});
+var uglify = require('gulp-uglify');
 
+// var paths = require('./config.json');
 var paths = {
   main: {
     app: './src/main/js/app.js',
@@ -26,20 +27,21 @@ var paths = {
     js: './src/test/js/**/*.js',
     resources: './src/test/resources/**/*.*'
   },
-  target: './target',
+  target: './target'
 };
 
 // gulp xxx --Env production
 var isProduction = args.Env === 'production';
 
-gulp.task('foo', function () {
-  console.log('prod : ' + isProduction);
-});
-
 gulp.task('lint', function () {
   return gulp.src(['gulpfile.js', paths.main.js, paths.test.js])
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(gulp.dest('./lint'));
+});
+
+gulp.task("watch-lint", function () {
+  gulp.watch(['.jshintrc', 'gulpfile.js', paths.main.js, paths.test.js], ['lint']);
 });
 
 gulp.task('test', function () {
@@ -51,7 +53,7 @@ gulp.task('test', function () {
       // }
     })) // nyan, markdown
     .on('error', function (err) {
-      console.log(err.toString());
+      gutil.log(err.toString());
       this.emit('end');
     });
 });
@@ -104,6 +106,6 @@ gulp.task('clean', function () {
 gulp.task('test-build', ['bundle-core', 'bundle-test']);
 
 gulp.task('default', ['test', 'bundle-test', 'bundle-core', 'bundle'], function () {
-  console.log('default task');
+  gutil.log('default task');
 });
 

@@ -1,10 +1,10 @@
+/*global alert*/
 var Backbone = require('backbone');
 var template = require('../templates/client.html');
 
 var ClientView = Backbone.View.extend({
 
   // el: 'body',
-
   events: {
     'click': 'toggle'
   },
@@ -17,7 +17,6 @@ var ClientView = Backbone.View.extend({
   toggle: function () {
     alert('hola');
   }
-
 });
 
 module.exports = ClientView;

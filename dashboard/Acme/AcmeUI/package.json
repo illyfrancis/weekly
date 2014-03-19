@@ -30,7 +30,9 @@
     "jshint": "^2.4.4",
     "jshint-stylish": "^0.1.5",
     "vinyl-source-stream": "^0.1.1",
-    "yargs": "^1.2.1"
+    "yargs": "^1.2.1",
+    "gulp-util": "^2.2.14",
+    "gulp-changed": "^0.2.1"
   },
   "dependencies": {
     "backbone": "^1.1.2",
