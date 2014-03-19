@@ -1,4 +1,4 @@
-// var buffer = require('gulp-buffer');
+//var buffer = require('gulp-buffer');
 // var changed = require('gulp-changed');
 // var debug = require('gulp-debug');
 // var rename = require('gulp-rename');
@@ -36,8 +36,7 @@ var isProduction = args.Env === 'production';
 gulp.task('lint', function () {
   return gulp.src(['gulpfile.js', paths.main.js, paths.test.js])
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(gulp.dest('./lint'));
+    .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task("watch-lint", function () {
@@ -58,7 +57,7 @@ gulp.task('test', function () {
     });
 });
 
-gulp.task('bundle', function () {
+gulp.task('build', function () {
   var b = browserify();
   b.add(paths.main.app)
     .transform(hbsfy)
@@ -105,7 +104,6 @@ gulp.task('clean', function () {
 
 gulp.task('test-build', ['bundle-core', 'bundle-test']);
 
-gulp.task('default', ['test', 'bundle-test', 'bundle-core', 'bundle'], function () {
+gulp.task('default', ['test', 'test-build', 'build'], function () {
   gutil.log('default task');
 });
-
