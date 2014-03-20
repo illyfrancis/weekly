@@ -5,10 +5,15 @@ var ClientView = require('./views/clientView');
 var AppRouter = Backbone.Router.extend({
 
   routes: {
+    '': 'start',
     'about': 'showAbout', // http://app.acme.com/#about
     'search/:query': 'search',
-    'other': 'defaultRoute',
-    'client': 'showClient'
+    'client': 'showClient',
+    '*default': 'defaultRoute'
+  },
+
+  start: function () {
+    console.log('starting point...');
   },
 
   showAbout: function () {

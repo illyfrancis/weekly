@@ -7,4 +7,4 @@ require('bootstrap');
 var AppRouter = require('./router');
 var router = new AppRouter();
 Backbone.history.start();
-router.navigate('client', {trigger: true});
+// router.navigate('client', {trigger: true});
