@@ -104,6 +104,11 @@ gulp.task('clean', function () {
 
 gulp.task('test-build', ['bundle-core', 'bundle-test']);
 
+gulp.task('build-all', ['lint', 'test', 'test-build', 'build']);
+gulp.task('watch-build-all', ['build-all'], function () {
+  gulp.watch(['.jshintrc', 'gulpfile.js', paths.main.js, paths.test.js], ['build-all']);
+});
+
 gulp.task('default', ['test', 'test-build', 'build'], function () {
   gutil.log('default task');
 });

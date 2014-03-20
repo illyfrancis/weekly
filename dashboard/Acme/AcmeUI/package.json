@@ -2,17 +2,15 @@
   "name": "AcmeUI",
   "version": "0.0.0",
   "description": "Acme client",
-  "main": "app.js",
+  "main": "./src/main/js/app.js",
   "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./src/test/js"
   },
   "author": "me",
   "license": "ISC",
   "devDependencies": {
     "browserify": "^3.32.1",
+    "browserify-shim": "^3.2.2",
     "glob": "^3.2.9",
     "gulp": "^3.5.5",
     "gulp-browserify": "^0.5.0",
@@ -36,7 +34,14 @@
   },
   "dependencies": {
     "backbone": "^1.1.2",
-    "jquery": "^2.1.0",
+    "moment": "^2.5.1",
     "underscore": "^1.6.0"
+  },
+  "browser": {
+    "bootstrap": "./lib/bootstrap-3.1.1/js/bootstrap.js",
+    "jquery": "./lib/jquery-1.11.0.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

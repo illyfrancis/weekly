@@ -1,7 +1,7 @@
+var $ = global.jQuery = require('jquery');
 var Backbone = require('backbone');
-var $ = require('jquery');
 Backbone.$ = $;
-global.jQuery = $;
+require('bootstrap');
 
 var Client = require('./models/client'),
     ClientView = require('./views/clientView');
