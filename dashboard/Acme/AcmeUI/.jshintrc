@@ -5,6 +5,7 @@
   "trailing": true,
   "white": true,
   "globals": { 
+    "console": true,
     "global": true,
     "require": true,
     "module": true,
