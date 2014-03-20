@@ -1,11 +1,14 @@
 var Backbone = require('backbone');
 
+var Client = require('./models/client');
+var ClientView = require('./views/clientView');
 var AppRouter = Backbone.Router.extend({
 
   routes: {
     'about': 'showAbout', // http://app.acme.com/#about
     'search/:query': 'search',
-    'other': 'defaultRoute'
+    'other': 'defaultRoute',
+    'client': 'showClient'
   },
 
   showAbout: function () {
@@ -19,6 +22,15 @@ var AppRouter = Backbone.Router.extend({
 
   defaultRoute: function (other) {
     console.log('invalid, you attempted to reach: ' + other);
+  },
+
+  showClient: function () {
+    var view = new ClientView({
+      model: new Client()
+    });
+
+    // hack
+    Backbone.$('body').append(view.render().el);
   }
 });
 

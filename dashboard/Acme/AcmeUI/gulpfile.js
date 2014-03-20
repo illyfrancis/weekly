@@ -64,7 +64,11 @@ gulp.task('build', function () {
     .bundle({debug: ! isProduction})
     .pipe(source('app.js'))
     .pipe(streamify(gulpif(isProduction, uglify())))
-    .pipe(gulp.dest(paths.target));
+    .pipe(gulp.dest(paths.target))
+    .on('error', function (err) {
+      gutil.log(err.toString());
+      this.emit('end');
+    });
 });
 
 gulp.task('bundle-test', function () {
