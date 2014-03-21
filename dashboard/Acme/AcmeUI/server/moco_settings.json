@@ -1,0 +1,8 @@
+[
+    {
+        "include" : "moco_foo.json"
+    },
+    {
+        "include" : "moco_bar.json"
+    }
+]

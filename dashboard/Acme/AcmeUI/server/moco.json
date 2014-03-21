@@ -3,9 +3,23 @@
     "uri": "/foo"
   },
   "response": {
-    "text": "bar"
+    "headers": {
+      "content-type": "application/json"
+    },
+    "text": "{\"foo\": \"bar\"}"
   }
-}, { 
+}, 
+{
+    "request": {
+        "uri": "/json"
+    },
+    "response": {
+        "json": {
+            "foo" : "bar"
+        }
+    }
+},
+  { 
   "mount": {
     "dir": "../target",
     "uri": "/"
