@@ -1,0 +1,12 @@
+{
+  "main": {
+    "app": "./src/main/js/app.js",
+    "js": "./src/main/js/**/*.js",
+    "resources": "./src/main/resources/**/*.*"
+  },
+  "test": {
+    "js": "./src/test/js/**/*.js",
+    "resources": "./src/test/resources/**/*.*"
+  },
+  "target": "./target"
+}
