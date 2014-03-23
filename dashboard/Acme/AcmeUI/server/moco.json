@@ -8,18 +8,16 @@
     },
     "text": "{\"foo\": \"bar\"}"
   }
-}, 
-{
+}, {
     "request": {
-        "uri": "/json"
+        "uri": "/json",
+        "method": "post"
     },
     "response": {
-        "json": {
-            "foo" : "bar"
-        }
+        "file": "package.json"
     }
 },
-  { 
+{ 
   "mount": {
     "dir": "../target",
     "uri": "/"
