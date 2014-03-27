@@ -2,6 +2,7 @@
 
 var assert = require('assert');
 var Books = require('../../../src/main/js/models/books');
+// var sinon = sinon || require('sinon');
 
 describe('Pageable Collection', function () {
 

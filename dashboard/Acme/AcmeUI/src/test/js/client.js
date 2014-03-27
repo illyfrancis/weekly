@@ -1,5 +1,6 @@
 var assert = require('assert');
 var Client = require('../../../src/main/js/models/client');
+var sinon = require('sinon');
 
 describe('Client', function () {
   describe('# new Client()', function () {
