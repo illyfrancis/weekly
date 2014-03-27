@@ -47,8 +47,10 @@ gulp.task('test', function () {
   gulp.src(paths.test.js, {read: false})
     .pipe(mocha({
       reporter: 'spec',
+      grep: '#browser:',
+      invert: true,
       // globals: {
-      //   should: requier('should')
+      //   should: require('should')
       // }
     })) // nyan, markdown
     .on('error', function (err) {

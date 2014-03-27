@@ -33,13 +33,14 @@
   "dependencies": {
     "backbone": "^1.1.2",
     "moment": "^2.5.1",
-    "underscore": "^1.6.0"
+    "underscore": "^1.6.0",
+    "backbone-pageable": "^1.4.5"
   },
   "browser": {
     "bootstrap": "./lib/bootstrap-3.1.1/js/bootstrap.js",
     "jquery": "./lib/jquery-1.11.0.js"
   },
   "scripts": {
-    "test": "mocha -R nyan --recursive src/test"
+    "test": "mocha -R nyan --recursive src/test/js -g #browser: -i"
   }
 }
