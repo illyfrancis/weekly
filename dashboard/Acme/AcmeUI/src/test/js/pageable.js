@@ -1,16 +1,11 @@
 /*global sinon*/
-global.XMLHttpRequest = function () {}
-
 var assert = require('assert');
 var Books = require('../../../src/main/js/models/books');
-var sinon = require('sinon');
-global.sinon = sinon;
-var xhrx = require('sinon/lib/sinon/util/fake_xml_http_request');
 
 describe('Pageable Collection', function () {
 
   describe('non browserx test require', function () {
-    it('should be run', function () {
+    it('should run in node test', function () {
       assert.equal('foo', 'foo');
     });
   });
