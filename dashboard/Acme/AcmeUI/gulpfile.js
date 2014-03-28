@@ -75,6 +75,7 @@ gulp.task('build', function () {
 
 gulp.task('bundle-test', function () {
   var b = browserify();
+  b.ignore('sinon');
   glob.sync(paths.main.js).forEach(function (file) {
     b.external(file);
   });
