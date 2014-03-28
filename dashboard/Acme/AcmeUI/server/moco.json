@@ -10,8 +10,8 @@
   }
 }, {
     "request": {
-        "uri": "/json",
-        "method": "post"
+        "uri": "/books",
+        "method": "get"
     },
     "response": {
         "file": "package.json",

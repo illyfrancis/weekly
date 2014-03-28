@@ -1,5 +1,6 @@
 var Backbone = require('backbone');
 
+var Books = require('./models/books');
 var Client = require('./models/client');
 var ClientView = require('./views/clientView');
 var AppRouter = Backbone.Router.extend({
@@ -14,6 +15,8 @@ var AppRouter = Backbone.Router.extend({
 
   start: function () {
     console.log('starting point...');
+    var books = new Books();
+    books.fetch();
   },
 
   showAbout: function () {
