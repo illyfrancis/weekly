@@ -1,3 +1,4 @@
+/*global sinon*/
 var assert = require('assert');
 var Client = require('../../../src/main/js/models/client');
 

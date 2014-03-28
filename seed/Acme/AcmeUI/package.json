@@ -28,7 +28,8 @@
     "jshint": "^2.4.4",
     "jshint-stylish": "^0.1.5",
     "vinyl-source-stream": "^0.1.1",
-    "yargs": "^1.2.1"
+    "yargs": "^1.2.1",
+    "sinon": "^1.9.0"
   },
   "dependencies": {
     "backbone": "^1.1.2",
@@ -40,6 +41,6 @@
     "jquery": "./lib/jquery-1.11.0.js"
   },
   "scripts": {
-    "test": "mocha -R nyan --recursive src/test"
+    "test": "mocha -R nyan --recursive src/test/js/node"
   }
 }

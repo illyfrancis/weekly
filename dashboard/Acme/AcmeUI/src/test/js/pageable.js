@@ -1,8 +1,11 @@
 /*global sinon*/
+global.XMLHttpRequest = function () {}
 
 var assert = require('assert');
 var Books = require('../../../src/main/js/models/books');
-// var sinon = sinon || require('sinon');
+var sinon = require('sinon');
+global.sinon = sinon;
+var xhrx = require('sinon/lib/sinon/util/fake_xml_http_request');
 
 describe('Pageable Collection', function () {
 
@@ -17,16 +20,14 @@ describe('Pageable Collection', function () {
     var xhr, requests;
 
     beforeEach(function () {
-      console.log('beforeEach');
       xhr = sinon.useFakeXMLHttpRequest();
       requests = [];
       xhr.onCreate = function (req) {
         requests.push(req);
-      };    
+      };
     });
 
     afterEach(function () {
-      console.log('afterEach');
       xhr.restore();
     });
 
@@ -36,6 +37,7 @@ describe('Pageable Collection', function () {
       books.fetch();
 
       assert.equal(requests.length, 1);
+      assert.equal('localhost:9091/books?page=1&per_page=25', requests[0].url);
 
       console.log('url is [' + requests[0].url + ']');
     });

@@ -25,6 +25,7 @@ var paths = {
   },
   test: {
     js: './src/test/js/**/*.js',
+    jsnode: './src/test/js/node/**/*.js',
     resources: './src/test/resources/**/*.*'
   },
   target: './target'
@@ -43,8 +44,9 @@ gulp.task("watch-lint", function () {
   gulp.watch(['.jshintrc', 'gulpfile.js', paths.main.js, paths.test.js], ['lint']);
 });
 
+// this should really be running mocha-phantomjs
 gulp.task('test', function () {
-  gulp.src(paths.test.js, {read: false})
+  gulp.src(paths.test.jsnode, {read: false})
     .pipe(mocha({
       reporter: 'spec',
       // globals: {
