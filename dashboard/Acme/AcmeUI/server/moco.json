@@ -14,7 +14,10 @@
         "method": "post"
     },
     "response": {
-        "file": "package.json"
+        "file": "package.json",
+        "cookies": {
+          "login": "true"
+        }
     }
 },
 { 
