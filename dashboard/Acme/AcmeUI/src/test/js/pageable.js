@@ -34,12 +34,14 @@ describe('Pageable Collection', function () {
       books.fetch();
 
       assert.equal(requests.length, 1);
-      assert.equal('http://localhost:9091/books?page=1&per_page=50', requests[0].url);
+      assert.equal('/books?page=1&per_page=50', requests[0].url);
 
-      var expected = url.parse(requests[0].url);
-      var expectedQuery = url.parse(requests[0].url, true);
+      console.log('URL: ' + requests[0].url);
 
-      console.log('url is [' + requests[0].url + ']');
+      // var expected = url.parse(requests[0].url);
+      // var expectedQuery = url.parse(requests[0].url, true);
+
+      // console.log('url is [' + requests[0].url + ']');
     });
 
     it('should sort');

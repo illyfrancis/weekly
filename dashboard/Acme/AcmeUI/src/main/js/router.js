@@ -1,8 +1,10 @@
 var Backbone = require('backbone');
 
+var Book = require('./models/book');
 var Books = require('./models/books');
 var Client = require('./models/client');
 var ClientView = require('./views/clientView');
+var BookView = require('./views/bookView');
 var AppRouter = Backbone.Router.extend({
 
   routes: {
@@ -10,6 +12,7 @@ var AppRouter = Backbone.Router.extend({
     'about': 'showAbout', // http://app.acme.com/#about
     'search/:query': 'search',
     'client': 'showClient',
+    'book': 'showBook',
     '*default': 'defaultRoute'
   },
 
@@ -34,10 +37,18 @@ var AppRouter = Backbone.Router.extend({
 
   showClient: function () {
     var view = new ClientView({
-      model: new Client()
+      model: new Book()
     });
 
     // hack
+    Backbone.$('body').append(view.render().el);
+  },
+
+  showBook: function () {
+    var view = new BookView({
+      model: new Book()
+    });
+    
     Backbone.$('body').append(view.render().el);
   }
 });
