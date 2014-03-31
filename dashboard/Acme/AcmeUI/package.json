@@ -1,6 +1,6 @@
 {
   "name": "AcmeUI",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Acme client",
   "main": "./src/main/js/app.js",
   "directories": {
@@ -41,6 +41,8 @@
     "jquery": "./lib/jquery-1.11.0.js"
   },
   "scripts": {
-    "test": "mocha -R nyan --recursive src/test/js -g #browser: -i"
+    "test": "npm run test-node && npm run test-browser",
+    "test-node": "mocha -R nyan --recursive src/test/js -g #browser: -i",
+    "test-browser": "mocha-phantomjs ./target/mocha.html"
   }
 }
