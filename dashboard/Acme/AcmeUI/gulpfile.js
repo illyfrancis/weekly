@@ -25,6 +25,7 @@ var paths = {
   },
   test: {
     js: './src/test/js/**/*.js',
+    jsnode: './src/test/jsnode/**/*.js',
     resources: './src/test/resources/**/*.*'
   },
   target: './target'
@@ -44,11 +45,9 @@ gulp.task("watch-lint", function () {
 });
 
 gulp.task('test', function () {
-  gulp.src(paths.test.js, {read: false})
+  gulp.src(paths.test.jsnode, {read: false})
     .pipe(mocha({
       reporter: 'spec',
-      grep: '#browser:',
-      invert: true,
       // globals: {
       //   should: require('should')
       // }
@@ -75,8 +74,6 @@ gulp.task('build', function () {
 
 gulp.task('bundle-test', function () {
   var b = browserify();
-  // b.exclude('sinon');
-  // b.ignore('sinon');
   glob.sync(paths.main.js).forEach(function (file) {
     b.external(file);
   });
