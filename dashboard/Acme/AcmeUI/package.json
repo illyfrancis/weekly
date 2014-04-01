@@ -42,7 +42,7 @@
   },
   "scripts": {
     "test": "npm run test-node && npm run test-browser",
-    "test-node": "mocha -R nyan --recursive src/test/js -g #browser: -i",
-    "test-browser": "mocha-phantomjs ./target/mocha.html"
+    "test-node": "mocha -R nyan --recursive src/test/jsnode",
+    "test-browser": "mocha-phantomjs -R spec ./target/mocha.html"
   }
 }
