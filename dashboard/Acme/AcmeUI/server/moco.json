@@ -10,7 +10,7 @@
   }
 }, {
   "request": {
-      "uri": "/books",
+      "uri": "/api/books",
       "method": "get"
   },
   "response": {
