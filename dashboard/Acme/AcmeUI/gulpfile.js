@@ -45,9 +45,9 @@ gulp.task("watch-lint", function () {
 });
 
 gulp.task('test', function () {
-  gulp.src(paths.test.jsnode, {read: false})
+  return gulp.src(paths.test.jsnode, {read: false})
     .pipe(mocha({
-      reporter: 'spec',
+      reporter: 'nyan',
       // globals: {
       //   should: require('should')
       // }
@@ -97,7 +97,7 @@ gulp.task('bundle-core', function () {
     .pipe(gulp.dest(paths.target));
 });
 
-gulp.task('copy-resources', function () {
+gulp.task('copy-resources', ['clean'], function () {
   return gulp.src([paths.main.resources, paths.test.resources])
     .pipe(gulp.dest(paths.target));
 });
@@ -112,7 +112,7 @@ gulp.task('watch-test-build', ['test-build'], function () {
   gulp.watch([paths.main.js, paths.test.js], ['test-build', 'test']);
 });
 
-gulp.task('build-all', ['lint', 'test', 'test-build', 'build']);
+gulp.task('build-all', ['copy-resources', 'lint', 'test', 'test-build', 'build']);
 gulp.task('watch-build-all', ['build-all'], function () {
   gulp.watch(['.jshintrc', 'gulpfile.js', paths.main.js, paths.test.js], ['build-all']);
 });
