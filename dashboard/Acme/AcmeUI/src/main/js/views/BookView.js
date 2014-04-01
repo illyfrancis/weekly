@@ -1,3 +1,4 @@
+/*global alert*/
 var Backbone = require('backbone');
 var template = require('../templates/book.html');
 var moment = require('moment');

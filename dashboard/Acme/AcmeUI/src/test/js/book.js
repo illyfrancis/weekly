@@ -1,6 +1,5 @@
 /*global sinon*/
 var assert = require('assert');
-var url = require('url');
 var Book = require('../../../src/main/js/models/book');
 
 describe('Book model', function () {
@@ -11,14 +10,13 @@ describe('Book model', function () {
       xhr = sinon.useFakeXMLHttpRequest();
       requests = [];
       xhr.onCreate = function (req) {
-        console.log('fetching: ' + JSON.stringify(req));
         requests.push(req);
       };
     });
 
     afterEach(function () {
       xhr.restore();
-    });    
+    });
 
     it('should fetch the book', function () {
       var book = new Book();

@@ -1,5 +1,6 @@
 /*global sinon*/
 var jQuery = require('jquery');
+var assert = require('assert');
 
 function getTodos(listId, callback) {
   jQuery.ajax({
@@ -10,15 +11,12 @@ function getTodos(listId, callback) {
   });
 }
 
-var assert = require('assert');
-var url = require('url');
-
 describe('#browser: Fake test', function () {
   describe('with stub', function () {
 
     afterEach(function () {
       jQuery.ajax.restore();
-    });    
+    });
 
     it('make a GET request for todo items', function () {
       sinon.stub(jQuery, 'ajax');
