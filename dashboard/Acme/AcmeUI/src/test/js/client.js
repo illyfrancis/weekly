@@ -1,4 +1,5 @@
-var assert = require('assert');
+var chai = require('chai');
+var assert = chai.assert;
 var Client = require('../../../src/main/js/models/client');
 
 describe('Client', function () {

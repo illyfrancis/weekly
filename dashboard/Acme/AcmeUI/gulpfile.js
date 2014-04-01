@@ -109,7 +109,7 @@ gulp.task('clean', function () {
 
 gulp.task('test-build', ['bundle-core', 'bundle-test']);
 gulp.task('watch-test-build', ['test-build'], function () {
-  gulp.watch([paths.main.js, paths.test.js], ['test-build']);
+  gulp.watch([paths.main.js, paths.test.js], ['test-build', 'test']);
 });
 
 gulp.task('build-all', ['lint', 'test', 'test-build', 'build']);
