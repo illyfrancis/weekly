@@ -1,35 +1,12 @@
 [{
   "request": {
-    "uri": "/foo"
-  },
-  "response": {
     "headers": {
-      "content-type": "application/json"
-    },
-    "text": "{\"foo\": \"bar\"}"
-  }
-}, {
-  "request": {
-      "uri": "/api/books",
-      "method": "get"
-  },
-  "response": {
-      "file": "package.json",
-      "cookies": {
-        "login": "true"
+      "foo": {
+        "exist": "not"
       }
-  }
-}, {
-  "request": {
-      "uri": "/api/book",
-      "method": "get"
+    }
   },
   "response": {
-      "file": "book.json"
-  }
-}, { 
-  "mount": {
-    "dir": "../target",
-    "uri": "/"
+    "text": "bar"
   }
 }]

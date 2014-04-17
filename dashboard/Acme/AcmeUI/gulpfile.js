@@ -97,7 +97,7 @@ gulp.task('bundle-core', function () {
     .pipe(gulp.dest(paths.target));
 });
 
-gulp.task('copy-resources', ['clean'], function () {
+gulp.task('resources', function () {
   return gulp.src([paths.main.resources, paths.test.resources])
     .pipe(gulp.dest(paths.target));
 });
@@ -119,4 +119,22 @@ gulp.task('watch-build-all', ['build-all'], function () {
 
 gulp.task('default', ['test', 'test-build', 'build'], function () {
   gutil.log('default task');
+});
+
+var minifyHtml = require('gulp-minify-html');
+gulp.task('minify-html', function () {
+  gulp.src('./src/main/resources/*.html')
+    .pipe(minifyHtml())
+    .pipe(gulp.dest('./target'));
+});
+
+gulp.task('watch-mini', ['minify-html'], function () {
+  gulp.watch(['**/*.html'], ['minify-html']);
+});
+
+var htmlmin = require('gulp-htmlmin');
+gulp.task('mini', function () {
+  gulp.src('./src/main/resources/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('./target/html/'));
 });
