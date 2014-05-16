@@ -1,0 +1,11 @@
+[{
+  "id": "reportName",
+  "filter": "TR",
+  "sortOrder": 1,
+  "groupOrder": 0
+}, {
+  "id": "reportType",
+  "filter": {},
+  "sortOrder": 0,
+  "groupOrder": 0
+}]

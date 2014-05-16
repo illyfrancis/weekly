@@ -124,7 +124,9 @@ gulp.task('default', ['test', 'test-build', 'build'], function () {
 var minifyHtml = require('gulp-minify-html');
 gulp.task('minify-html', function () {
   gulp.src('./src/main/resources/*.html')
-    .pipe(minifyHtml())
+    .pipe(minifyHtml({
+      comments: true
+    }))
     .pipe(gulp.dest('./target'));
 });
 

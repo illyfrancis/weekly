@@ -1,0 +1,66 @@
+{
+  "schedules": [{
+    "id": 100,
+    "clientId": "2010",
+    "clientName": "Acme & Co.",
+    "createdBy": "Bob",
+    "distributionFormat": "ftp",
+    "distributionList": "value",
+    "frequency": "value",
+    "lastExecution": "value",
+    "modifiedBy": "value",
+    "reportExpiry": "value",
+    "reportName": "Q2 Transaction Report 2014",
+    "reportOwner": "Ted",
+    "reportType": "value",
+    "trigger": "none"
+  }, {
+    "id": 101,
+    "clientId": "2010",
+    "clientName": "Acme & Co.",
+    "createdBy": "Bob",
+    "distributionFormat": "ftp",
+    "distributionList": "value",
+    "frequency": "value",
+    "lastExecution": "value",
+    "modifiedBy": "value",
+    "reportExpiry": "value",
+    "reportName": "Q1 Transaction Report 2014",
+    "reportOwner": "Ted",
+    "reportType": "value",
+    "trigger": "none"
+  }, {
+    "id": 102,
+    "clientId": "2010",
+    "clientName": "Acme & Co.",
+    "createdBy": "Bob",
+    "distributionFormat": "ftp",
+    "distributionList": "value",
+    "frequency": "value",
+    "lastExecution": "value",
+    "modifiedBy": "value",
+    "reportExpiry": "value",
+    "reportName": "Q3 Transaction Report 2014",
+    "reportOwner": "Ted",
+    "reportType": "value",
+    "trigger": "none"
+  }, {
+    "id": 103,
+    "clientId": "2010",
+    "clientName": "Acme & Co.",
+    "createdBy": "Bob",
+    "distributionFormat": "ftp",
+    "distributionList": "value",
+    "frequency": "value",
+    "lastExecution": "value",
+    "modifiedBy": "value",
+    "reportExpiry": "value",
+    "reportName": "Q1 Transaction Report 2013",
+    "reportOwner": "Ted",
+    "reportType": "value",
+    "trigger": "none"
+  }],
+
+  "page": 1,
+  "total": 5034
+}

@@ -1,0 +1,49 @@
+[{
+  "request": {
+    "uri": "/api/book",
+    "method": "get"
+  },
+  "response": {
+    "file": "./resources/book.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/settings",
+    "method": "get"
+  },
+  "response": {
+    "file": "./resources/settings.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/credential",
+    "method": "get"
+  },
+  "response": {
+    "file": "./resources/credential.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/schedules",
+    "method": "get"
+  },
+  "response": {
+    "file": "./resources/schedules.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/header",
+    "method": "get",
+    "headers": {
+      "Authenticate": "123456"
+    }
+  },
+  "response": {
+    "file": "./resources/settings.json"
+  }
+}, {
+  "mount": {
+    "dir": "../target",
+    "uri": "/"
+  }
+}]

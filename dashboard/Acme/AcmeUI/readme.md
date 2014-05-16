@@ -16,7 +16,7 @@ Has dependency on Phantomjs. On Windows install by downloading directly, on othe
 
 Also need to update the default spec runner with:
 
-```
+```javascript
   <script>
     if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
     else { mocha.run(); }

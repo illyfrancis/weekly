@@ -32,17 +32,38 @@
             <label for="groupBy" class="col-sm-2 control-label">Group by</label>
             <div class="col-sm-4">
               <select class="form-control" id="groupBy">
-                <option>Report name</option>
                 <option>Report type</option>
                 <option>Created by</option>
                 <option>Owner</option>
                 <option>Last modified by</option>
+                <option>Frequency</option>
+                <option>Trigger</option>
+                <option>Distribution list</option>
+                <option>Last execution time</option>
+                <option>Distribution format</option>
+                <option>Client id</option>
+                <option>Client name</option>
+                <option>Report expiration</option>
               </select>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-4">
-              <button type="submit" class="btn btn-default">Sign in</button>
+            <label for="groupOrder" class="col-sm-2 control-label">Order</label>
+            <div class="col-sm-4">
+              <select class="form-control" id="groupOrder">
+                <option>Ascending</option>
+                <option>Descending</option>
+              </select>
+            </div>
+            <div class="col-sm-2">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default">
+                  <span class="glyphicon glyphicon-arrow-up"></span>
+                </button>
+                <button type="button" class="btn btn-default">
+                  <span class="glyphicon glyphicon-arrow-down"></span>
+                </button>
+              </div>
             </div>
           </div>
         </form>
