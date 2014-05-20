@@ -20,6 +20,7 @@ var Repository = {
       this.schedules = new Schedules();
       this.schedules.fetch();
     }
+    return this.schedules;
   }
 };
 

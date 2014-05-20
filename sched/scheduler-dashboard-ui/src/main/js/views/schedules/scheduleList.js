@@ -6,7 +6,7 @@ var ScheduleItem = require('./scheduleItem');
 var ScheduleList = Backbone.View.extend({
 
   initialize: function (options) {
-    // collection for schedule list
+    // this.collection = schedules.collection
     this.criteria = options.headers;
   },
 
@@ -17,12 +17,17 @@ var ScheduleList = Backbone.View.extend({
       collection: this.criteria
     });
     this.$('thead').append(scheduleHeader.render().el);
-    
+
     // dispose views properly
-    var scheduleItem = new ScheduleItem();
-    this.$('tbody').append(scheduleItem.render().el);
-    var item2 = new ScheduleItem();
-    this.$('tbody').append(item2.render().el);
+
+    console.log('in scheduleList : collection size is ' + this.collection.size());
+
+    this.collection.each(function (item) {
+      var scheduleItem = new ScheduleItem({
+        model: item
+      });
+      this.$('tbody').append(scheduleItem.render().el);
+    }, this);
 
     return this;
   }
