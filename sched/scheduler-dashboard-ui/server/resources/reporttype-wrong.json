@@ -1,0 +1,223 @@
+[{
+  "product": {
+    "name": "Corporate Actions (New)",
+    "subProduct": [{
+      "code": "SRECPAY",
+      "name": "Shares Receivable/Payable"
+    }, {
+      "code": "TXLXN",
+      "name": "Tax Withholding Elections"
+    }, {
+      "code": "FXSTDINST",
+      "name": "FX Standing Instructions"
+    }, {
+      "code": "RSPSTDINST",
+      "name": "Response Standing Instructions"
+    }, {
+      "code": "INTREC",
+      "name": "Internal Response Reconciliation"
+    }, {
+      "code": "SUBREC",
+      "name": "Sub Group Response Reconciliation"
+    }, {
+      "code": "PDRECPAY",
+      "name": "Past Due Receivable/Payable"
+    }, {
+      "code": "FACTOR",
+      "name": "Factor Research"
+    }, {
+      "code": "RESSTAT",
+      "name": "Response Status"
+    }, {
+      "code": "RESRESH",
+      "name": "Response Research"
+    }, {
+      "code": "TXRCLM",
+      "name": "Tax Reclaim"
+    }, {
+      "code": "RECPAY",
+      "name": "Receivable/Payable"
+    }, {
+      "code": "RESREC",
+      "name": "Response Reconciliation"
+    }, {
+      "code": "CACTION",
+      "name": "Action Research"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Securities Lending Reporting",
+    "subProduct": [{
+      "code": "SLREPORTS",
+      "name": "Report List"
+    }, {
+      "code": "SLPERF",
+      "name": "Performance"
+    }, {
+      "code": "SLEARN",
+      "name": "Earnings"
+    }, {
+      "code": "SLCOMP",
+      "name": "Compliance"
+    }, {
+      "code": "SLCOLL",
+      "name": "Collateral"
+    }, {
+      "code": "SLBAL",
+      "name": "Balances"
+    }, {
+      "code": "SLACTVTY",
+      "name": "Activity"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Portfolio Accounting",
+    "subProduct": [{
+      "code": "FCTPR",
+      "name": "Pooling Reports"
+    }, {
+      "code": "FCTFA",
+      "name": "Fund Administration"
+    }, {
+      "code": "FCTBR",
+      "name": "Broker Reports"
+    }, {
+      "code": "FCTTGL",
+      "name": "Transactions and Gain / Loss"
+    }, {
+      "code": "FCTIR",
+      "name": "Income and Receivables"
+    }, {
+      "code": "FCTHV",
+      "name": "Holdings and Valuation"
+    }, {
+      "code": "FCTNTB",
+      "name": "NAV and Trial Balances"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Cash",
+    "subProduct": [{
+      "code": "WMRTCSHTRN",
+      "name": "WM Real Time Transactions"
+    }, {
+      "code": "WMRTCSHBAL",
+      "name": "WM Real Time Balances"
+    }, {
+      "code": "CSHTRAN",
+      "name": "Historical Transactions"
+    }, {
+      "code": "CSHBAL",
+      "name": "Historical Balances"
+    }, {
+      "code": "RTCSHTRAN",
+      "name": "Real Time Transactions"
+    }, {
+      "code": "RTCSHBAL",
+      "name": "Real Time Balances"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Total Expense Ratio Report",
+    "subProduct": [{
+      "code": "FA_TER_DSH",
+      "name": "Fund Admin TER Reports"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Reporting Profiles",
+    "subProduct": [{
+      "code": "ETF_RPTG",
+      "name": "ETF Reporting Profiles"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Nav Lookup App",
+    "subProduct": [{
+      "code": "NAV_LOOKUP",
+      "name": "Fund Admin Nav Lookup"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Cash Balance App",
+    "subProduct": [{
+      "code": "CASH_BALANCE",
+      "name": "Cash Historical Balances"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Transaction Reporting",
+    "subProduct": [{
+      "code": "TXNREPORT_COMMON",
+      "name": "Transaction Reporting"
+    }, {
+      "code": "TXNREPORT_TRADES",
+      "name": "Transaction Reporting"
+    }, {
+      "code": "TRANSACTION_LOOKUP",
+      "name": "Transaction Reporting - Trans Lookup"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Alert Center",
+    "subProduct": [{
+      "code": "ALERTS_PORTLET_SETTINGS",
+      "name": "Alerts Portlet Settings"
+    }]
+  }
+}, {
+  "product": {
+    "name": "AppBoard",
+    "subProduct": [{
+      "code": "RECENT_SELECTIONS",
+      "name": "Recent Selections"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Golden Source Parent",
+    "subProduct": [{
+      "code": "GLDNSRCTR",
+      "name": "GS Transactions - OFI & BBH Only"
+    }, {
+      "code": "GLDNSRCPV",
+      "name": "GS Portfolio Valuation - OFI & BBH Only"
+    }, {
+      "code": "GLDNSRCTDP",
+      "name": "GS Trade Date Position"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Position Reporting",
+    "subProduct": [{
+      "code": "POSREPORT_POSITIONS",
+      "name": "Positions Reporting - Positions"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Swift Lookup App",
+    "subProduct": [{
+      "code": "SWIFT_LOOKUP",
+      "name": "Swift Lookup"
+    }]
+  }
+}, {
+  "product": {
+    "name": "Middle Office Reporting",
+    "subProduct": [{
+      "code": "HOLDVAL",
+      "name": "Trade Date Reporting"
+    }]
+  }
+}]
