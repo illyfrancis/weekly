@@ -8,10 +8,6 @@ var Filters = Backbone.View.extend({
 
   className: 'filters',
 
-  events: {
-    'click .dashboard': 'showDashbaord'
-  },
-
   initialize: function () {
     this.criteria = repository.loadCriteria();
   },
@@ -23,9 +19,9 @@ var Filters = Backbone.View.extend({
     this.criteria.each(function (criterion) {
       id = criterion.id;
       FilterView = FilterManager[id];
-      
+
       if (!_.isUndefined(FilterView)) {
-        filter = new FilterManager[id]({
+        filter = this.createSubView(FilterView, {
           model: criterion,
           el: this.$('.' + id + 'Filter')
         });
@@ -33,12 +29,6 @@ var Filters = Backbone.View.extend({
       }
     }, this);
     return this;
-  },
-
-  showDashbaord: function () {
-    Backbone.router.navigate('', {
-      trigger: true
-    });
   }
 
 });

@@ -9,7 +9,6 @@ var ScheduleItem = Backbone.View.extend({
   },
 
   render: function () {
-    console.log(JSON.stringify(this.model));
     this.$el.html(template(this.model.attributes));
     return this;
   }

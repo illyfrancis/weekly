@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var _ = require('underscore');
 var template = require('./templates/reportTypeFilter.html');
 
 var ReportTypeFilter = Backbone.View.extend({
@@ -10,7 +11,10 @@ var ReportTypeFilter = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.html(template(this.model.attributes));
+    this.$el.html(template(
+      _.extend({
+        reportTypes: global.dashboard.reportTypes
+      }, this.model.attributes)));
     return this;
   }
 

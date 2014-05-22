@@ -24,7 +24,8 @@ var Menu = Backbone.View.extend({
   },
 
   showGroupBy: function () {
-    Backbone.router.navigate('groupby', {trigger: true});
+    Backbone.router.showGroupBy();
+    // Backbone.router.navigate('groupby', {trigger: true});
   }
 
 });

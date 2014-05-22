@@ -3,6 +3,7 @@ var Backbone = require('backbone');
 
 Backbone.$ = $;
 require('bootstrap');
+require('./customize');
 
 var repository = require('./repository');
 
@@ -14,3 +15,4 @@ repository.loadCriteria(function () {
   Backbone.router = new AppRouter();
   Backbone.history.start();
 });
+

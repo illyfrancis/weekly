@@ -9,8 +9,7 @@ var GroupBy = Backbone.View.extend({
   className: 'group-by',
 
   events: {
-    'change #groupBy': 'selectChange',
-    'click .dashboard': 'showDashbaord'
+    'change #groupBy': 'selectChange'
   },
 
   initialize: function () {
@@ -34,10 +33,6 @@ var GroupBy = Backbone.View.extend({
   selectChange: function (event) {
     var id = event.target.value;
     this.criteria.get(id).makeGroupField();
-  },
-
-  showDashbaord: function () {
-    Backbone.router.navigate('', {trigger: true});
   }
 
 });

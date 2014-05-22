@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +12,22 @@
     <script src="lib/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
+
 <body>
-  <div class="dashboard"></div>
+  <div class="dashboard-container"></div>
+  <!--bootstrap user credential & other reference data-->
+  <script>
+  var dashboard = dashboard || {};
+  dashboard.user = {
+    userId: '1234',
+    roles: ['REPORT_OWNER', 'SERV_DELIVER', 'ADMIN'],
+    language: 'en_US',
+    timezone: 'US Eastern',
+    ctoken: 'emllbW5pYWs='
+  };
+  </script>
+  <script src="reportType.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>

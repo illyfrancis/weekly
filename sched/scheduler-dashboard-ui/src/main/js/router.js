@@ -7,45 +7,36 @@ var GroupBy = require('./views/groupBy/groupBy');
 var AppRouter = Backbone.Router.extend({
 
   routes: {
-    '': 'start',
-    'filters': 'showFilters',
-    'groupby': 'showGroupBy',
-    'search/:query': 'search'
+    '': 'showDashboard'
   },
 
-  start: function () {
-    this.removeCurrentView();
-    this.view = new Dashboard();
+  showDashboard: function () {
+    if (this.dashboard) {
+      this.dashboard.dispose();
+    }
+    this.dashbaord = new Dashboard();
 
-    // remove existing view first
-    Backbone.$('.dashboard').empty().append(this.view.render().el);
+    Backbone.$('.dashboard-container').empty().append(this.dashbaord.render().el);
   },
 
   showFilters: function () {
-    this.removeCurrentView();
+    if (!this.filter) {
+      this.filter = new Filters();
+      Backbone.$('.dashboard-container').append(this.filter.render().el);
+    }
 
-    this.view = new Filters();
-    Backbone.$('.dashboard').empty().append(this.view.render().el);
     Backbone.$('#filtersModal').modal('show');
   },
 
   showGroupBy: function () {
-    this.removeCurrentView();
-
-    this.view = new GroupBy();
-    Backbone.$('.dashboard').empty().append(this.view.render().el);
-    Backbone.$('#groupByModal').modal('show');
-  },
-
-  search: function (query) {
-    console.log('search with query [' + query + ']');
-  },
-
-  removeCurrentView: function () {
-    if (!_.isUndefined(this.view)) {
-      this.view.remove();
+    if (!this.groupBy) {
+      this.groupBy = new GroupBy();
+      Backbone.$('.dashboard-container').append(this.groupBy.render().el);
     }
+
+    Backbone.$('#groupByModal').modal('show');
   }
+
 });
 
 module.exports = AppRouter;

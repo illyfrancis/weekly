@@ -12,11 +12,11 @@ var DashboardView = Backbone.View.extend({
 
     this.criteria = repository.loadCriteria();
 
-    this.menu = new Menu({
+    this.menu = this.createSubView(Menu, {
       collection: this.criteria
     });
 
-    this.schedules = new Schedules({
+    this.schedules = this.createSubView(Schedules, {
       collection: this.criteria
     });
   },

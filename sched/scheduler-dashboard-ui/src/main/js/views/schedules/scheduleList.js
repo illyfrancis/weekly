@@ -13,17 +13,14 @@ var ScheduleList = Backbone.View.extend({
   render: function () {
     this.$el.html(template());
 
-    var scheduleHeader = new ScheduleHeader({
+    var scheduleHeader = this.createSubView(ScheduleHeader, {
       collection: this.criteria
     });
     this.$('thead').append(scheduleHeader.render().el);
 
-    // dispose views properly
-
-    console.log('in scheduleList : collection size is ' + this.collection.size());
-
+    var scheduleItem;
     this.collection.each(function (item) {
-      var scheduleItem = new ScheduleItem({
+      scheduleItem = this.createSubView(ScheduleItem, {
         model: item
       });
       this.$('tbody').append(scheduleItem.render().el);

@@ -13,12 +13,12 @@ var Schedules = Backbone.View.extend({
     // also need list of schedules too, but initiate from this.
     this.schedulesCollection = repository.loadSchedules();
 
-    this.scheduleList = new ScheduleList({
+    this.scheduleList = this.createSubView(ScheduleList, {
       // collection: reserve it for the_actual_schedule_lists
       headers: this.collection,
       collection: this.schedulesCollection
     });
-    this.pagination = new Pagination();
+    this.pagination = this.createSubView(Pagination);
   },
 
   render: function () {
