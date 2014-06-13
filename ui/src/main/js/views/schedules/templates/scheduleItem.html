@@ -1,0 +1,44 @@
+<td>
+  <a href="detail.html">
+    <span class="glyphicon glyphicon-tree-conifer"></span>
+  </a>&nbsp;<span data-toggle="tooltip" title="{{id}}">{{reportName}}</span>
+</td>
+<td>{{reportType}}</td>
+<td>
+  <span data-toggle="tooltip" title="{{createdByName}}">{{createdById}}</span>
+</td>
+<td>
+  <span data-toggle="tooltip" title="{{reportOwnerName}}">{{reportOwnerId}}</span>
+</td>
+<td>
+  <span data-toggle="tooltip" title="{{modifiedByName}}">{{modifiedById}}</span>
+</td>
+<td>
+  <span class="label label-info">{{frequency}}</span>
+</td>
+<td>
+  {{#if timeTrigger}}
+  <span data-toggle="tooltip" title="{{trigger}}" class="glyphicon glyphicon-time"></span>
+  {{else}}
+  <span data-toggle="tooltip" title="{{trigger}}" class="glyphicon glyphicon-flash"></span>
+  {{/if}}
+</td>
+<td>{{distributionList}}</td>
+<td>
+  <span data-toggle="tooltip" title="{{lastExecution}}">{{timeago}}</span>
+</td>
+<td>
+  {{#each deliveryOptions}} {{#if ATTACHMENT}}
+  <span data-toggle="tooltip" title="{{delivery}}" class="glyphicon glyphicon-paperclip"></span>
+  {{/if}} {{#if URL}}
+  <span data-toggle="tooltip" title="{{delivery}}" class="glyphicon glyphicon-link"></span>
+  {{/if}} {{#if FTP}}
+  <span data-toggle="tooltip" title="{{delivery}}" class="glyphicon glyphicon-transfer"></span>
+  {{/if}} {{/each}}
+</td>
+<td>
+  <span data-toggle="tooltip" title="{{clientName}}">{{clientId}}</span>
+</td>
+<td>
+  <span data-toggle="tooltip" title="{{reportExpiry}}">{{expiry}}</span>
+</td>

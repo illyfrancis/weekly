@@ -1,0 +1,20 @@
+{
+	"indent": 2,
+  "undef": true,
+  "unused": true,
+  "trailing": true,
+  "white": true,
+  "expr": true,
+  "globals": { 
+    "console": true,
+    "document": true,
+    "global": true,
+    "process": true,
+    "require": true,
+    "module": true,
+    "it": true,
+    "describe": true,
+    "beforeEach": true,
+    "afterEach": true
+  }
+}

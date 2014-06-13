@@ -1,0 +1,139 @@
+<div class="modal fade" id="filtersModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Filters</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <form class="form-horizontal" role="form">
+                <!-- left col -->
+                <div class="col-sm-6">
+                  <div class="form-group reportNameFilter">
+                  </div>
+                  <div class="form-group reportTypeFilter">
+                  </div>
+                  <div class="form-group createdByFilter">
+                  </div>
+                  <div class="form-group reportOwnerFilter">
+                  </div>
+                  <div class="form-group modifiedByFilter">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="clientId" class="col-sm-4 control-label">Client</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="clientId" placeholder="Client id or name">
+                    </div>
+                  </div>
+
+                </div>
+                <!-- left col -->
+
+                <!-- right col -->
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="frequency" class="col-sm-4 control-label">Frequency</label>
+                    <div class="col-sm-8">
+                      <select class="form-control selectpicker" multiple id="frequency">
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Sometimes</option>
+                        <option>At random</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="trigger" class="col-sm-4 control-label">Trigger</label>
+                    <div class="col-sm-8">
+                      <select class="form-control selectpicker" multiple id="trigger">
+                        <option>Time</option>
+                        <option>Event</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="distributionList" class="col-sm-4 control-label">Distribution list</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="distributionList" placeholder="Distribution list">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="distributionFormat" class="col-sm-4 control-label">Distribution format</label>
+                    <div class="col-sm-8">
+                      <select class="form-control selectpicker" multiple id="distributionFormat">
+                        <option>Attachment</option>
+                        <option>Link</option>
+                        <option>FTP</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-xs-12 col-sm-4 control-label">Last execution time</label>
+                    <div class="col-xs-6 col-sm-8 col-md-4">
+                      <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary" type="button">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-8 col-md-4">
+                      <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary" type="button">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-xs-12 col-sm-4 control-label">Report expiry</label>
+                    <div class="col-xs-6 col-sm-8 col-md-4">
+                      <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary" type="button">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-8 col-md-4">
+                      <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary" type="button">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- right col -->
+
+              </form>
+            </div>
+            <!-- row -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default apply" data-dismiss="modal">Apply</button>
+        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>

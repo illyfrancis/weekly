@@ -1,0 +1,90 @@
+[{
+  "request": {
+    "uri": "/api/settings",
+    "method": "get"
+  },
+  "response": {
+    "file": "./resources/settings.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/users",
+    "method": "get",
+    "queries": {
+      "q": "BS7"
+    }
+  },
+  "response": {
+    "file": "./resources/users-bs7.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/users",
+    "method": "get",
+    "queries": {
+      "q": "NJ9"
+    }
+  },
+  "response": {
+    "file": "./resources/users-nj9.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/users",
+    "method": "get"
+  },
+  "response": {
+    "file": "./resources/users-empty.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/credential",
+    "method": "get"
+  },
+  "response": {
+    "file": "./resources/credential.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/reportType",
+    "method": "get"
+  },
+  "response": {
+    "file": "./resources/reportType.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/schedules",
+    "method": "get"
+  },
+  "response": {
+    "file": "./resources/schedules.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/schedules",
+    "method": "get",
+    "queries": {
+      "xxx": "foo"
+    }
+  },
+  "response": {
+    "file": "./resources/noschedule.json"
+  }
+}, {
+  "request": {
+    "uri": "/api/schedules_v2",
+    "method": "get",
+    "headers": {
+      "some_made_up_name": "5558c8de35eab17d7f4671ef7ab974883188db06"
+    }
+  },
+  "response": {
+    "file": "./resources/schedules.json"
+  }
+}, {
+  "mount": {
+    "dir": "../target",
+    "uri": "/"
+  }
+}]

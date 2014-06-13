@@ -1,0 +1,12 @@
+<label for="reportType" class="col-sm-4 control-label">{{title}}</label>
+<div class="col-sm-8">
+  <select class="form-control selectpicker" multiple data-selected-text-format="count>1" id="reportType">
+    {{#each reportTypes}}
+    <optgroup label="{{this.product.name}}">
+      {{#each this.product.layout}}
+      <option value="{{this.code}}">{{this.name}}</option>
+      {{/each}}
+    </optgroup>
+    {{/each}}
+  </select>
+</div>
