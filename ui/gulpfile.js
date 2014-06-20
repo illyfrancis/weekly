@@ -1,20 +1,22 @@
 var args = require('yargs').argv;
 var browserify = require('browserify');
 var clean = require('gulp-clean');
+var concat = require('gulp-concat');
 var glob = require('glob');
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var hbsfy = require('hbsfy').configure({extensions: ['html']});
 var jshint = require('gulp-jshint');
+var minifycss = require('gulp-minify-css');
 var mocha = require('gulp-mocha');
 var source = require('vinyl-source-stream');
-var streamify = require('gulp-streamify');
 var uglify = require('gulp-uglify');
 
+var appjs = 'app.js';
 var paths = {
   main: {
-    app: './src/main/js/app.js',
+    app: './src/main/js/' + appjs,
     js: './src/main/js/**/*.js',
     templates: './src/main/js/**/*.html',
     resources: './src/main/resources/**/*.*'
@@ -24,7 +26,10 @@ var paths = {
     jsnode: './src/test/jsnode/**/*.js',
     resources: './src/test/resources/**/*.*'
   },
-  target: './target'
+  target: {
+    base: './target',
+    app: './target/' + appjs
+  }
 };
 
 // gulp {task} --env production
@@ -41,29 +46,56 @@ var errorHandler = function (err) {
 };
 
 gulp.task('lint', function () {
-  return gulp.src(['gulpfile.js', paths.main.js, paths.test.js, paths.test.jsnode])
+  var stream = gulp.src(['gulpfile.js', paths.main.js, paths.test.js, paths.test.jsnode])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
+
+  return stream;
 });
 
 gulp.task('test', function () {
-  return gulp.src(paths.test.jsnode, {read: false})
+  var stream = gulp.src(paths.test.jsnode, {read: false})
     .pipe(mocha({
       reporter: 'tap'
     }))
     .on('error', errorHandler);
+
+  return stream;
 });
 
-gulp.task('build', function () {
+gulp.task('bundle', function () {
   var b = browserify();
-  b.add(paths.main.app)
+  var stream = b.add(paths.main.app)
     .transform(hbsfy)
     .bundle({debug: ! isProduction})
-    .pipe(source('app.js'))
-    .pipe(streamify(gulpif(isProduction, uglify())))
-    .pipe(gulp.dest(paths.target))
-    .on('error', errorHandler);	
+    .on('error', errorHandler)
+    .pipe(source(appjs))
+    .pipe(gulp.dest(paths.target.base));
+
+  return stream;
 });
+
+gulp.task('concat', ['bundle'], function () {
+  // concat external libs
+  var stream = gulp.src([paths.target.app,
+      './lib/bootstrap-select/1.5.2/js/bootstrap-select.js',
+      './lib/typeahead.js/0.10.2/dist/typeahead.bundle.js'
+    ])
+    .pipe(concat(appjs))
+    .pipe(gulp.dest(paths.target.base));
+
+  return stream;
+});
+
+gulp.task('minify', ['concat'], function () {
+  var stream = gulp.src(paths.target.app)
+    .pipe(gulpif(isProduction, uglify()))
+    .pipe(gulp.dest(paths.target.base));
+
+  return stream;
+});
+
+gulp.task('build', ['minify']);
 
 gulp.task('bundle-test', function () {
   var b = browserify();
@@ -75,7 +107,7 @@ gulp.task('bundle-test', function () {
   });
   b.bundle()
     .pipe(source('tests.js'))
-    .pipe(gulp.dest(paths.target));
+    .pipe(gulp.dest(paths.target.base));
 });
 
 gulp.task('bundle-core', function () {
@@ -87,16 +119,33 @@ gulp.task('bundle-core', function () {
   b.transform(hbsfy)
     .bundle()
     .pipe(source('core.js'))
-    .pipe(gulp.dest(paths.target));
+    .pipe(gulp.dest(paths.target.base));
 });
 
-gulp.task('resources', function () {
-  return gulp.src([paths.main.resources, paths.test.resources])
-    .pipe(gulp.dest(paths.target));
+gulp.task('css', function () {
+  var stream = gulp.src([
+      './lib/bootstrap-select/1.5.2/css/bootstrap-select.min.css',
+      './lib/bootstrap-3.1.1/css/bootstrap.min.css',
+      './src/main/resources/css/dashboard.css'
+    ])
+    .pipe(concat('dashboard.css'))
+    .pipe(gulpif(isProduction, minifycss({keepSpecialComments: 0})))
+    .pipe(gulp.dest('./target/css'));
+
+  return stream;
+});
+
+gulp.task('resources', ['css'], function () {
+  return gulp.src([
+      '!./src/main/resources/css/*.css',
+      paths.main.resources,
+      paths.test.resources
+    ])
+    .pipe(gulp.dest(paths.target.base));
 });
 
 gulp.task('clean', function () {
-  return gulp.src(paths.target, {read: false})
+  return gulp.src(paths.target.base, {read: false})
     .pipe(clean());
 });
 

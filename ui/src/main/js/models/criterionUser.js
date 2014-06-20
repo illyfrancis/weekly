@@ -5,30 +5,47 @@ var Users = require('../collections/users');
 var CriterionUser = Criterion.extend({
 
   initialize: function () {
-    this.users = new Users(this.get('filterBy'));
+    this.users = new Users(this.get('filter'));
     this.listenTo(this.users, 'add remove reset', this.updateFilter);
+    this.on('change:filter', this.updateUsers);
+  },
+
+  updateUsers: function (model, filter) {
+    this.users.reset(filter, { silent: true });
   },
 
   updateFilter: function () {
-    this.set('filterBy', this.users.toJSON());
+    this.set('filter', this.users.toJSON(), { silent: true });
   },
 
   toQuery: function () {
-    var query = [];
-    this.users.each(function (user) {
-      if (user.has('id')) {
-        query.push('{"' + this.get('id') + '":"' + user.get('id') + '"}');
-      }
-    }, this);
+    var query = this.buildQuery();
+    var wrappedQuery = null;
 
-    var queryString = '';
     if (query.length === 1) {
-      queryString = query.shift();
+      wrappedQuery = query.shift();
     } else if (query.length > 1) {
-      queryString = '{"$or":[' + query.join(',') + ']}';
+      wrappedQuery = {
+        '$or': query
+      };
     }
 
-    return queryString;
+    return wrappedQuery;
+  },
+
+  buildQuery: function () {
+    var userHasId = function (user) {
+      return user.has('id');
+    };
+
+    var id = this.get('id');
+    var userToQuery = function (user) {
+      var item = {};
+      item[id] = user.get('id');
+      return item;
+    };
+
+    return this.users.chain().filter(userHasId).map(userToQuery).value();
   }
 
 });

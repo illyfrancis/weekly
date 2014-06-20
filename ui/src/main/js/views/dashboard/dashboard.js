@@ -8,6 +8,7 @@ var DashboardView = Backbone.View.extend({
   className: 'dashboard',
 
   initialize: function (options) {
+    this.user = options.user;
     this.criteria = options.criteria;
     this.schedules = options.schedules;
   },

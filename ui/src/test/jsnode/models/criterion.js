@@ -12,12 +12,12 @@ describe('Criterion', function () {
 
     beforeEach(function () {
       field = new Criterion({
-        name: 'reportName'
+        id: 'reportName'
       });
     });
 
-    it('matches the name', function () {
-      expect(field.get('name')).to.equal('reportName');
+    it('matches the id', function () {
+      expect(field.get('id')).to.equal('reportName');
     });
 
     it('is not a sort field by default', function () {
@@ -41,6 +41,21 @@ describe('Criterion', function () {
       expect(field.get('sortOrder')).to.equal(-1);
     });
 
+    it('returns sort object', function () {
+      field.makeSortField();
+      expect(field.toSortBy()).to.eql({
+        'field': 'reportName',
+        'order': 1
+      });
+    });
+
+    it('returns group object', function () {
+      field.makeGroupField();
+      expect(field.toGroupBy()).to.eql({
+        'field': 'reportName',
+        'order': 1
+      });
+    });
   });
 
   describe('In a criteria collection', function () {
@@ -148,96 +163,6 @@ describe('Criterion', function () {
       bar.makeGroupField();
       expect(bar.isGroupField()).to.be.true;
       expect(bar.isSortField()).to.be.false;
-    });
-  });
-
-  describe('Applying filter', function () {
-
-    var buzz;
-
-    beforeEach(function () {
-      buzz = new Criterion({
-        name: 'buzz'
-      });
-    });
-
-    it('sets filter value when not empty', function () {
-      buzz.setFilter('transaction report');
-
-      expect(buzz.get('isFilter')).to.be.true;
-      expect(buzz.get('filterBy')).to.equal('transaction report');
-    });
-
-    it('removes filter when empty', function () {
-      buzz.setFilter('transaction report');
-      buzz.setFilter('');
-
-      expect(buzz.get('isFilter')).to.be.false;
-      expect(buzz.get('filterBy')).to.equal('');
-    });
-
-    it('sets filter with trimmed value', function () {
-      buzz.setFilter(' xyz ');
-      expect(buzz.get('isFilter')).to.be.true;
-      expect(buzz.get('filterBy')).to.equal('xyz');
-    });
-
-    it('doesn\'t set filter with empty strings', function () {
-      buzz.setFilter('   ');
-      expect(buzz.get('isFilter')).to.be.false;
-      expect(buzz.get('filterBy')).to.equal('');
-    });
-
-    it('doesn\'t set filter with null', function () {
-      buzz.setFilter(null);
-      expect(buzz.get('isFilter')).to.be.false;
-      expect(buzz.get('filterBy')).to.equal('');
-    });
-
-    it('doesn\'t set filter with undefined', function () {
-      buzz.setFilter(undefined);
-      expect(buzz.get('isFilter')).to.be.false;
-      expect(buzz.get('filterBy')).to.equal('');
-    });
-
-    it('escapes filter value', function () {
-      buzz.setFilter('<script>');
-      expect(buzz.get('filterBy')).to.equal('&lt;script&gt;');
-    });
-
-  });
-
-  describe('Default validation', function () {
-
-    var buzz;
-
-    beforeEach(function () {
-      buzz = new Criterion({
-        name: 'buzz'
-      });
-    });
-
-    it('is valid for default criterion', function () {
-      var invalid = false;
-      buzz.on('invalid', function () {
-        invalid = true;
-      });
-
-      buzz.isValid();
-      expect(invalid).to.be.false;
-    });
-
-    it('is not valid when filter value is set without filter applied', function () {
-      var invalid = false;
-      buzz.on('invalid', function () {
-        invalid = true;
-      });
-
-      // brittle test, remove???
-      buzz.set('filterBy', 'xyz');
-
-      buzz.isValid();
-      expect(invalid).to.be.true;
     });
   });
 

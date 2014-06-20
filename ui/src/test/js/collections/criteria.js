@@ -1,14 +1,14 @@
 /*global sinon*/
+var _ = require('underscore');
 var assert = require('assert');
 var Criteria = require('../../../../src/main/js/collections/criteria');
-var Settings = require('../../../../src/main/js/models/settings');
-
-// enable cache
-require('../../../../src/main/js/app').ajaxSetup({cache: true});
+var ReportName = require('../../../../src/main/js/models/reportName');
 
 describe('Criteria', function () {
 
-  describe('with fake request', function () {
+  var API_URI = '/api/settings';
+
+  describe('interacting with API', function () {
     var xhr, requests;
 
     beforeEach(function () {
@@ -29,11 +29,26 @@ describe('Criteria', function () {
       criteria.fetch();
 
       assert.equal(1, requests.length);
-      assert.equal('/api/settings', requests[0].url);
+      assert(requests[0].url.indexOf(API_URI) > -1);
     });
+
+    it('saves settings using Settings API', function () {
+
+      var reportName = new ReportName();
+      var criteria = new Criteria(reportName);
+      criteria.save();
+
+      assert.equal(API_URI, requests[0].url);
+      assert.equal('POST', requests[0].method);
+      assert(_.isEqual(criteria.toJSON(), eval(requests[0].requestBody))); // jshint ignore:line
+    });
+
   });
 
   describe('with fake server', function () {
+
+    // enable cache
+    require('../../../../src/main/js/app').ajaxSetup({cache: true});
 
     var server;
 
@@ -84,13 +99,26 @@ describe('Criteria', function () {
       assert.equal(2, criteria.size());
     });
 
-  });
+    it('fetches an empty list and keeps the existing', function () {
+      server.respondWith('GET', '/api/settings', [200, {
+          'Content-Type': 'application/json'
+        },
+        '[]'
+      ]);
 
-  describe('collaboration with others', function () {
-    it('can be created with default list using Settings', function () {
-      var criteria = new Criteria(Settings.defaults());
-      assert(13, criteria.size());
+      var criteria = new Criteria([{ "id": "reportName", "title": "Report name" }]);
+      criteria.fetch({
+        remove: false
+      });
+
+      server.respond();
+
+      var reportName = criteria.get('reportName');
+
+      assert(reportName, 'report name exists');
+      assert.equal(1, criteria.size());
     });
+
   });
 
 });

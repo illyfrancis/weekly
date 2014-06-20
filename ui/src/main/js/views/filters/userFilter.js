@@ -11,7 +11,7 @@ var UserFilter = Backbone.View.extend({
 
   events: {
     'click .adduser': 'addUser',
-    'keyup .typeahead.tt-input': 'keyUpHandler',
+    'keyup .typeahead.tt-input': 'handleKeyup',
     'focus .typeahead': 'clearError',
     'typeahead:selected': 'onSelect'
   },
@@ -27,8 +27,25 @@ var UserFilter = Backbone.View.extend({
     }
 
     this.selectedUsers = this.createSubView(SelectedUsers, {
-      collection: this.users
+      collection: this.users,
+      model: this.model
     });
+
+    this.initializeTypeaheadEngine();
+  },
+
+  initializeTypeaheadEngine: function () {
+    this.hound = new Bloodhound({
+      // TODO - figure out exactly how to configure this
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      limit: 250, // TODO increase limit dynamically
+      remote: {
+        url: '/api/users?q=%QUERY'
+      }
+    });
+
+    this.hound.initialize();
   },
 
   render: function () {
@@ -44,18 +61,6 @@ var UserFilter = Backbone.View.extend({
   },
 
   typeahead: function () {
-    this.hound = new Bloodhound({
-      // TODO - figure out exactly how to configure this
-      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      limit: 250, // TODO increase limit dynamically
-      remote: {
-        url: '/api/users?q=%QUERY'
-      }
-    });
-
-    this.hound.initialize();
-
     this.$('.typeahead').typeahead({
       hint: true,
       highlight: true,
@@ -84,7 +89,7 @@ var UserFilter = Backbone.View.extend({
   },
 
   hasValidSelection: function () {
-    if (!!this.selected) {
+    if (_.isObject(this.selected) && _.has(this.selected, 'id')) {
       var userId = this.$('.typeahead.tt-input').val();
       if (this.selected.id === userId) {
         return true;
@@ -94,7 +99,7 @@ var UserFilter = Backbone.View.extend({
     return false;
   },
 
-  keyUpHandler: function (event) {
+  handleKeyup: function (event) {
     if (this.hasError) {
       this.clearError();
     }

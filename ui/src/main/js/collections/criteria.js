@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var Settings = require('./settings');
 var Criterion = require('../models/criterion');
 
 var Criteria = Backbone.Collection.extend({
@@ -7,27 +8,59 @@ var Criteria = Backbone.Collection.extend({
 
   model: Criterion,
 
+  initialize: function () {
+    this.reset(Settings.defaults());
+  },
+
   comparator: function (criterion) {
     return criterion.get('displayOrder');
   },
 
+  save: function (options) {
+    Backbone.sync('create', this, options);
+  },
+
   toQuery: function () {
-    var query, queries = [];
+    return {
+      'query': this.buildQuery(),
+      'sorts': this.buildSort()
+    };
+  },
+
+  buildQuery: function () {
+    var criterionToQuery = function (criterion) {
+      return criterion.toQuery();
+    };
+
+    var nullQuery = function (query) {
+      return query === null;
+    };
+
+    var queries = this.chain().map(criterionToQuery).reject(nullQuery).value();
+
+    var query = {};
+    if (queries.length === 1) {
+      query = queries.shift();
+    } else if (queries.length > 1) {
+      query.$and = queries;
+    }
+
+    return query;
+  },
+
+  buildSort: function () {
+    var sorts = [];
     this.each(function (criterion) {
-      query = criterion.toQuery();
-      if (query) {
-        queries.push(query);
+      if (criterion.isSortField()) {
+        sorts.push(criterion.toSortBy());
+      }
+
+      if (criterion.isGroupField()) {
+        sorts.unshift(criterion.toGroupBy());
       }
     });
 
-    var queryString = '';
-    if (queries.length === 1) {
-      queryString = queries.shift();
-    } else if (queries.length > 1) {
-      queryString = '{"$and":[' + queries.join(',') + ']}';      
-    }
-
-    return queryString;
+    return sorts;
   }
 
 });

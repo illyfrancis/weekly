@@ -11,12 +11,12 @@ var AppRouter = Backbone.Router.extend({
   },
 
   initialize: function () {
-    // custom events
+    // register 'search' event handler
     this.listenTo(this, 'dashboard:search', this.search);
   },
 
-  search: function (o) {
-    console.log('kick off search with q : [' + o + ']');
+  search: function (query) {
+    console.log('kick off search with q : ' + JSON.stringify(query) + '');
   },
 
   showDashboard: function () {
@@ -25,6 +25,7 @@ var AppRouter = Backbone.Router.extend({
     }
 
     this.dashbaord = new Dashboard({
+      user: repository.user(),
       criteria: repository.criteria(),
       schedules: repository.schedules()
     });
@@ -33,15 +34,15 @@ var AppRouter = Backbone.Router.extend({
   },
 
   showFilters: function () {
-    if (!this.filter) {
-      this.filter = new Filters({
+    if (!this.filters) {
+      this.filters = new Filters({
         collection: repository.criteria()
       });
 
-      Backbone.$('.dashboard-container').append(this.filter.render().el);
+      Backbone.$('.dashboard-container').append(this.filters.render().el);
     }
 
-    Backbone.$('#filtersModal').modal('show');
+    this.filters.$('.modal').modal('show');
   },
 
   showGroupBy: function () {
@@ -53,7 +54,7 @@ var AppRouter = Backbone.Router.extend({
       Backbone.$('.dashboard-container').append(this.groupBy.render().el);
     }
 
-    Backbone.$('#groupByModal').modal('show');
+    this.groupBy.$('.modal').modal('show');
   }
 
 });

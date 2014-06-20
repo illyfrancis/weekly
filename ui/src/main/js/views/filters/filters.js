@@ -10,7 +10,8 @@ var Filters = Backbone.View.extend({
   className: 'filters',
 
   events: {
-    'click .apply': 'applyFilters'
+    'click .apply': 'applyFilters',
+    'click .reset': 'resetFilters'
   },
 
   render: function () {
@@ -37,13 +38,16 @@ var Filters = Backbone.View.extend({
   },
 
   applyFilters: function () {
-    // generate query
     var query = this.collection.toQuery();
-
-    // initiate search
+    // initiate search by triggering 'search' event
     Backbone.router.trigger('dashboard:search', query);
+    this.collection.save();
+    this.$('.modal').modal('hide');
+  },
 
-    // 3. save filters
+  resetFilters: function () {
+    this.collection.fetch();
+    this.$('.modal').modal('hide');
   }
 
 });

@@ -5,8 +5,7 @@
   "trailing": true,
   "white": true,
   "expr": true,
-  "globals": { 
-    "console": true,
+  "globals": {
     "document": true,
     "global": true,
     "process": true,

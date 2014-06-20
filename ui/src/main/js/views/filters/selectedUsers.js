@@ -7,8 +7,14 @@ var SelectedUsers = Backbone.View.extend({
   className: 'well well-sm user-list',
 
   initialize: function () {
-    // collection - Users
+    // model - a user based criterion
+    // collection - users
+    this.listenTo(this.model, 'change:filter', this.resetCollection);
     this.listenTo(this.collection, 'add remove reset', this.render);
+  },
+
+  resetCollection: function (model) {
+    this.collection.reset(model.get('filter'));
   },
 
   render: function () {

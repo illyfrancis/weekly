@@ -1,5 +1,6 @@
 var Criterion = require('../../../../src/main/js/models/criterion');
 var Criteria = require('../../../../src/main/js/collections/criteria');
+var Settings = require('../../../../src/main/js/collections/settings');
 
 var chai = require('chai');
 var expect = chai.expect;
@@ -15,6 +16,10 @@ describe('Criteria', function () {
 
   it('has a url string', function () {
     expect(criteria.url).to.be.a('string').and.equal('/api/settings');
+  });
+
+  it('has default set of criterion', function () {
+    expect(criteria.size()).to.equal(Settings.defaults().length);
   });
 
   it('sorts the elements by displayOrder', function () {
@@ -40,22 +45,42 @@ describe('Criteria', function () {
   });
 
   it('returns an empty query when there\'s no criterion', function () {
-    expect(criteria.toQuery()).to.be.empty;
+    expect(criteria.toQuery()).to.eql({
+      query: {},
+      sorts: [{
+        field: 'client',
+        order: 1
+      }]
+    });
   });
 
   it('returns a query from a criteria when one criterion is set', function () {
-    var query = '{#query#}',
+    var query1 = {
+      'key': 'value'
+    },
       criterion = new Criterion();
-    sinon.stub(criterion, 'toQuery').returns(query);
+    sinon.stub(criterion, 'toQuery').returns(query1);
 
     criteria.add(criterion);
-    expect(criteria.toQuery()).to.equal(query);
+    expect(criteria.toQuery()).to.eql({
+      query: query1,
+      sorts: [{
+        field: 'client',
+        order: 1
+      }]
+    });
   });
 
   it('returns a combined query when multiple criteria is set', function () {
-    var query1 = '{#query1#}',
-      query2 = '{#query2#}',
-      query3 = '{#query3#}',
+    var query1 = {
+      'key1': 'val1'
+    },
+      query2 = {
+        'key2': 'val2'
+      },
+      query3 = {
+        'key3': 'val3'
+      },
       criterion1 = new Criterion(),
       criterion2 = new Criterion(),
       criterion3 = new Criterion();
@@ -68,6 +93,60 @@ describe('Criteria', function () {
     criteria.add(criterion2);
     criteria.add(criterion3);
 
-    expect(criteria.toQuery()).to.equal('{"$and":[' + query1 + ',' + query2 + ',' + query3 + ']}');
+    expect(criteria.toQuery()).to.eql({
+      query: {
+        '$and': [query1, query2, query3]
+      },
+      sorts: [{
+        field: 'client',
+        order: 1
+      }]
+    });
   });
+
+  it('returns sort field from a criteria when one criterion is set', function () {
+    var criterion = new Criterion({
+      id: 'criterion1',
+      sortOrder: -1
+    });
+
+    criteria.add(criterion);
+
+    expect(criteria.toQuery()).to.eql({
+      query: {},
+      sorts: [{
+        field: 'client',
+        order: 1
+      }, {
+        field: 'criterion1',
+        order: -1
+      }]
+    });
+  });
+
+  it('returns sort fields from a criteria when two criterion are set', function () {
+    var criterion1 = new Criterion({
+      id: 'criterion1'
+    });
+
+    var criterion2 = new Criterion({
+      id: 'criterion2',
+      sortOrder: -1
+    });
+
+    criteria.add(criterion1);
+    criteria.add(criterion2);
+
+    expect(criteria.toQuery()).to.eql({
+      query: {},
+      sorts: [{
+        field: 'client',
+        order: 1
+      }, {
+        field: 'criterion2',
+        order: -1
+      }]
+    });
+  });
+
 });

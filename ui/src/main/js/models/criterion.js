@@ -1,14 +1,9 @@
 var Backbone = require('backbone');
 var _ = require('underscore');
 
-// TODO
-// instead of having toSort .. or toGroupby etc on criteria, 
-// let's pass the critera and derive sort and groupby in another function.
-
 var Criterion = Backbone.Model.extend({
   defaults: {
-    isFilter: false,
-    filterBy: '',
+    filter: null,
     sortOrder: 0,
     groupOrder: 0,
     displayOrder: -1
@@ -65,28 +60,22 @@ var Criterion = Backbone.Model.extend({
     }
   },
 
-  setFilter: function (filterBy) {
-    // trim and validate
-    if (_.isNull(filterBy) || _.isUndefined(filterBy)) {
-      filterBy = '';
-    }
-    filterBy = _.escape(filterBy.trim());
-    this.set('filterBy', filterBy);
-    this.set('isFilter', filterBy.length > 0);
+  toSortBy: function () {
+    return {
+      'field': this.get('id'),
+      'order': this.get('sortOrder')
+    };
   },
 
-  validate: function (attrs, options) {
-    _.isUndefined(options);
-    
-    if (attrs.filterBy.length > 0 && !attrs.isFilter) {
-      return 'filter not applied';
-    }
+  toGroupBy: function () {
+    return {
+      'field': this.get('id'),
+      'order': this.get('groupOrder')
+    };
   },
 
   toQuery: function () {
-    // override to return a query string
-    // an empty string indicates no query
-    return '';
+    return null;
   }
 
 });

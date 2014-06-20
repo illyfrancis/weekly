@@ -21,7 +21,6 @@ Backbone.View = Backbone.View.extend({
   // Call to dispose any sub views created via 'createSubView' function
   // and remove itself according to Backbone.View.remove() function.
   dispose: function () {
-    // console.log('dispose: ' + this.cid + ', class [' + this.className + '], tag [' + this.tagName + ']');
     this.disposeSubViews();
     this.remove();
     return this;

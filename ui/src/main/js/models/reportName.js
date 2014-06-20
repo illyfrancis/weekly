@@ -1,18 +1,40 @@
-var Criterion = require('./criterion');
 var _ = require('underscore');
+var Criterion = require('./criterion');
 
 var ReportName = Criterion.extend({
 
-  toQuery: function () {
-    var queryString = '',
-      filter = this.get('filterBy');
+  initialize: function () {
+    this.set('filter', '');
+  },
 
-    if (_.isString(filter) && filter.trim() !== '') {
-        // escape filter?
-        queryString = '{"$like":{"' + this.get('id') + '":"' + filter + '"}}';
+  setFilter: function (filter) {
+    // filter = _.escape(filter.trim()); // no trim in IE8
+    filter = _.escape(filter.replace(/^\s+|\s+$/g, '')); // For now. Need _.string
+    if (this.get('filter') !== filter) {
+      this.set('filter', filter, { validate: true });
+    }
+  },
+
+  validate: function (attrs) {
+    // just an example
+    if (attrs.filter.length > 10 ) {
+      return 'too long';
+    }
+  },
+
+  toQuery: function () {
+    var filter = this.get('filter'),
+      query = null;
+
+    if (filter !== '') {
+      var field = {};
+      field[this.get('id')] = filter;
+      query = {
+        '$like': field
+      };
     }
 
-    return queryString;
+    return query;
   }
 
 });
