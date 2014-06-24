@@ -23,10 +23,12 @@ var DashboardView = Backbone.View.extend({
   },
 
   renderMenu: function () {
-    var menu = this.createSubView(Menu);
+    var menu = this.createSubView(Menu, {
+      criteria: this.criteria
+    });
+    
     // ??? does `replaceWith` cause unbound event?`
     // this.$('.menu').empty().append(this.menu.render().el);
-
     this.$('.menu').replaceWith(menu.render().el);
   },
 

@@ -8,7 +8,15 @@
   }
 }, {
   "request": {
-    "uri": "/api/users",
+    "uri": "/api/settings",
+    "method": "post"
+  },
+  "response": {
+    "status" : "200"
+  }
+}, {
+  "request": {
+    "uri": "/api/users/search",
     "method": "get",
     "queries": {
       "q": "BS7"
@@ -19,7 +27,7 @@
   }
 }, {
   "request": {
-    "uri": "/api/users",
+    "uri": "/api/users/search",
     "method": "get",
     "queries": {
       "q": "NJ9"
@@ -30,8 +38,22 @@
   }
 }, {
   "request": {
-    "uri": "/api/users",
-    "method": "get"
+    "uri": "/api/users/search",
+    "method": "get",
+    "queries": {
+      "q": "BBH"
+    }
+  },
+  "response": {
+    "status": "404"
+  }
+}, {
+  "request": {
+    "uri": "/api/users/search",
+    "method": "get",
+    "queries": {
+      "q": "ABC"
+    }
   },
   "response": {
     "file": "./resources/users-empty.json"

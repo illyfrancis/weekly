@@ -15,13 +15,14 @@ var GroupBy = Backbone.View.extend({
     this.$el.html(template());
     var $select = this.$('select');
 
-    _(this.collection.map(function (criterion) {
+    this.collection.chain().map(function (criterion) {
       var mapped = criterion.toJSON();
       mapped.isGroupBy = criterion.isGroupField();
       return mapped;
-    })).each(function (mapped) {
+    }).each(function (mapped) {
       $select.append(itemTemplate(mapped));
     });
+
     return this;
   },
 

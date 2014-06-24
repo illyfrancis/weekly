@@ -1,11 +1,1 @@
-[{
-  "id": "reportName",
-  "filter": "TR",
-  "sortOrder": 1,
-  "groupOrder": 0
-}, {
-  "id": "reportType",
-  "filter": {},
-  "sortOrder": 0,
-  "groupOrder": 0
-}]
+[{"id":"reportName","title":"Report name","displayOrder":0,"filter":"Transaction","sortOrder":0,"groupOrder":0},{"id":"reportType","title":"Report type","displayOrder":1,"filter":null,"sortOrder":0,"groupOrder":0},{"id":"createdBy","title":"Created by","displayOrder":2,"filter":[{"id":"NJ97011","name":"Jenny Brainin"},{"id":"BS74010","name":"Kristen Alves"}],"sortOrder":0,"groupOrder":0},{"id":"reportOwner","title":"Report owner","displayOrder":3,"filter":null,"sortOrder":0,"groupOrder":0},{"id":"modifiedBy","title":"Modified by","displayOrder":4,"filter":[{"id":"NJ97279","name":"Lolita Espina (RD)"}],"sortOrder":0,"groupOrder":0},{"id":"frequency","title":"Frequency","displayOrder":5,"filter":null,"sortOrder":0,"groupOrder":0},{"id":"trigger","title":"Trigger","displayOrder":6,"filter":null,"sortOrder":0,"groupOrder":0},{"id":"distributionList","title":"Distribution list","displayOrder":7,"filter":null,"sortOrder":0,"groupOrder":0},{"id":"lastExecution","title":"Last execution","displayOrder":8,"filter":null,"sortOrder":0,"groupOrder":0},{"id":"distributionFormat","title":"Distribution format","displayOrder":9,"filter":null,"sortOrder":0,"groupOrder":0},{"id":"client","title":"Client","displayOrder":10,"groupOrder":1,"filter":null,"sortOrder":0},{"id":"reportExpiry","title":"Report expiry","displayOrder":11,"filter":null,"sortOrder":0,"groupOrder":0}]
