@@ -1,14 +1,13 @@
 var Backbone = require('backbone');
+var GroupBy = require('../groupBy/groupBy');
 var template = require('./templates/menu.html');
-var Grouping = require('../groupBy/grouping');
 
 var Menu = Backbone.View.extend({
 
   className: 'menu',
 
   events: {
-    'click .filter': 'showFilter',
-    'click .group-by': 'showGroupBy'
+    'click .filter': 'showFilter'
   },
 
   initialize: function (options) {
@@ -18,23 +17,17 @@ var Menu = Backbone.View.extend({
   render: function () {
     this.$el.html(template());
 
-    var elem = this.$('.foobar');
-    var grouping = this.createSubView(Grouping, {
-      el: elem,
+    var groupBy = this.createSubView(GroupBy, {
+      el: this.$('.group-by'),
       collection: this.criteria
     });
-    grouping.render();
+    groupBy.render();
 
     return this;
   },
 
   showFilter: function () {
     Backbone.router.showFilters();
-  },
-
-  showGroupBy: function () {
-    Backbone.router.showGroupBy();
-    // Backbone.router.navigate('groupby', {trigger: true});
   }
 
 });

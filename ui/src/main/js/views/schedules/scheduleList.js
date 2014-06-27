@@ -1,8 +1,8 @@
 /*global alert*/
 var Backbone = require('backbone');
-var template = require('./templates/scheduleList.html');
 var ScheduleHeader = require('./scheduleHeader');
 var ScheduleItem = require('./scheduleItem');
+var template = require('./templates/scheduleList.html');
 
 var ScheduleList = Backbone.View.extend({
 

@@ -44,9 +44,10 @@ var CriterionHeader = Backbone.View.extend({
   },
 
   setSortField: function () {
-    this.model.makeSortField();
-
-    // trigger search event
+    if (this.model.get('isSortable')) {
+      this.model.makeSortField();
+      // trigger search event
+    }
   }
 
 });

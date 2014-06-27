@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Criterion = Backbone.Model.extend({
   defaults: {
     filter: null,
+    isSortable: true,
     sortOrder: 0,
     groupOrder: 0,
     displayOrder: -1

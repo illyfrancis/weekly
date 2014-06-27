@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
-var template = require('./templates/selectedUsers.html');
 var SelectedUser = require('./selectedUser');
+var template = require('./templates/selectedUsers.html');
 
 var SelectedUsers = Backbone.View.extend({
 

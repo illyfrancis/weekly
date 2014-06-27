@@ -77,7 +77,7 @@
 }, {
   "request": {
     "uri": "/api/schedules",
-    "method": "get"
+    "method": "post"
   },
   "response": {
     "file": "./resources/schedules.json"

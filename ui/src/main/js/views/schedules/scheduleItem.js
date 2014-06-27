@@ -1,7 +1,7 @@
-var Backbone = require('backbone');
 var _ = require('underscore');
-var template = require('./templates/scheduleItem.html');
+var Backbone = require('backbone');
 var moment = require('moment');
+var template = require('./templates/scheduleItem.html');
 
 var ScheduleItem = Backbone.View.extend({
 

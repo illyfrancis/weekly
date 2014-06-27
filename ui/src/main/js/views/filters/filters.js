@@ -1,7 +1,7 @@
-var Backbone = require('backbone');
 var _ = require('underscore');
-var template = require('./templates/filters.html');
+var Backbone = require('backbone');
 var FilterManager = require('./filterManager');
+var template = require('./templates/filters.html');
 
 var Filters = Backbone.View.extend({
 

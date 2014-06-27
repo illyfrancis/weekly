@@ -1,7 +1,7 @@
 var Backbone = require('backbone');
-var template = require('./templates/dashboard.html');
 var Menu = require('./menu');
 var Schedules = require('../schedules/schedules');
+var template = require('./templates/dashboard.html');
 
 var DashboardView = Backbone.View.extend({
 
@@ -26,9 +26,7 @@ var DashboardView = Backbone.View.extend({
     var menu = this.createSubView(Menu, {
       criteria: this.criteria
     });
-    
-    // ??? does `replaceWith` cause unbound event?`
-    // this.$('.menu').empty().append(this.menu.render().el);
+   
     this.$('.menu').replaceWith(menu.render().el);
   },
 
@@ -37,6 +35,7 @@ var DashboardView = Backbone.View.extend({
       collection: this.schedules,
       criteria: this.criteria
     });
+    
     this.$('.schedules').replaceWith(schedules.render().el);
   }
 });

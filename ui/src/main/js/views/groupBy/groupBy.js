@@ -1,34 +1,22 @@
 var Backbone = require('backbone');
-var _ = require('underscore');
-var template = require('./templates/groupBy.html');
-var itemTemplate = require('./templates/groupByOption.html');
+var GroupByOption = require('./groupByOption');
 
 var GroupBy = Backbone.View.extend({
 
-  className: 'group-by',
-
-  events: {
-    'change #groupBy': 'selectChange'
-  },
-
   render: function () {
-    this.$el.html(template());
-    var $select = this.$('select');
 
-    this.collection.chain().map(function (criterion) {
-      var mapped = criterion.toJSON();
-      mapped.isGroupBy = criterion.isGroupField();
-      return mapped;
-    }).each(function (mapped) {
-      $select.append(itemTemplate(mapped));
-    });
+    var $dropdown = this.$('.dropdown-menu');
+
+    this.collection.each(function (criterion) {
+      if (criterion.get('isSortable')) {
+        var groupByOption = this.createSubView(GroupByOption, {
+          model: criterion
+        });
+        $dropdown.append(groupByOption.render().el);
+      }
+    }, this);    
 
     return this;
-  },
-
-  selectChange: function (event) {
-    var id = event.target.value;
-    this.collection.get(id).makeGroupField();
   }
 
 });

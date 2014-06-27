@@ -1,5 +1,5 @@
-var Backbone = require('backbone');
 var _ = require('underscore');
+var Backbone = require('backbone');
 var template = require('./templates/reportTypeFilter.html');
 
 var dashboard = global.dashboard || {};

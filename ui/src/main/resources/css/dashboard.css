@@ -194,3 +194,6 @@
   padding-right: 3px;
   padding-bottom: 3px;
 }
+.group-by .dropdown-menu {
+  min-width: 180px;
+}
