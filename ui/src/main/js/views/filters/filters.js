@@ -11,7 +11,7 @@ var Filters = Backbone.View.extend({
 
   events: {
     'click .apply': 'applyFilters',
-    'click .reset': 'resetFilters'
+    'click .cancel': 'cancelFilters'
   },
 
   render: function () {
@@ -45,7 +45,7 @@ var Filters = Backbone.View.extend({
     this.$('.modal').modal('hide');
   },
 
-  resetFilters: function () {
+  cancelFilters: function () {
     this.collection.fetch();
     this.$('.modal').modal('hide');
   }

@@ -84,6 +84,14 @@
   }
 }, {
   "request": {
+    "uri": "/api/schedules/17920/run",
+    "method": "post"
+  },
+  "response": {
+    "status": "204"
+  }
+}, {
+  "request": {
     "uri": "/api/schedules",
     "method": "get",
     "queries": {

@@ -10,12 +10,17 @@ var Schedule = Backbone.Model.extend({
     distributionList: '',
     frequency: '',
     lastExecution: '',
+    lastReportOutputId: '',
     modifiedById: '',
     modifiedByName: '',
+    reportCategory: '',
+    reportCategoryId: '',
     reportExpiry: '',
     reportName: '',
-    reportOwner: '',
+    reportOwnerId: '',
+    reportOwnerName: '',
     reportType: '',
+    reportTypeCode: '',
     trigger: ''
   }
 });

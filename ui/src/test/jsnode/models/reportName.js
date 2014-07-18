@@ -24,8 +24,8 @@ describe('ReportName', function () {
     var query = reportName.toQuery();
 
     expect(query).to.eql({
-      '$like': {
-        'reportName': 'TRANSACTION_REPORT'
+      'reportName': {
+        '$like': 'TRANSACTION_REPORT'
       }
     });
   });

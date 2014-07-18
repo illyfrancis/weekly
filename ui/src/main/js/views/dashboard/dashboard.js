@@ -1,6 +1,7 @@
 var Backbone = require('backbone');
 var Menu = require('./menu');
 var Schedules = require('../schedules/schedules');
+var Notification = require('./notification');
 var template = require('./templates/dashboard.html');
 
 var DashboardView = Backbone.View.extend({
@@ -11,6 +12,7 @@ var DashboardView = Backbone.View.extend({
     this.user = options.user;
     this.criteria = options.criteria;
     this.schedules = options.schedules;
+    this.listenTo(Backbone.router, 'dashboard:notify', this.showNotification);
   },
 
   render: function () {
@@ -20,6 +22,14 @@ var DashboardView = Backbone.View.extend({
     this.renderMenu();
     this.renderSchedules();
     return this;
+  },
+
+  showNotification: function (text, type) {
+    var notification = this.createSubView(Notification, {
+      text: text,
+      type: type
+    });
+    Backbone.$('.notifications').append(notification.render().el);
   },
 
   renderMenu: function () {

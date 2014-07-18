@@ -41,7 +41,7 @@ var UserLookupFilter = Backbone.View.extend({
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       limit: 250, // TODO increase limit dynamically
       remote: {
-        url: '/api/users/search?q=%QUERY'
+        url: './api/users/search?q=%QUERY'
       }
     });
 

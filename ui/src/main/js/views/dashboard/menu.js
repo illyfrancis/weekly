@@ -7,7 +7,8 @@ var Menu = Backbone.View.extend({
   className: 'menu',
 
   events: {
-    'click .filter': 'showFilter'
+    'click .filters': 'showFilters',
+    'click .clients': 'showClients'
   },
 
   initialize: function (options) {
@@ -26,8 +27,12 @@ var Menu = Backbone.View.extend({
     return this;
   },
 
-  showFilter: function () {
+  showFilters: function () {
     Backbone.router.showFilters();
+  },
+
+  showClients: function () {
+    Backbone.router.showClients();
   }
 
 });

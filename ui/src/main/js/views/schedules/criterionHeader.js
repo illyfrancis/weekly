@@ -47,6 +47,10 @@ var CriterionHeader = Backbone.View.extend({
     if (this.model.get('isSortable')) {
       this.model.makeSortField();
       // trigger search event
+      // TODO - pull up
+      var query = this.model.collection.toQuery();
+      Backbone.router.trigger('dashboard:search', query);
+      this.model.collection.save();
     }
   }
 

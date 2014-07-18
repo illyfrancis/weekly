@@ -7,6 +7,17 @@ var ScheduleItem = Backbone.View.extend({
 
   tagName: 'tr',
 
+  events: {
+    'click': 'toggleDetail'
+  },
+
+  toggleDetail: function () {
+    var detailName = '.detail' + this.model.id;
+    var p = this.$el.parent();
+    p.find('.collapse.in').not(detailName).collapse('hide');
+    p.find(detailName).collapse('toggle');
+  },
+
   render: function () {
     this.$el.html(template(this.toJSON()));
     return this;

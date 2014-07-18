@@ -61,16 +61,24 @@ var Criterion = Backbone.Model.extend({
     }
   },
 
+  filterWith: function () {
+    return this.has('filterWith') ? this.get('filterWith') : this.get('id');
+  },
+
+  sortWith: function () {
+    return this.has('sortWith') ? this.get('sortWith') : this.get('id');
+  },
+
   toSortBy: function () {
     return {
-      'field': this.get('id'),
+      'field': this.sortWith(),
       'order': this.get('sortOrder')
     };
   },
 
   toGroupBy: function () {
     return {
-      'field': this.get('id'),
+      'field': this.sortWith(),
       'order': this.get('groupOrder')
     };
   },

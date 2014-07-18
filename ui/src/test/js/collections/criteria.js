@@ -6,7 +6,7 @@ var ReportName = require('../../../../src/main/js/models/reportName');
 
 describe('Criteria', function () {
 
-  var API_URI = '/api/settings';
+  var API_URI = './api/settings';
 
   describe('interacting with API', function () {
     var xhr, requests;
@@ -61,7 +61,7 @@ describe('Criteria', function () {
     });
 
     it('fetches an item to an empty collection', function () {
-      server.respondWith('GET', '/api/settings', [200, {
+      server.respondWith('GET', './api/settings', [200, {
           'Content-Type': 'application/json'
         },
         '[{ "id": "reportType", "title": "Report type" }]'
@@ -78,7 +78,7 @@ describe('Criteria', function () {
     });
 
     it('fetches a new item and keeps the existing', function () {
-      server.respondWith('GET', '/api/settings', [200, {
+      server.respondWith('GET', './api/settings', [200, {
           'Content-Type': 'application/json'
         },
         '[{ "id": "reportType", "title": "Report type" }]'
@@ -100,7 +100,7 @@ describe('Criteria', function () {
     });
 
     it('fetches an empty list and keeps the existing', function () {
-      server.respondWith('GET', '/api/settings', [200, {
+      server.respondWith('GET', './api/settings', [200, {
           'Content-Type': 'application/json'
         },
         '[]'

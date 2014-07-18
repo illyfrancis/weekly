@@ -1,0 +1,31 @@
+<div class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Clients</h4>
+      </div>
+      <div class="modal-body">
+
+        <form class="form" role="form">
+          <div class="form-group">
+            <label for="{{viewId}}">Select clients</label>
+            <div class="input-group scrollable-dropdown-menu">
+              <input type="text" class="form-control typeahead" id="{{viewId}}" placeholder="Client id or name">
+              <span class="input-group-btn">
+                <button class="btn btn-default adduser" type="button">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </button>
+              </span>
+            </div>
+            <span class="help-block hidden">Invalid user id</span>
+          </div>
+          <div class="selectedUsers">
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default apply">Apply</button>
+      </div>
+    </div>
+  </div>

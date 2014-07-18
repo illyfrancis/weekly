@@ -17,7 +17,7 @@ var ReportName = Criterion.extend({
 
   validate: function (attrs) {
     // just an example
-    if (attrs.filter.length > 10 ) {
+    if (attrs.filter.length > 10) {
       return 'too long';
     }
   },
@@ -27,11 +27,8 @@ var ReportName = Criterion.extend({
       query = null;
 
     if (filter !== '') {
-      var field = {};
-      field[this.get('id')] = filter;
-      query = {
-        '$like': field
-      };
+      query = {};
+      query[this.filterWith()] = { '$like': filter };
     }
 
     return query;

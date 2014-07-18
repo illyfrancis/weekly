@@ -23,10 +23,14 @@ var CriterionUser = Criterion.extend({
     var wrappedQuery = null;
 
     if (query.length === 1) {
-      wrappedQuery = query.shift();
+      wrappedQuery = {};
+      wrappedQuery[this.filterWith()] = {
+        '$eq': query.shift()
+      };
     } else if (query.length > 1) {
-      wrappedQuery = {
-        '$or': query
+      wrappedQuery = {};
+      wrappedQuery[this.filterWith()] = {
+        '$in': query
       };
     }
 
@@ -38,11 +42,8 @@ var CriterionUser = Criterion.extend({
       return user.has('id');
     };
 
-    var id = this.get('id');
     var userToQuery = function (user) {
-      var item = {};
-      item[id] = user.get('id');
-      return item;
+      return user.get('id');
     };
 
     return this.users.chain().filter(userHasId).map(userToQuery).value();

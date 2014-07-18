@@ -77,12 +77,12 @@ describe('CriterionUser', function () {
 
   it('returns a query with a single field when one filter is set', function () {
     criterionUser.users.add(user);
-    expect(criterionUser.toQuery()).to.eql({'User':'123'});
+    expect(criterionUser.toQuery()).to.eql({'User':{'$eq':'123'}});
   });
 
   it('returns a query with two fields when two filters are set', function () {
     criterionUser.users.add(user);
     criterionUser.users.add(otherUser);
-    expect(criterionUser.toQuery()).to.eql({'$or':[{'User':'123'},{'User':'789'}]});
+    expect(criterionUser.toQuery()).to.eql({'User':{'$in': ['123', '789']}});
   });
 });

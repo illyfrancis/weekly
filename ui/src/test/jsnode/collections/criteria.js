@@ -15,7 +15,7 @@ describe('Criteria', function () {
   });
 
   it('has a url string', function () {
-    expect(criteria.url).to.be.a('string').and.equal('/api/settings');
+    expect(criteria.url).to.be.a('string').and.equal('./api/settings');
   });
 
   it('has default set of criterion', function () {
@@ -48,7 +48,7 @@ describe('Criteria', function () {
     expect(criteria.toQuery()).to.eql({
       query: {},
       sorts: [{
-        field: 'client',
+        field: 'clientId',
         order: 1
       }]
     });
@@ -65,7 +65,7 @@ describe('Criteria', function () {
     expect(criteria.toQuery()).to.eql({
       query: query1,
       sorts: [{
-        field: 'client',
+        field: 'clientId',
         order: 1
       }]
     });
@@ -98,7 +98,7 @@ describe('Criteria', function () {
         '$and': [query1, query2, query3]
       },
       sorts: [{
-        field: 'client',
+        field: 'clientId',
         order: 1
       }]
     });
@@ -115,7 +115,7 @@ describe('Criteria', function () {
     expect(criteria.toQuery()).to.eql({
       query: {},
       sorts: [{
-        field: 'client',
+        field: 'clientId',
         order: 1
       }, {
         field: 'criterion1',
@@ -140,7 +140,7 @@ describe('Criteria', function () {
     expect(criteria.toQuery()).to.eql({
       query: {},
       sorts: [{
-        field: 'client',
+        field: 'clientId',
         order: 1
       }, {
         field: 'criterion2',

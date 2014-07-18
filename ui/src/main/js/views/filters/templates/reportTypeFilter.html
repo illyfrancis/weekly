@@ -2,8 +2,8 @@
 <div class="col-sm-8">
   <select class="form-control selectpicker" multiple data-selected-text-format="count>1" id="reportType">
     {{#each reportTypes}}
-    <optgroup label="{{this.product.name}}">
-      {{#each this.product.layout}}
+    <optgroup label="{{this.name}}">
+      {{#each this.layout}}
       <option value="{{this.code}}">{{this.name}}</option>
       {{/each}}
     </optgroup>

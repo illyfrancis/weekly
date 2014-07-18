@@ -1,8 +1,9 @@
 var Backbone = require('backbone');
 var Dashboard = require('./views/dashboard/dashboard');
 var Filters = require('./views/filters/filters');
-var GroupBy = require('./views/groupBy/groupBy');
+var Clients = require('./views/clients/clients');
 var repository = require('./repository');
+var Query = require('./models/query');
 
 var AppRouter = Backbone.Router.extend({
 
@@ -11,12 +12,12 @@ var AppRouter = Backbone.Router.extend({
   },
 
   initialize: function () {
-    // register 'search' event handler
     this.listenTo(this, 'dashboard:search', this.search);
   },
 
   search: function (query) {
-    console.log('kick off search with q : ' + JSON.stringify(query) + '');
+    var q = new Query({}, { schedules: repository.schedules() });
+    q.search(query);
   },
 
   showDashboard: function () {
@@ -45,16 +46,14 @@ var AppRouter = Backbone.Router.extend({
     this.filters.$('.modal').modal('show');
   },
 
-  showGroupBy: function () {
-    if (!this.groupBy) {
-      this.groupBy = new GroupBy({
-        collection: repository.criteria()
-      });
-      
-      Backbone.$('.dashboard-container').append(this.groupBy.render().el);
+  showClients: function () {
+    if (!this.clients) {
+      this.clients = new Clients();
+
+      Backbone.$('.dashboard-container').append(this.clients.render().el);
     }
 
-    this.groupBy.$('.modal').modal('show');
+    this.clients.$('.modal').modal('show');
   }
 
 });

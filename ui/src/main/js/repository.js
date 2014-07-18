@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var Backbone = require('backbone');
 var Criteria = require('./collections/criteria');
 var Schedules = require('./collections/schedules');
 var User = require('./models/user');
@@ -21,9 +22,8 @@ var Repository = {
   }),
 
   loadSchedules: function () {
-    this.schedules().fetch({
-      reset: true
-    });
+    var query = this.criteria().toQuery();
+    Backbone.router.trigger('dashboard:search', query);
   },
 
   user: _.once(function () {

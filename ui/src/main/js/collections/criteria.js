@@ -4,7 +4,7 @@ var Criterion = require('../models/criterion');
 
 var Criteria = Backbone.Collection.extend({
 
-  url: '/api/settings',
+  url: './api/settings',
 
   model: Criterion,
 
