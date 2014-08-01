@@ -1,5 +1,5 @@
-var Criterion = require('../../../../src/main/js/models/criterion');
-var Criteria = require('../../../../src/main/js/collections/criteria');
+var Criterion = require('../../../../../src/main/js/models/criteria/criterion');
+var Criteria = require('../../../../../src/main/js/collections/criteria');
 
 var chai = require('chai');
 var expect = chai.expect;

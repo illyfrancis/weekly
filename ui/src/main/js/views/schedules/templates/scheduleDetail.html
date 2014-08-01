@@ -17,19 +17,21 @@
             <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
           </button>
         </div>
+        {{#if isReportOwner}}
         <div class="btn-group">
-          <button class="btn btn-primary btn-sm">
-            <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+          <button class="btn btn-primary btn-sm download">
+            <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
           </button>
         </div>
+        {{/if}}
         <div class="btn-group">
           <button class="btn btn-primary btn-sm">
             <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
           </button>
         </div>
         <div class="btn-group">
-          <button class="btn btn-primary btn-sm download">
-            <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+          <button class="btn btn-primary btn-sm">
+            <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
           </button>
         </div>
       </div>

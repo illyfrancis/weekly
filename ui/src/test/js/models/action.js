@@ -49,12 +49,12 @@ describe('Action', function() {
 
       beforeEach(function() {
 
-        spy = sinon.spy(action, '_showNotification');
+        spy = sinon.spy(action, 'showNotification');
         server = sinon.fakeServer.create();
       });
 
       afterEach(function() {
-        action._showNotification.restore();
+        action.showNotification.restore();
         server.restore();
       });
 

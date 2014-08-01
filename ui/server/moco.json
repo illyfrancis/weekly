@@ -12,7 +12,7 @@
     "method": "post"
   },
   "response": {
-    "status" : "200"
+    "status": "200"
   }
 }, {
   "request": {
@@ -60,6 +60,17 @@
   }
 }, {
   "request": {
+    "uri": "/api/clients/search",
+    "method": "get",
+    "queries": {
+      "q": "bbh"
+    }
+  },
+  "response": {
+    "file": "./resources/clients-bbh.json"
+  }
+}, {
+  "request": {
     "uri": "/api/credential",
     "method": "get"
   },
@@ -84,6 +95,16 @@
   }
 }, {
   "request": {
+    "uri": {
+      "match": "/api/schedules/clients/.*"
+    },
+    "method": "post"
+  },
+  "response": {
+    "file": "./resources/schedules.json"
+  }
+}, {
+  "request": {
     "uri": "/api/schedules/17920/run",
     "method": "post"
   },
@@ -92,26 +113,38 @@
   }
 }, {
   "request": {
-    "uri": "/api/schedules",
-    "method": "get",
-    "queries": {
-      "xxx": "foo"
-    }
+    "uri": {
+      "match": "/reportoutput/\\d*?[02468]/file"
+    },
+    "method": "get"
   },
   "response": {
-    "file": "./resources/noschedule.json"
+    "headers": {
+      "Content-Disposition": "attachment; filename=\"report.txt\""
+    },
+    "latency" : 1000
   }
 }, {
   "request": {
-    "uri": "/api/schedules_v2",
-    "method": "get",
-    "headers": {
-      "some_made_up_name": "5558c8de35eab17d7f4671ef7ab974883188db06"
-    }
+    "uri": {
+      "match": "/reportoutput/\\d*?[13579]/file"
+    },
+    "method": "get"
   },
   "response": {
-    "file": "./resources/schedules.json"
+    "file": "./resources/downloadError.html",
+    "latency" : 1000
   }
+}, {
+  "request": {
+    "uri": {
+      "match": "/api/reportcriteria/\\d*"
+    },    
+    "method": "get"
+  },
+  "response": {
+    "file": "./resources/reportCriteria.json"
+  }   
 }, {
   "mount": {
     "dir": "../target",

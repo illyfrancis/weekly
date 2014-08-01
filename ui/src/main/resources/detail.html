@@ -6,8 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Acme App</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
-  <link rel="stylesheet" href="css/.bootstrap-theme.css" />
+  <link rel="stylesheet" href="css/dashboard.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -15,70 +14,2448 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+  <style type="text/css">
+  .truncate {
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+  p.block {
+    width: 300px;
+  }
+  .parent-div {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+  }
+  </style>
 </head>
 
 <body>
 
-  <div class="container">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h4 class="panel-title">Things to action</h4>
-      </div>
-      <div class="panel-body">
-        <div class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <strong>Warning!</strong>The schedule belongs to someone else.
+  <div class="dashboard-container">
+    <div class="dashboard">
+      <div class="container-fluid">
+        <div class="menu">
+          <div class="btn-toolbar">
+            <div class="btn-group">
+              <button class="filters btn btn-default">
+                <span class="glyphicon glyphicon-filter"></span>&nbsp;Filters</button>
+            </div>
+            <div class="btn-group group-by">
+              <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Group by
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a>Report name </a>
+                </li>
+                <li><a>Report category </a>
+                </li>
+                <li><a>Report type </a>
+                </li>
+                <li><a>Report owner </a>
+                </li>
+                <li><a>Created by </a>
+                </li>
+                <li><a>Modified by </a>
+                </li>
+                <li><a>Frequency </a>
+                </li>
+                <li><a>Trigger </a>
+                </li>
+                <li><a>Distribution list </a>
+                </li>
+                <li><a>Last execution </a>
+                </li>
+                <li><a>Clients <span class="pull-right glyphicon glyphicon-ok"></span></a>
+                </li>
+                <li><a>Report expiry </a>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button class="clients btn btn-default">
+                <span class="glyphicon glyphicon-user"></span>&nbsp;Clients</button>
+            </div>
+          </div>
         </div>
-        <dl class="dl-horizontal">
-          <dt>Report Name</dt>
-          <dd>Transaction Report</dd>
-          <dt>Report Type</dt>
-          <dd>foo</dd>
-          <dt>Owner</dt>
-          <dd>Ted</dd>
-          <dt>Frequency</dt>
-          <dd>daily</dd>
-          <dt>Distribution list</dt>
-          <dd>wendy@acme.com</dd>
-          <dt>Last execution</dt>
-          <dd>10:00 am Today</dd>
-        </dl>
+        <div class="schedules">
+          <div class="scheduleList">
+            <div>
+              <table class="table .table-striped table-hover table-condensed">
+                <thead>
+                  <tr>
+                    <th>Report name
+                      <span class="group-by"></span>
+                      <span class="sort-order caret"></span>
+                    </th>
+                    <th>Report category
+                      <span class="group-by"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                    <th>Report type
+                      <span class="group-by"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                    <th>Report owner
+                      <span class="group-by"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                    <th>Created by
+                      <span class="group-by"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                    <th>Modified by
+                      <span class="group-by"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                    <th>Frequency
+                      <span class="group-by"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                    <th>Trigger
+                      <span class="group-by"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                    <th>Distribution list
+                      <span class="group-by"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                    <th>Last execution
+                      <span class="group-by"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                    <th>Distribution format
+                      <span class="group-by"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                    <th>Clients
+                      <span class="group-by glyphicon glyphicon-star"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                    <th>Report expiry
+                      <span class="group-by"></span>
+                      <span class="sort-order"></span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="reportName">TWE PDF</td>
+                    <td><div class="parent-div">
+                      <div class="ellipsis">Corporate Actions (New)</div>
+                    </div>
+                    </td>
+                    <td>Tax Withholding Elections</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title=""></span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
 
-        <div class="btn-toolbar pull-right">
-          <div class="btn-group">
-            <button class="btn btn-default">
-              <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
-            </button>
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>
+                      <div class="truncate">matthew.george@bbh.com</div>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-29T20:00:22Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-18T04:00:00Z">Sep 18th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17920">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17920">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">TAX</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Tax Withholding Elections</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title=""></span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-07-07T19:00:05Z">24 days ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-12-04T05:00:00Z">Dec 4th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail24361">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail24361">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">TAX WITH DATAFILE</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Tax Withholding Elections</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-29T20:30:16Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-24T04:00:00Z">Sep 24th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17534">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17534">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">TAX WITH PDF</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Tax Withholding Elections</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-29T20:30:14Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-24T04:00:00Z">Sep 24th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17533">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17533">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">FX SI EXPORT HERITAGE</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>FX Standing Instructions</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title=""></span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-29T20:30:12Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-25T04:00:00Z">Sep 25th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail23363">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail23363">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">FX SI</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>FX Standing Instructions</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-29T20:30:16Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-25T04:00:00Z">Sep 25th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail23362">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail23362">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">RSI EXPORT</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Response Standing Instructions</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title=""></span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-30T16:30:13Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-07-17T04:00:00Z">Jul 17th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17916">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17916">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">RESP SI DATA</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Response Standing Instructions</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-29T20:00:25Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-24T04:00:00Z">Sep 24th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17528">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17528">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">RESP SI PDF</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Response Standing Instructions</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-29T20:00:28Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-24T04:00:00Z">Sep 24th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17527">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17527">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">RSI PDF</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Response Standing Instructions</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-30T16:31:44Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-24T04:00:00Z">Sep 24th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17915">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17915">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">PD PR EXPORT N20 0</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Past Due Receivable/Payable</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title=""></span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-03-24T14:00:08Z">4 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-07-17T04:00:00Z">Jul 17th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17908">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17908">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">PD PR PDF N20 0</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Past Due Receivable/Payable</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title=""></span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-03-24T14:00:04Z">4 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-07-17T04:00:00Z">Jul 17th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17907">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17907">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">PD EXPORT</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Past Due Receivable/Payable</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2013-12-23T20:00:05Z">7 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-24T04:00:00Z">Sep 24th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17522">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17522">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">PD PDF</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Past Due Receivable/Payable</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2013-12-23T20:00:05Z">7 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-24T04:00:00Z">Sep 24th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17521">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17521">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">FR N31 P20 EXPORT</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Factor Research</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title=""></span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-29T21:30:05Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-07-16T04:00:00Z">Jul 16th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17903">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17903">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">FR N31 P20 PDF</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Factor Research</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-29T21:30:07Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-25T04:00:00Z">Sep 25th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17902">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17902">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">ALL FTPTESTING FILE</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Factor Research</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-30T15:30:01Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                      <span data-toggle="tooltip" title="FTP" class="glyphicon glyphicon-transfer"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title=""></span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail21667">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail21667">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">FR PDF</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Factor Research</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-29T20:30:13Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-09-24T04:00:00Z">Sep 24th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17439">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17439">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">RSTAT EXPORT</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Response Status</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title=""></span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-30T16:30:30Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-07-17T04:00:00Z">Jul 17th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17918">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17918">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="reportName">RSTAT PDF</td>
+                    <td>Corporate Actions (New)</td>
+                    <td>Response Status</td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Matthew George">BS58443</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title=""></span>
+                    </td>
+                    <td>
+                      <span class="label label-default">WEEKLY</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="TIME" class="glyphicon glyphicon-time"></span>
+
+                    </td>
+                    <td>matthew.george@bbh.com</td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-04-30T16:30:27Z">3 months ago</span>
+                    </td>
+                    <td>
+
+                      <span data-toggle="tooltip" title="ATTACHMENT" class="glyphicon glyphicon-paperclip"></span>
+
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="Brown Brothers Harriman">BBH1</span>
+                    </td>
+                    <td>
+                      <span data-toggle="tooltip" title="2014-07-17T04:00:00Z">Jul 17th 2014</span>
+                    </td>
+                  </tr>
+                  <tr class="collapse detail17917">
+                    <td colspan="13" style="padding: 0px;">
+                      <div class="collapse detail17917">
+                        <div style="margin: 5px;">
+                          <div class="btn-toolbar .pull-right">
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm run-schedule">
+                                <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm view-criteria">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm download">
+                                <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
+
+                            </div>
+                            <div class="btn-group">
+                              <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div class="btn-group">
-            <button class="btn btn-default">
-              <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
-            </button>
+          <div class="page">
+            <div>
+              <div class="text-center">
+                <ul class="pagination">
+                  <li><a href="#">«</a>
+                  </li>
+                  <li><a href="#">1</a>
+                  </li>
+                  <li><a href="#">2</a>
+                  </li>
+                  <li><a href="#">3</a>
+                  </li>
+                  <li><a href="#">4</a>
+                  </li>
+                  <li><a href="#">5</a>
+                  </li>
+                  <li><a href="#">»</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div class="btn-group">
-            <button class="btn btn-default" onclick="window.location.href='criteria.html';">
-              <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
-            </button>
+        </div>
+        <div class="notifications"></div>
+      </div>
+    </div>
+    <div class="filters">
+      <div class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Filters</h4>
+            </div>
+            <div class="modal-body">
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="row">
+                    <form class="form-horizontal" role="form">
+                      <!-- left col -->
+                      <div class="col-sm-6">
+                        <div class="form-group reportNameFilter">
+                          <label for="reportName" class="col-sm-4 control-label">Report name</label>
+                          <div class="col-sm-8">
+                            <div>
+                              <input type="text" class="form-control" id="reportName" placeholder="Report name" value="">
+                            </div>
+                            <span class="help-block hidden"></span>
+                          </div>
+                        </div>
+                        <div class="form-group reportTypeFilter">
+                          <label for="reportType" class="col-sm-4 control-label">Report type</label>
+                          <div class="col-sm-8">
+                            <select class="form-control selectpicker" multiple="" data-selected-text-format="count>1" id="reportType" style="display: none;">
+
+                              <optgroup label="Cash">
+
+                                <option value="CSHBAL">Historical Balances</option>
+
+                                <option value="CSHTRAN">Historical Transactions</option>
+
+                                <option value="RTCSHBAL">Real Time Balances</option>
+
+                                <option value="RTCSHTRAN">Real Time Transactions</option>
+
+                                <option value="WMRTCSHBAL">WM Real Time Balances</option>
+
+                                <option value="WMRTCSHTRN">WM Real Time Transactions</option>
+
+                              </optgroup>
+
+                              <optgroup label="Corporate Actions (New)">
+
+                                <option value="CACTION">Action Research</option>
+
+                                <option value="FXSTDINST">FX Standing Instructions</option>
+
+                                <option value="FACTOR">Factor Research</option>
+
+                                <option value="INTREC">Internal Response Reconciliation</option>
+
+                                <option value="PDRECPAY">Past Due Receivable/Payable</option>
+
+                                <option value="CORPDVPRVP">RVP/DVP Standing Instruction</option>
+
+                                <option value="RECPAY">Receivable/Payable</option>
+
+                                <option value="RESREC">Response Reconciliation</option>
+
+                                <option value="RESRESH">Response Research</option>
+
+                                <option value="RSPSTDINST">Response Standing Instructions</option>
+
+                                <option value="RESSTAT">Response Status</option>
+
+                                <option value="SRECPAY">Shares Receivable/Payable</option>
+
+                                <option value="SUBREC">Sub Group Response Reconciliation</option>
+
+                                <option value="TXRCLM">Tax Reclaim</option>
+
+                                <option value="TXLXN">Tax Withholding Elections</option>
+
+                              </optgroup>
+
+                              <optgroup label="ETF Reporting Profiles">
+
+                                <option value="ETF_RPTG">ETF Reporting Profiles</option>
+
+                              </optgroup>
+
+                              <optgroup label="Golden Source Parent">
+
+                                <option value="GLDNSRCPV">GS Portfolio Valuation-OFI&amp;BBH Only</option>
+
+                                <option value="GLDNSRCTDP">GS Trade Date Position</option>
+
+                                <option value="GLDNSRCTR">GS Transactions-OFI&amp;BBH Only</option>
+
+                              </optgroup>
+
+                              <optgroup label="Middle Office Reporting">
+
+                                <option value="HOLDVAL">Trade Date Reporting</option>
+
+                              </optgroup>
+
+                              <optgroup label="Portfolio Accounting">
+
+                                <option value="FCTBR">Broker Reports</option>
+
+                                <option value="FCTFA">Fund Administration</option>
+
+                                <option value="FCTHV">Holdings and Valuation</option>
+
+                                <option value="FCTIR">Income and Receivables</option>
+
+                                <option value="FCTNTB">NAV and Trial Balances</option>
+
+                                <option value="FCTPR">Pooling Reports</option>
+
+                                <option value="FCTTGL">Transactions and Gain/Loss</option>
+
+                              </optgroup>
+
+                              <optgroup label="Position Reporting">
+
+                                <option value="POSREPORT_POSITIONS">Positions Reporting - Positions</option>
+
+                              </optgroup>
+
+                              <optgroup label="Securities Lending Reporting">
+
+                                <option value="SLACTVTY">Activity</option>
+
+                                <option value="SLBAL">Balances</option>
+
+                                <option value="SLCOLL">Collateral</option>
+
+                                <option value="SLCOMP">Compliance</option>
+
+                                <option value="SLEARN">Earnings</option>
+
+                                <option value="SLPERF">Performance</option>
+
+                                <option value="SLREPORTS">Report List</option>
+
+                              </optgroup>
+
+                              <optgroup label="Total Expense Ratio Report">
+
+                                <option value="FA_TER_DSH">Fund Admin TER Reports</option>
+
+                              </optgroup>
+
+                              <optgroup label="Transaction Reporting">
+
+                                <option value="TXNREPORT_TRADES">Transaction Reporting</option>
+
+                              </optgroup>
+
+                            </select>
+                            <div class="btn-group bootstrap-select show-tick form-control">
+                              <button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="reportType" title="Nothing selected">
+                                <span class="filter-option pull-left">Nothing selected</span>&nbsp;
+                                <span class="caret"></span>
+                              </button>
+                              <div class="dropdown-menu open">
+                                <ul class="dropdown-menu inner selectpicker" role="menu">
+                                  <li rel="0">
+                                    <dt>
+                                      <span class="text">Cash</span>
+                                    </dt>
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Historical Balances</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="1">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Historical Transactions</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="2">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Real Time Balances</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="3">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Real Time Transactions</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="4">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">WM Real Time Balances</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="5">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">WM Real Time Transactions</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="6">
+                                    <div class="div-contain">
+                                      <div class="divider"></div>
+                                    </div>
+                                    <dt>
+                                      <span class="text">Corporate Actions (New)</span>
+                                    </dt>
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Action Research</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="7">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">FX Standing Instructions</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="8">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Factor Research</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="9">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Internal Response Reconciliation</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="10">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Past Due Receivable/Payable</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="11">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">RVP/DVP Standing Instruction</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="12">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Receivable/Payable</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="13">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Response Reconciliation</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="14">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Response Research</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="15">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Response Standing Instructions</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="16">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Response Status</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="17">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Shares Receivable/Payable</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="18">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Sub Group Response Reconciliation</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="19">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Tax Reclaim</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="20">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Tax Withholding Elections</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="21">
+                                    <div class="div-contain">
+                                      <div class="divider"></div>
+                                    </div>
+                                    <dt>
+                                      <span class="text">ETF Reporting Profiles</span>
+                                    </dt>
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">ETF Reporting Profiles</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="22">
+                                    <div class="div-contain">
+                                      <div class="divider"></div>
+                                    </div>
+                                    <dt>
+                                      <span class="text">Golden Source Parent</span>
+                                    </dt>
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">GS Portfolio Valuation-OFI&amp;BBH Only</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="23">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">GS Trade Date Position</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="24">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">GS Transactions-OFI&amp;BBH Only</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="25">
+                                    <div class="div-contain">
+                                      <div class="divider"></div>
+                                    </div>
+                                    <dt>
+                                      <span class="text">Middle Office Reporting</span>
+                                    </dt>
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Trade Date Reporting</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="26">
+                                    <div class="div-contain">
+                                      <div class="divider"></div>
+                                    </div>
+                                    <dt>
+                                      <span class="text">Portfolio Accounting</span>
+                                    </dt>
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Broker Reports</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="27">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Fund Administration</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="28">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Holdings and Valuation</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="29">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Income and Receivables</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="30">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">NAV and Trial Balances</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="31">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Pooling Reports</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="32">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Transactions and Gain/Loss</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="33">
+                                    <div class="div-contain">
+                                      <div class="divider"></div>
+                                    </div>
+                                    <dt>
+                                      <span class="text">Position Reporting</span>
+                                    </dt>
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Positions Reporting - Positions</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="34">
+                                    <div class="div-contain">
+                                      <div class="divider"></div>
+                                    </div>
+                                    <dt>
+                                      <span class="text">Securities Lending Reporting</span>
+                                    </dt>
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Activity</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="35">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Balances</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="36">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Collateral</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="37">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Compliance</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="38">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Earnings</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="39">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Performance</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="40">
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Report List</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="41">
+                                    <div class="div-contain">
+                                      <div class="divider"></div>
+                                    </div>
+                                    <dt>
+                                      <span class="text">Total Expense Ratio Report</span>
+                                    </dt>
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Fund Admin TER Reports</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="42">
+                                    <div class="div-contain">
+                                      <div class="divider"></div>
+                                    </div>
+                                    <dt>
+                                      <span class="text">Transaction Reporting</span>
+                                    </dt>
+                                    <a tabindex="0" class="opt " style="">
+                                      <span class="text">Transaction Reporting</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group reportOwnerFilter">
+                          <label for="view169" class="col-sm-4 control-label">Report owner</label>
+                          <div class="col-sm-8">
+                            <div class="input-group scrollable-dropdown-menu">
+                              <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
+                                <input type="text" class="form-control typeahead tt-hint" disabled="" autocomplete="off" spellcheck="false" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none;">
+                                <input type="text" class="form-control typeahead tt-input" id="view169" placeholder="User id or name" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre;"></pre>
+                                <span class="tt-dropdown-menu" style="position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;">
+                                  <div class="tt-dataset-users"></div>
+                                </span>
+                              </span>
+                              <span class="input-group-btn">
+                                <button class="btn btn-default adduser" type="button">
+                                  <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                              </span>
+                            </div>
+                            <span class="help-block hidden">Invalid user id</span>
+                          </div>
+
+                          <div class="col-sm-8 col-sm-offset-4 selectedUsers">
+                            <div class="well well-sm user-list hidden">
+                              <ul></ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group createdByFilter">
+                          <label for="view172" class="col-sm-4 control-label">Created by</label>
+                          <div class="col-sm-8">
+                            <div>
+                              <input type="text" class="form-control" id="view172" placeholder="User id" value="">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group modifiedByFilter">
+                          <label for="view173" class="col-sm-4 control-label">Modified by</label>
+                          <div class="col-sm-8">
+                            <div>
+                              <input type="text" class="form-control" id="view173" placeholder="User id" value="">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group clientsFilter">
+                          <label for="clients" class="col-sm-4 control-label">Clients</label>
+                          <div class="col-sm-8">
+                            <div>
+                              <select class="form-control selectpicker" multiple="" data-selected-text-format="count>1" id="clients" style="display: none;">
+                              </select>
+                              <div class="btn-group bootstrap-select show-tick form-control">
+                                <button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="clients" title="Nothing selected">
+                                  <span class="filter-option pull-left">Nothing selected</span>&nbsp;
+                                  <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu open">
+                                  <ul class="dropdown-menu inner selectpicker" role="menu"></ul>
+                                </div>
+                              </div>
+                            </div>
+                            <span class="help-block hidden"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- left col -->
+
+                      <!-- right col -->
+                      <div class="col-sm-6">
+                        <div class="form-group frequencyFilter">
+                          <label for="Frequency-select" class="col-sm-4 control-label">Frequency</label>
+                          <div class="col-sm-8">
+                            <select class="form-control selectpicker" multiple="" id="Frequency-select" style="display: none;">
+                              <option>Daily</option>
+                              <option>Weekly</option>
+                              <option>Monthly</option>
+                              <option>Yearly</option>
+                              <option>Trigger</option>
+                            </select>
+                            <div class="btn-group bootstrap-select show-tick form-control">
+                              <button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="Frequency-select" title="Nothing selected">
+                                <span class="filter-option pull-left">Nothing selected</span>&nbsp;
+                                <span class="caret"></span>
+                              </button>
+                              <div class="dropdown-menu open">
+                                <ul class="dropdown-menu inner selectpicker" role="menu">
+                                  <li rel="0">
+                                    <a tabindex="0" class="" style="">
+                                      <span class="text">Daily</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="1">
+                                    <a tabindex="0" class="" style="">
+                                      <span class="text">Weekly</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="2">
+                                    <a tabindex="0" class="" style="">
+                                      <span class="text">Monthly</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="3">
+                                    <a tabindex="0" class="" style="">
+                                      <span class="text">Yearly</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="4">
+                                    <a tabindex="0" class="" style="">
+                                      <span class="text">Trigger</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group triggerFilter">
+                          <label for="Trigger-select" class="col-sm-4 control-label">Trigger</label>
+                          <div class="col-sm-8">
+                            <select class="form-control selectpicker" multiple="" id="Trigger-select" style="display: none;">
+                              <option>Time</option>
+                              <option>Event</option>
+                              <option>Hybrid</option>
+                            </select>
+                            <div class="btn-group bootstrap-select show-tick form-control">
+                              <button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="Trigger-select" title="Nothing selected">
+                                <span class="filter-option pull-left">Nothing selected</span>&nbsp;
+                                <span class="caret"></span>
+                              </button>
+                              <div class="dropdown-menu open">
+                                <ul class="dropdown-menu inner selectpicker" role="menu">
+                                  <li rel="0">
+                                    <a tabindex="0" class="" style="">
+                                      <span class="text">Time</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="1">
+                                    <a tabindex="0" class="" style="">
+                                      <span class="text">Event</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="2">
+                                    <a tabindex="0" class="" style="">
+                                      <span class="text">Hybrid</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group distributionListFilter">
+                          <label for="distributionList" class="col-sm-4 control-label">Distribution list</label>
+                          <div class="col-sm-8">
+                            <div>
+                              <input type="text" class="form-control" id="distributionList" placeholder="Distribution list" value="">
+                            </div>
+                            <span class="help-block hidden"></span>
+                          </div>
+                        </div>
+                        <div class="form-group distributionFormatFilter">
+                          <label for="Distribution format-select" class="col-sm-4 control-label">Distribution format</label>
+                          <div class="col-sm-8">
+                            <select class="form-control selectpicker" multiple="" id="Distribution format-select" style="display: none;">
+                              <option>Attachment</option>
+                              <option>Link</option>
+                              <option>FTP</option>
+                            </select>
+                            <div class="btn-group bootstrap-select show-tick form-control">
+                              <button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="Distribution format-select" title="Nothing selected">
+                                <span class="filter-option pull-left">Nothing selected</span>&nbsp;
+                                <span class="caret"></span>
+                              </button>
+                              <div class="dropdown-menu open">
+                                <ul class="dropdown-menu inner selectpicker" role="menu">
+                                  <li rel="0">
+                                    <a tabindex="0" class="" style="">
+                                      <span class="text">Attachment</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="1">
+                                    <a tabindex="0" class="" style="">
+                                      <span class="text">Link</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                  <li rel="2">
+                                    <a tabindex="0" class="" style="">
+                                      <span class="text">FTP</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="inputEmail3" class="col-xs-12 col-sm-4 control-label">Last execution</label>
+                          <div class="col-xs-6 col-sm-8 col-md-4">
+                            <div class="input-group">
+                              <input type="text" class="form-control">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                  <span class="glyphicon glyphicon-calendar"></span>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="col-xs-6 col-sm-8 col-md-4">
+                            <div class="input-group">
+                              <input type="text" class="form-control">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                  <span class="glyphicon glyphicon-calendar"></span>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="inputEmail3" class="col-xs-12 col-sm-4 control-label">Report expiry</label>
+                          <div class="col-xs-6 col-sm-8 col-md-4">
+                            <div class="input-group">
+                              <input type="text" class="form-control">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                  <span class="glyphicon glyphicon-calendar"></span>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="col-xs-6 col-sm-8 col-md-4">
+                            <div class="input-group">
+                              <input type="text" class="form-control">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                  <span class="glyphicon glyphicon-calendar"></span>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <!-- right col -->
+
+                    </form>
+                  </div>
+                  <!-- row -->
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default apply">Apply</button>
+              <button type="button" class="btn btn-link cancel">Cancel</button>
+            </div>
           </div>
-          <div class="btn-group">
-            <button class="btn btn-default">
-              <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
-            </button>
-          </div>
-          <div class="btn-group">
-            <button class="btn btn-default">
-              <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
-            </button>
-          </div>
-          <div class="btn-group">
-            <button class="btn btn-default">
-              <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
-            </button>
-          </div>
-          <div class="btn-group">
-            <button class="btn btn-primary" onclick="window.location.href='prototype.html';">
-              <span class="glyphicon glyphicon-home"></span>&nbsp;Dashboard</button>
-            </button>
+        </div>
+      </div>
+    </div>
+    <div class="clients">
+      <div class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Clients</h4>
+            </div>
+            <div class="modal-body">
+
+              <form class="form" role="form">
+                <div class="form-group scrollable-dropdown-menu has-feedback">
+                  <label for="view482">Select clients</label>
+                  <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
+                    <input type="text" class="form-control typeahead tt-hint" disabled="" autocomplete="off" spellcheck="false" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none;">
+                    <input type="text" class="form-control typeahead tt-input" id="view482" placeholder="Client id or name" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre;"></pre>
+                    <span class="tt-dropdown-menu" style="position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;">
+                      <div class="tt-dataset-clients"></div>
+                    </span>
+                  </span>
+                  <span class="glyphicon glyphicon-plus form-control-feedback add-client"></span>
+                  <span class="help-block hidden">Invalid client id</span>
+                </div>
+                <div class="selectedClients">
+                  <div class="well well-sm hidden"></div>
+                </div>
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default apply">Apply</button>
+            </div>
           </div>
         </div>
       </div>

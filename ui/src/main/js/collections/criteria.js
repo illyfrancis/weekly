@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 var Settings = require('./settings');
-var Criterion = require('../models/criterion');
+var Criterion = require('../models/criteria/criterion');
 
 var Criteria = Backbone.Collection.extend({
 

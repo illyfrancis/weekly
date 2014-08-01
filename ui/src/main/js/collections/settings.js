@@ -1,34 +1,34 @@
-var Client = require('../models/client');
-var CreatedBy = require('../models/criterionUser');
-var DistributionFormat = require('../models/distributionFormat');
-var DistributionList = require('../models/distributionList');
-var Frequency = require('../models/frequency');
-var LastExecution = require('../models/lastExecution');
-var ModifiedBy = require('../models/criterionUser');
-var ReportCategory = require('../models/reportCategory');
-var ReportExpiry = require('../models/reportExpiry');
-var ReportName = require('../models/reportName');
-var ReportOwner = require('../models/criterionUser');
-var ReportType = require('../models/reportType');
-var Trigger = require('../models/trigger');
+var Client = require('../models/criteria/client');
+var CreatedBy = require('../models/criteria/user');
+var DistributionFormat = require('../models/criteria/distributionFormat');
+var DistributionList = require('../models/criteria/distributionList');
+var Frequency = require('../models/criteria/frequency');
+var LastExecution = require('../models/criteria/lastExecution');
+var ModifiedBy = require('../models/criteria/user');
+var ReportCategory = require('../models/criteria/reportCategory');
+var ReportExpiry = require('../models/criteria/reportExpiry');
+var ReportName = require('../models/criteria/reportName');
+var ReportOwner = require('../models/criteria/reportOwner');
+var ReportType = require('../models/criteria/reportType');
+var Trigger = require('../models/criteria/trigger');
 
 var settings = {
   defaults: function () {
     return [
       new Client({
-        'id': 'client',
-        'sortWith': 'clientId',
+        'id': 'clients',
         'filterWith': 'clientId',
-        'title': 'Client',
+        'sortWith': 'clientId',
+        'title': 'Clients',
         'displayOrder': 11,
         'groupOrder': 1
       }),
       new CreatedBy({
         'id': 'createdBy',
-        'sortWith': 'createdById',
         'filterWith': 'createdById',
+        'sortWith': 'createdByName',
         'title': 'Created by',
-        'displayOrder': 3
+        'displayOrder': 4
       }),
       new DistributionFormat({
         'id': 'distributionFormat',
@@ -52,15 +52,15 @@ var settings = {
       }),
       new ModifiedBy({
         'id': 'modifiedBy',
-        'sortWith': 'modifiedById',
         'filterWith': 'modifiedById',
+        'sortWith': 'modifiedByName',
         'title': 'Modified by',
         'displayOrder': 5
       }),
       new ReportCategory({
         'id': 'reportCategory',
-        'sortWith': 'reportCategory',
         'filterWith': 'reportCategoryId',
+        'sortWith': 'reportCategory',
         'title': 'Report category',
         'displayOrder': 1
       }),
@@ -76,14 +76,15 @@ var settings = {
       }),
       new ReportOwner({
         'id': 'reportOwner',
-        'sortWith': 'reportOwnerId',
+        'filterWith': 'reportOwnerId',
+        'sortWith': 'reportOwnerName',
         'title': 'Report owner',
-        'displayOrder': 4
+        'displayOrder': 3
       }),
       new ReportType({
         'id': 'reportType',
-        'sortWith': 'reportType',
         'filterWith': 'reportTypeCode',
+        'sortWith': 'reportType',
         'title': 'Report type',
         'displayOrder': 2
       }),

@@ -29,21 +29,22 @@ var DashboardView = Backbone.View.extend({
       text: text,
       type: type
     });
-    Backbone.$('.notifications').append(notification.render().el);
+    this.$('.notifications').append(notification.render().el);
   },
 
   renderMenu: function () {
     var menu = this.createSubView(Menu, {
       criteria: this.criteria
     });
-   
+
     this.$('.menu').replaceWith(menu.render().el);
   },
 
   renderSchedules: function () {
     var schedules = this.createSubView(Schedules, {
       collection: this.schedules,
-      criteria: this.criteria
+      criteria: this.criteria,
+      user: this.user
     });
     
     this.$('.schedules').replaceWith(schedules.render().el);

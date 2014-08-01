@@ -9,6 +9,7 @@ var ScheduleList = Backbone.View.extend({
 
   initialize: function (options) {
     // this.collection = schedules.collection
+    this.user = options.user;
     this.criteria = options.criteria;
     this.listenTo(this.collection, 'reset', this.render);
     this.listenTo(this.collection, 'error', this.displayError);
@@ -56,6 +57,7 @@ var ScheduleList = Backbone.View.extend({
   appendScheduleDetail: function (item) {
     var scheduleDetail = this.createSubView(ScheduleDetail, {
       model: item,
+      user: this.user,
       className: 'collapse detail' + item.id
     });
     this.$('tbody').append(scheduleDetail.render().el);

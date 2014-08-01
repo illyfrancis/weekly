@@ -15,7 +15,7 @@ var CriterionHeader = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.html(template(this.model.attributes));
+    this.$el.html(template(this.model.toJSON()));
     this.renderSortOrder();
     this.renderGroupBy();
     return this;
@@ -46,10 +46,7 @@ var CriterionHeader = Backbone.View.extend({
   setSortField: function () {
     if (this.model.get('isSortable')) {
       this.model.makeSortField();
-      // trigger search event
-      // TODO - pull up
-      var query = this.model.collection.toQuery();
-      Backbone.router.trigger('dashboard:search', query);
+      Backbone.router.trigger('dashboard:search');
       this.model.collection.save();
     }
   }

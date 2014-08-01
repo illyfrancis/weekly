@@ -1,34 +1,41 @@
 var _ = require('underscore');
+_.str = require('underscore.string');
 var Criterion = require('./criterion');
 
-var ReportName = Criterion.extend({
+var User = Criterion.extend({
 
   initialize: function () {
     this.set('filter', '');
   },
 
   setFilter: function (filter) {
-    // filter = _.escape(filter.trim()); // no trim in IE8
-    filter = _.escape(filter.replace(/^\s+|\s+$/g, '')); // For now. Need _.string
+    filter = _.escape(_.str.trim(filter));
     if (this.get('filter') !== filter) {
-      this.set('filter', filter, { validate: true });
+      this.set('filter', filter, {
+        validate: true
+      });
     }
   },
 
   validate: function (attrs) {
-    // just an example
     if (attrs.filter.length > 10) {
       return 'too long';
+    }
+
+    if (!/^[a-z0-9]*$/i.test(attrs.filter)) {
+      return 'invalid content';
     }
   },
 
   toQuery: function () {
-    var filter = this.get('filter'),
-      query = null;
+    var filter = this.get('filter');
+    var query = null;
 
     if (filter !== '') {
       query = {};
-      query[this.filterWith()] = { '$like': filter };
+      query[this.filterWith()] = {
+        '$eq': filter
+      };
     }
 
     return query;
@@ -36,4 +43,4 @@ var ReportName = Criterion.extend({
 
 });
 
-module.exports = ReportName;
+module.exports = User;

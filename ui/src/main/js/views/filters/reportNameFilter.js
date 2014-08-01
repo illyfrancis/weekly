@@ -4,17 +4,17 @@ var template = require('./templates/reportNameFilter.html');
 var ReportNameFilter = Backbone.View.extend({
 
   events: {
-    'blur input': 'onBlur',
+    'blur input': 'copyFilterValue',
     'keydown input': 'handleKeydown',
   },
 
   initialize: function () {
     // this.model is ReportName
-    this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.model, 'change:filter', this.render);
     this.listenTo(this.model, 'invalid', this.showError);
   },
 
-  onBlur: function () {
+  copyFilterValue: function () {
     var filter = this.$('input').val();
     this.model.setFilter(filter);
   },

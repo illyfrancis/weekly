@@ -1,8 +1,7 @@
 var Criterion = require('./criterion');
-var Users = require('../collections/users');
+var Users = require('../../collections/users');
 
-// a criterion based on user(s). e.g. ReportOwner, CreatedBy or ModifiedBy fields
-var CriterionUser = Criterion.extend({
+var ReportOwner = Criterion.extend({
 
   initialize: function () {
     this.users = new Users(this.get('filter'));
@@ -51,4 +50,4 @@ var CriterionUser = Criterion.extend({
 
 });
 
-module.exports = CriterionUser;
+module.exports = ReportOwner;

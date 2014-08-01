@@ -56,7 +56,7 @@ gulp.task('lint', function () {
 gulp.task('test', function () {
   var stream = gulp.src(paths.test.jsnode, {read: false})
     .pipe(mocha({
-      reporter: 'tap'
+      reporter: 'spec'
     }))
     .on('error', errorHandler);
 
@@ -125,7 +125,7 @@ gulp.task('bundle-core', function () {
 gulp.task('css', function () {
   var stream = gulp.src([
       './lib/bootstrap-select/1.5.2/css/bootstrap-select.min.css',
-      './lib/bootstrap-3.1.1/css/bootstrap.min.css',
+      './lib/bootstrap-3.2.0/css/bootstrap.css',
       './src/main/resources/css/dashboard.css'
     ])
     .pipe(concat('dashboard.css'))

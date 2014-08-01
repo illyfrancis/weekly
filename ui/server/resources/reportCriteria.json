@@ -1,0 +1,27 @@
+{
+  "parameters": [{
+    "name": "product",
+    "value": "SS"
+  }, {
+    "name": "EntityValHidden",
+    "value": ["1003", "1005", "1006", "100C", "100E", "100M"]
+  }, {
+    "name": "dateTypeList",
+    "value": "Daily"
+  }, {
+    "name": "frmDateSubList",
+    "value": "-35"
+  }, {
+    "name": "toDateSubList",
+    "value": "-32"
+  }, {
+    "name": "entityGrpList",
+    "value": "ENTITY"
+  }, {
+    "name": "sortList",
+    "value": "Investment Type"
+  }, {
+    "name": "viewList",
+    "value": "Position"
+  }]
+}

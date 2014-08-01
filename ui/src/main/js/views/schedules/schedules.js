@@ -10,7 +10,8 @@ var Schedules = Backbone.View.extend({
   initialize: function (options) {
     this.scheduleList = this.createSubView(ScheduleList, {
       collection: this.collection,
-      criteria: options.criteria
+      criteria: options.criteria,
+      user: options.user
     });
     this.pagination = this.createSubView(Pagination);
   },

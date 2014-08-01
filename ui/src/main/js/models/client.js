@@ -1,6 +1,11 @@
-var Criterion = require('./criterion');
+var Backbone = require('backbone');
 
-var Client = Criterion.extend({
+var Client = Backbone.Model.extend({
+
+  defaults: {
+    id: '',
+    name: ''
+  }
 
 });
 

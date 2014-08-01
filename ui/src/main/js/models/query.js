@@ -4,12 +4,12 @@ var Query = Backbone.Model.extend({
 
   initialize: function (attrs, options) {
     this.schedules = options.schedules;
+    this.user = options.user;
+    this.clients = options.clients;
   },
 
   url: function () {
-    return './api/schedules';
-      // depends on user's role
-      // '/api/schedules', or /api/schedules/clients/{clients}
+    return this.user.isInternal() ? './api/schedules/clients/' + this.clients.toList() : './api/schedules';
   },
 
   search: function (criteria) {

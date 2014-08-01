@@ -2,7 +2,7 @@
 var _ = require('underscore');
 var assert = require('assert');
 var Criteria = require('../../../../src/main/js/collections/criteria');
-var ReportName = require('../../../../src/main/js/models/reportName');
+var ReportName = require('../../../../src/main/js/models/criteria/reportName');
 
 describe('Criteria', function () {
 

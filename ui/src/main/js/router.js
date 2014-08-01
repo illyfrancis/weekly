@@ -15,8 +15,14 @@ var AppRouter = Backbone.Router.extend({
     this.listenTo(this, 'dashboard:search', this.search);
   },
 
-  search: function (query) {
-    var q = new Query({}, { schedules: repository.schedules() });
+  search: function () {
+    var q = new Query({}, {
+      schedules: repository.schedules(),
+      user: repository.user(),
+      clients: repository.clients()
+    });
+
+    var query = repository.criteria().toQuery();
     q.search(query);
   },
 
@@ -37,6 +43,7 @@ var AppRouter = Backbone.Router.extend({
   showFilters: function () {
     if (!this.filters) {
       this.filters = new Filters({
+        user: repository.user(),
         collection: repository.criteria()
       });
 
@@ -48,7 +55,9 @@ var AppRouter = Backbone.Router.extend({
 
   showClients: function () {
     if (!this.clients) {
-      this.clients = new Clients();
+      this.clients = new Clients({
+        collection: repository.clients()
+      });
 
       Backbone.$('.dashboard-container').append(this.clients.render().el);
     }

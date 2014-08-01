@@ -16,6 +16,7 @@ var GroupByItem = Backbone.View.extend({
 
   selectGroupBy: function () {
     this.model.makeGroupField();
+    Backbone.router.trigger('dashboard:search');
   },
 
   render: function () {

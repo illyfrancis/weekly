@@ -2,16 +2,16 @@
 <td>{{reportCategory}}</td>
 <td>{{reportType}}</td>
 <td>
-  <span data-toggle="tooltip" title="{{createdByName}}">{{createdById}}</span>
+  <span data-toggle="tooltip" title="{{reportOwnerId}}">{{reportOwnerName}}</span>
 </td>
 <td>
-  <span data-toggle="tooltip" title="{{reportOwnerName}}">{{reportOwnerId}}</span>
+  <span data-toggle="tooltip" title="{{createdById}}">{{createdByName}}</span>
 </td>
 <td>
-  <span data-toggle="tooltip" title="{{modifiedByName}}">{{modifiedById}}</span>
+  <span data-toggle="tooltip" title="{{modifiedById}}">{{modifiedByName}}</span>
 </td>
 <td>
-  <span class="label label-info">{{frequency}}</span>
+  <span class="label label-default">{{frequency}}</span>
 </td>
 <td>
   {{#if timeTrigger}}

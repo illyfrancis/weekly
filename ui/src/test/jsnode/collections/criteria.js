@@ -1,4 +1,4 @@
-var Criterion = require('../../../../src/main/js/models/criterion');
+var Criterion = require('../../../../src/main/js/models/criteria/criterion');
 var Criteria = require('../../../../src/main/js/collections/criteria');
 var Settings = require('../../../../src/main/js/collections/settings');
 

@@ -14,6 +14,10 @@ var Filters = Backbone.View.extend({
     'click .cancel': 'cancelFilters'
   },
 
+  initialize: function (options) {
+    this.user = options.user;
+  },
+
   render: function () {
     this.$el.html(template());
 
@@ -25,7 +29,8 @@ var Filters = Backbone.View.extend({
       if (!_.isUndefined(FilterView)) {
         filter = this.createSubView(FilterView, {
           model: criterion,
-          el: this.$('.' + id + 'Filter')
+          el: this.$('.' + id + 'Filter'),
+          user: this.user
         });
         filter.render();
       }
@@ -38,15 +43,13 @@ var Filters = Backbone.View.extend({
   },
 
   applyFilters: function () {
-    var query = this.collection.toQuery();
     // initiate search by triggering 'search' event
-    Backbone.router.trigger('dashboard:search', query);
+    Backbone.router.trigger('dashboard:search');
     this.collection.save();
     this.$('.modal').modal('hide');
   },
 
   cancelFilters: function () {
-    this.collection.fetch();
     this.$('.modal').modal('hide');
   }
 
