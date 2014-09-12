@@ -1,12 +1,11 @@
 /*global sinon*/
-var _ = require('underscore');
 var assert = require('assert');
 var Criteria = require('../../../../src/main/js/collections/criteria');
 var ReportName = require('../../../../src/main/js/models/criteria/reportName');
 
 describe('Criteria', function () {
 
-  var API_URI = './api/settings';
+  var API_URI = './api/settings/filters';
 
   describe('interacting with API', function () {
     var xhr, requests;
@@ -40,7 +39,7 @@ describe('Criteria', function () {
 
       assert.equal(API_URI, requests[0].url);
       assert.equal('POST', requests[0].method);
-      assert(_.isEqual(criteria.toJSON(), eval(requests[0].requestBody))); // jshint ignore:line
+      assert.equal(JSON.stringify(criteria), requests[0].requestBody);
     });
 
   });
@@ -61,10 +60,10 @@ describe('Criteria', function () {
     });
 
     it('fetches an item to an empty collection', function () {
-      server.respondWith('GET', './api/settings', [200, {
+      server.respondWith('GET', './api/settings/filters', [200, {
           'Content-Type': 'application/json'
         },
-        '[{ "id": "reportType", "title": "Report type" }]'
+        '{"filters": [{"id": "reportType", "title": "Report type" }]}'
       ]);
 
       var criteria = new Criteria();
@@ -78,10 +77,10 @@ describe('Criteria', function () {
     });
 
     it('fetches a new item and keeps the existing', function () {
-      server.respondWith('GET', './api/settings', [200, {
+      server.respondWith('GET', './api/settings/filters', [200, {
           'Content-Type': 'application/json'
         },
-        '[{ "id": "reportType", "title": "Report type" }]'
+        '{"filters": [{ "id": "reportType", "title": "Report type" }]}'
       ]);
 
       var criteria = new Criteria([{ "id": "reportName", "title": "Report name" }]);

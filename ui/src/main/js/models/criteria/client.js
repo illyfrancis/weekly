@@ -15,13 +15,9 @@ var Client = Criterion.extend({
         clone = _.clone(filter);
       }
 
-      this.set('filter', clone, {
-        validate: true
-      });
+      this.set('filter', clone);
     }
   },
-
-  validate: function ( /*attrs*/ ) {},
 
   toQuery: function () {
     var filter = this.get('filter');

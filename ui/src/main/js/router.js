@@ -1,9 +1,10 @@
+var _ = require('underscore');
 var Backbone = require('backbone');
+var Clients = require('./views/clients/clients');
 var Dashboard = require('./views/dashboard/dashboard');
 var Filters = require('./views/filters/filters');
-var Clients = require('./views/clients/clients');
-var repository = require('./repository');
 var Query = require('./models/query');
+var repository = require('./repository');
 
 var AppRouter = Backbone.Router.extend({
 
@@ -15,15 +16,9 @@ var AppRouter = Backbone.Router.extend({
     this.listenTo(this, 'dashboard:search', this.search);
   },
 
-  search: function () {
-    var q = new Query({}, {
-      schedules: repository.schedules(),
-      user: repository.user(),
-      clients: repository.clients()
-    });
-
-    var query = repository.criteria().toQuery();
-    q.search(query);
+  search: function (page) {
+    page = _.isUndefined(page) ? 1 : page;
+    new Query().search(page);
   },
 
   showDashboard: function () {
@@ -41,28 +36,24 @@ var AppRouter = Backbone.Router.extend({
   },
 
   showFilters: function () {
-    if (!this.filters) {
-      this.filters = new Filters({
-        user: repository.user(),
-        collection: repository.criteria()
-      });
 
-      Backbone.$('.dashboard-container').append(this.filters.render().el);
-    }
+    var filters = new Filters({
+      user: repository.user(),
+      collection: repository.criteria()
+    });
 
-    this.filters.$('.modal').modal('show');
+    Backbone.$('.dashboard-container').append(filters.render().el);
+    filters.$('.modal').modal('show');
   },
 
   showClients: function () {
-    if (!this.clients) {
-      this.clients = new Clients({
-        collection: repository.clients()
-      });
+    var clients = new Clients({
+      collection: repository.clients(),
+      criteria: repository.criteria()
+    });
 
-      Backbone.$('.dashboard-container').append(this.clients.render().el);
-    }
-
-    this.clients.$('.modal').modal('show');
+    Backbone.$('.dashboard-container').append(clients.render().el);
+    clients.$('.modal').modal('show');
   }
 
 });

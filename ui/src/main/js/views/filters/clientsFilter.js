@@ -20,6 +20,8 @@ var ClientsFilter = Backbone.View.extend({
   render: function () {
     this.$el.html(template(this.model.toJSON()));
     this.clients.each(this.appendItem, this);
+    this.renderSelected();
+    this.refreshSelector();
     return this;
   },
 
@@ -45,12 +47,18 @@ var ClientsFilter = Backbone.View.extend({
 
   refreshSelector: function () {
     this.$('.selectpicker').selectpicker('refresh');
+    this.clients.isEmpty() ? this.$el.addClass('hidden') : this.$el.removeClass('hidden');
   },
 
   updateFilter: function () {
     this.refreshSelector();
     this.setFilterWithSelection();
-  }
+  },
+
+  renderSelected: function () {
+    this.$('.selectpicker').val(this.model.get('filter'));
+    this.$('.selectpicker').selectpicker('render');
+  }  
 
 });
 

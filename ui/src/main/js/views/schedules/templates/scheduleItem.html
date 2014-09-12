@@ -1,17 +1,23 @@
-<td class="reportName">{{reportName}}</td>
-<td>{{reportCategory}}</td>
-<td>{{reportType}}</td>
-<td>
-  <span data-toggle="tooltip" title="{{reportOwnerId}}">{{reportOwnerName}}</span>
+<td class="report-name">
+  <div class="truncate" data-toggle="tooltip" title="{{reportName}}">{{reportName}}</div>
+</td>
+<td class="report-category">
+  <div class="truncate" data-toggle="tooltip" title="{{reportCategory}}">{{reportCategory}}</div>
+</td>
+<td class="report-type">
+  <div class="truncate" data-toggle="tooltip" title="{{reportType}}">{{reportType}}</div>
+</td>
+<td class="report-owner">
+  <div class="truncate" data-toggle="tooltip" title="{{reportOwnerName}} ({{reportOwnerId}})">{{reportOwnerName}}</div>
+</td>
+<td class="created-by">
+  <div class="truncate" data-toggle="tooltip" title="{{createdByName}} ({{createdById}})">{{createdByName}}</div>
+</td>
+<td class="modified-by">
+  <div class="truncate" data-toggle="tooltip" title="{{modifiedByName}} ({{modifiedById}})">{{modifiedByName}}</div>
 </td>
 <td>
-  <span data-toggle="tooltip" title="{{createdById}}">{{createdByName}}</span>
-</td>
-<td>
-  <span data-toggle="tooltip" title="{{modifiedById}}">{{modifiedByName}}</span>
-</td>
-<td>
-  <span class="label label-default">{{frequency}}</span>
+  <div class="label label-default">{{frequency}}</div>
 </td>
 <td>
   {{#if timeTrigger}}
@@ -20,9 +26,11 @@
   <span data-toggle="tooltip" title="{{trigger}}" class="glyphicon glyphicon-flash"></span>
   {{/if}}
 </td>
-<td>{{distributionList}}</td>
+<td class="distribution-list">
+  <div class="truncate" data-toggle="tooltip" title="{{distributionList}}">{{distributionList}}</div>
+</td>
 <td>
-  <span data-toggle="tooltip" title="{{lastExecution}}">{{timeago}}</span>
+  <div data-toggle="tooltip" title="{{lastExecution}}">{{timeago}}</div>
 </td>
 <td>
   {{#each deliveryOptions}} {{#if ATTACHMENT}}
@@ -33,9 +41,11 @@
   <span data-toggle="tooltip" title="{{delivery}}" class="glyphicon glyphicon-transfer"></span>
   {{/if}} {{/each}}
 </td>
-<td>
-  <span data-toggle="tooltip" title="{{clientName}}">{{clientId}}</span>
+{{#if isClientColumnVisible}}
+<td class="client">
+  <div data-toggle="tooltip" title="{{clientName}}">{{clientId}}</div>
 </td>
+{{/if}}
 <td>
-  <span data-toggle="tooltip" title="{{reportExpiry}}">{{expiry}}</span>
+  <div data-toggle="tooltip" data-placement="left" title="{{reportExpiry}}">{{expiry}}</div>
 </td>

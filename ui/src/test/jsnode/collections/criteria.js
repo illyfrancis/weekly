@@ -15,7 +15,7 @@ describe('Criteria', function () {
   });
 
   it('has a url string', function () {
-    expect(criteria.url).to.be.a('string').and.equal('./api/settings');
+    expect(criteria.url).to.be.a('string').and.equal('./api/settings/filters');
   });
 
   it('has default set of criterion', function () {
@@ -46,7 +46,7 @@ describe('Criteria', function () {
 
   it('returns an empty query when there\'s no criterion', function () {
     expect(criteria.toQuery()).to.eql({
-      query: {},
+      query: "{}",
       sorts: [{
         field: 'clientId',
         order: 1
@@ -63,7 +63,7 @@ describe('Criteria', function () {
 
     criteria.add(criterion);
     expect(criteria.toQuery()).to.eql({
-      query: query1,
+      query: JSON.stringify(query1),
       sorts: [{
         field: 'clientId',
         order: 1
@@ -94,9 +94,9 @@ describe('Criteria', function () {
     criteria.add(criterion3);
 
     expect(criteria.toQuery()).to.eql({
-      query: {
+      query: JSON.stringify({
         '$and': [query1, query2, query3]
-      },
+      }),
       sorts: [{
         field: 'clientId',
         order: 1
@@ -113,7 +113,7 @@ describe('Criteria', function () {
     criteria.add(criterion);
 
     expect(criteria.toQuery()).to.eql({
-      query: {},
+      query: "{}",
       sorts: [{
         field: 'clientId',
         order: 1
@@ -138,7 +138,7 @@ describe('Criteria', function () {
     criteria.add(criterion2);
 
     expect(criteria.toQuery()).to.eql({
-      query: {},
+      query: "{}",
       sorts: [{
         field: 'clientId',
         order: 1

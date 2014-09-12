@@ -1,7 +1,5 @@
-var Criterion = require('./criterion');
+var DateRange = require('./dateRange');
 
-var ReportExpiry = Criterion.extend({
-
-});
+var ReportExpiry = DateRange.extend();
 
 module.exports = ReportExpiry;

@@ -1,0 +1,46 @@
+//
+// Extended
+// --------------------------------------------------
+
+// Tables
+
+.table {
+  // Cells
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        // change - default border properites
+        border-top: 0;
+        border-bottom: 1px solid @table-border-color;
+        // add - truncate with ellipsis
+        > div.truncate {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: inherit;
+        }
+      }
+    }
+  }
+  // Remove bottom border from thead
+  > caption + thead,
+  > colgroup + thead,
+  > thead:first-child {
+    > tr:first-child {
+      > th,
+      > td {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+
+// Form groups
+
+.form-group {
+  margin-bottom: 10px;
+}

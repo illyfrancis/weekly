@@ -19,7 +19,7 @@ var settings = {
         'id': 'clients',
         'filterWith': 'clientId',
         'sortWith': 'clientId',
-        'title': 'Clients',
+        'title': 'Client',
         'displayOrder': 11,
         'groupOrder': 1
       }),

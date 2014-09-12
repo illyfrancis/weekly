@@ -34,7 +34,7 @@ var ReportName = Criterion.extend({
     if (this.hasValidFilter()) {
       var filter = this.get('filter');
       query = {};
-      query[this.filterWith()] = { '$startsWith': filter };
+      query[this.filterWith()] = { '$containsIgnoreCase': filter };
     }
 
     return query;

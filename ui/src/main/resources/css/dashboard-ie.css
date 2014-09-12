@@ -1,0 +1,16 @@
+/* fixed widths */
+td.report-name {
+  width: 160px;
+}
+td.report-category,
+td.report-type {
+  width: 100px;
+}
+td.report-owner,
+td.created-by,
+td.modified-by {
+  width: 80px;
+}
+td.distribution-list {
+  width: 110px;
+}

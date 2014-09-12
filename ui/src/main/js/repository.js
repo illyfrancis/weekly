@@ -1,30 +1,11 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
+var Clients = require('./collections/clients');
 var Criteria = require('./collections/criteria');
 var Schedules = require('./collections/schedules');
-var Clients = require('./collections/clients');
 var User = require('./models/user');
 
 var Repository = {
-
-  criteria: _.once(function () {
-    return new Criteria();
-  }),
-
-  loadCriteria: function (cb) {
-    this.criteria().fetch({
-      success: cb,
-      remove: false
-    });
-  },
-
-  schedules: _.once(function () {
-    return new Schedules();
-  }),
-
-  loadSchedules: function () {
-    Backbone.router.trigger('dashboard:search');
-  },
 
   user: _.once(function () {
     var dashboard = global.dashboard || {};
@@ -34,7 +15,27 @@ var Repository = {
 
   clients: _.once(function () {
     return new Clients();
-  })
+  }),
+
+  loadClients: function () {
+    return this.clients().fetch({reset: true});
+  },
+
+  criteria: _.once(function () {
+    return new Criteria();
+  }),
+
+  loadCriteria: function () {
+    return this.criteria().fetch({remove: false});
+  },
+
+  schedules: _.once(function () {
+    return new Schedules();
+  }),
+
+  loadSchedules: function () {
+    Backbone.router.trigger('dashboard:search');
+  }
 
 };
 

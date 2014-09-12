@@ -17,6 +17,10 @@ var User = Backbone.Model.extend({
     return this.isServiceDelivery || this.isAdmin;
   },
 
+  hasAdminRole: function () {
+    return this.isAdmin;
+  },
+
   toPermission: function () {
     return {
       'internal': this.isInternal()

@@ -10,16 +10,11 @@ var userTemplate = require('./templates/userSuggestion.html');
 var UserLookupFilter = Backbone.View.extend({
 
   events: {
-    'click .adduser': 'addUser',
-    'keyup .typeahead.tt-input': 'handleKeyup',
-    'focus .typeahead': 'clearError',
-    'typeahead:selected': 'onSelect'
+    'typeahead:selected': 'addSelectedUser'
   },
 
   initialize: function () {
     // this.model - a user based criterion
-    this.hasError = false;
-
     if (!this.model.users) {
       this.users = new Users();
     } else {
@@ -78,56 +73,9 @@ var UserLookupFilter = Backbone.View.extend({
     });
   },
 
-  addUser: function () {
-    if (this.hasValidSelection()) {
-      this.users.add(this.selected);
-      this.selected = null;
-      this.$('.typeahead').typeahead('val', '');
-    } else {
-      this.showError();
-    }
-  },
-
-  hasValidSelection: function () {
-    if (_.isObject(this.selected) && _.has(this.selected, 'id')) {
-      var userId = this.$('.typeahead.tt-input').val();
-      if (this.selected.id === userId) {
-        return true;
-      }
-    }
-
-    return false;
-  },
-
-  handleKeyup: function (event) {
-    if (this.hasError) {
-      this.clearError();
-    }
-
-    if (event.keyCode === 13) {
-      this.addUser();
-    }
-  },
-
-  showError: function () {
-    if (!this.hasError) {
-      this.hasError = true;
-      this.$el.addClass('has-error');
-      this.$('.help-block').removeClass('hidden');
-      this.$('.typeahead').typeahead('close');
-    }
-  },
-
-  clearError: function () {
-    if (this.hasError) {
-      this.hasError = false;
-      this.$el.removeClass('has-error');
-      this.$('.help-block').addClass('hidden');
-    }
-  },
-
-  onSelect: function (event, suggestion) {
-    this.selected = suggestion;
+  addSelectedUser: function (event, suggestion) {
+    this.users.add(suggestion);
+    this.$('.typeahead').typeahead('val', '');
   }
 
 });

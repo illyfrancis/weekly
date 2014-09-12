@@ -27,13 +27,20 @@ var MultiSelectFilter = Backbone.View.extend({
 
     }, this);
 
+    this.renderSelected();
+
     return this;
   },
 
   selectionOptions: function () {
     return [];
+  },
+
+  renderSelected: function () {
+    this.$('.selectpicker').val(this.model.get('filter'));
+    this.$('.selectpicker').selectpicker('render');
   }
-  
+
 });
 
 module.exports = MultiSelectFilter;

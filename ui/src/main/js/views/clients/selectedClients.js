@@ -6,8 +6,9 @@ var SelectedClients = Backbone.View.extend({
 
   className: 'well well-sm',
 
-  initialize: function () {
+  initialize: function (options) {
     // collection - clients
+    this.clientsCriterion = options.criteria.get('clients');
     this.listenTo(this.collection, 'add remove reset', this.render);
   },
 
@@ -22,7 +23,8 @@ var SelectedClients = Backbone.View.extend({
   appendClient: function (client) {
     var selectedClient = this.createSubView(SelectedClient, {
       model: client,
-      clients: this.collection
+      clients: this.collection,
+      clientsCriterion: this.clientsCriterion
     });
     this.$el.append(selectedClient.render().el);
   },

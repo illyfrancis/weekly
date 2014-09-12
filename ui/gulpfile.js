@@ -45,6 +45,28 @@ var errorHandler = function (err) {
   }
 };
 
+var less = require('gulp-less');
+var prefix = require('gulp-autoprefixer');
+gulp.task('less', function () {
+  gulp.src('./lib/bootstrap-3.2.0/less/bootstrap.less')
+    .pipe(less({
+        strictMath: true
+      }))
+    .pipe(prefix({
+        browsers: [
+          'Android 2.3',
+          'Android >= 4',
+          'Chrome >= 20',
+          'Firefox >= 24', // Firefox 24 is the latest ESR
+          'Explorer >= 8',
+          'iOS >= 6',
+          'Opera >= 12',
+          'Safari >= 6'
+        ]
+      }))
+    .pipe(gulp.dest('./lib/bootstrap-3.2.0/css/'));
+});
+
 gulp.task('lint', function () {
   var stream = gulp.src(['gulpfile.js', paths.main.js, paths.test.js, paths.test.jsnode])
     .pipe(jshint())
@@ -56,7 +78,7 @@ gulp.task('lint', function () {
 gulp.task('test', function () {
   var stream = gulp.src(paths.test.jsnode, {read: false})
     .pipe(mocha({
-      reporter: 'spec'
+      reporter: 'tap'
     }))
     .on('error', errorHandler);
 
@@ -79,7 +101,9 @@ gulp.task('concat', ['bundle'], function () {
   // concat external libs
   var stream = gulp.src([paths.target.app,
       './lib/bootstrap-select/1.5.2/js/bootstrap-select.js',
-      './lib/typeahead.js/0.10.2/dist/typeahead.bundle.js'
+      './lib/typeahead.js/0.10.2/dist/typeahead.bundle.js',
+      // './lib/typeahead.js/0.10.2/dist/typeahead.bundle.0.10.5.js',
+      './lib/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js'
     ])
     .pipe(concat(appjs))
     .pipe(gulp.dest(paths.target.base));
@@ -123,6 +147,10 @@ gulp.task('bundle-core', function () {
 });
 
 gulp.task('css', function () {
+  // copy IE specific styles
+  gulp.src('./src/main/resources/css/dashboard-ie.css')
+    .pipe(gulp.dest('./target/css'));
+
   var stream = gulp.src([
       './lib/bootstrap-select/1.5.2/css/bootstrap-select.min.css',
       './lib/bootstrap-3.2.0/css/bootstrap.css',

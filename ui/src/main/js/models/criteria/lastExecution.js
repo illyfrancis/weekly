@@ -1,7 +1,5 @@
-var Criterion = require('./criterion');
+var DateRange = require('./dateRange');
 
-var LastExecution = Criterion.extend({
-
-});
+var LastExecution = DateRange.extend();
 
 module.exports = LastExecution;

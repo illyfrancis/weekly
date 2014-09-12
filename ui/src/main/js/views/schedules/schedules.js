@@ -1,7 +1,7 @@
 var Backbone = require('backbone');
 var template = require('./templates/schedules.html');
 var ScheduleList = require('./scheduleList');
-var Pagination = require('./pagination');
+var PaginationBar = require('./paginationBar');
 
 var Schedules = Backbone.View.extend({
 
@@ -13,13 +13,16 @@ var Schedules = Backbone.View.extend({
       criteria: options.criteria,
       user: options.user
     });
-    this.pagination = this.createSubView(Pagination);
+    
+    this.paginationBar = this.createSubView(PaginationBar, {
+      model: this.collection.pagination
+    });
   },
 
   render: function () {
     this.$el.html(template());
     this.$('.scheduleList').html(this.scheduleList.render().el);
-    this.$('.page').html(this.pagination.render().el);
+    this.$('.page').replaceWith(this.paginationBar.render().el);
     return this;
   }
 });

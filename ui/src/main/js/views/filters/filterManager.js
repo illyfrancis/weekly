@@ -1,24 +1,27 @@
 var ClientsFilter = require('./clientsFilter');
+var DateRangeFilter = require('./dateRangeFilter');
+var DistributionFormatFilter = require('./distributionFormatFilter');
 var DistributionListFilter = require('./distributionListFilter');
+var FrequencyFilter = require('./frequencyFilter');
 var ReportNameFilter = require('./reportNameFilter');
 var ReportTypeFilter = require('./reportTypeFilter');
+var TriggerFilter = require('./triggerFilter');
 var UserFilter = require('./userFilter');
 var UserLookupFilter = require('./userLookupFilter');
-var FrequencyFilter = require('./frequencyFilter');
-var TriggerFilter = require('./triggerFilter');
-var DistributionFormatFilter = require('./distributionFormatFilter');
 
 var FilterManager = {
   clients: ClientsFilter,
   createdBy: UserFilter,
+  distributionFormat: DistributionFormatFilter,
   distributionList: DistributionListFilter,
+  frequency: FrequencyFilter,
+  lastExecution: DateRangeFilter,
   modifiedBy: UserFilter,
+  reportExpiry: DateRangeFilter,
   reportName: ReportNameFilter,
   reportOwner: UserLookupFilter,
   reportType: ReportTypeFilter,
-  frequency: FrequencyFilter,
-  trigger: TriggerFilter,
-  distributionFormat: DistributionFormatFilter
+  trigger: TriggerFilter
 };
 
 module.exports = FilterManager;

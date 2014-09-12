@@ -1,33 +1,43 @@
 var Backbone = require('backbone');
+var repository = require('../repository');
 
 var Query = Backbone.Model.extend({
 
-  initialize: function (attrs, options) {
-    this.schedules = options.schedules;
-    this.user = options.user;
-    this.clients = options.clients;
+  initialize: function () {
+    this.schedules = repository.schedules();
   },
 
   url: function () {
-    return this.user.isInternal() ? './api/schedules/clients/' + this.clients.toList() : './api/schedules';
+    var user = repository.user();
+    var clients = repository.clients();
+
+    return user.isInternal() ? './api/schedules/clients/' + clients.toList() : './api/schedules';
   },
 
-  search: function (criteria) {
+  callbacks: function () {
     var schedules = this.schedules;
-    var options = {
+    
+    return {
       success: function (model, response) {
         schedules.reset(response.schedules);
+        schedules.setPagination({
+          'currentPage': response.page,
+          'totalRecords': response.total
+        });
       },
 
       error: function () {
         schedules.trigger('error');
       }
     };
+  },
 
-    criteria.query = JSON.stringify(criteria.query);
-    criteria.offset = 0;
-    criteria.limit = 50;
-    this.save(criteria, options);
+  search: function (page) {
+    var criteria = repository.criteria().toQuery();
+    criteria.offset = this.schedules.offset(page);
+    criteria.limit = this.schedules.limit();
+
+    this.save(criteria, this.callbacks());
   }
 
 });

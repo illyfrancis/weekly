@@ -11,6 +11,10 @@ var ScheduleItem = Backbone.View.extend({
     'click': 'toggleDetail'
   },
 
+  initialize: function (options) {
+    this.user = options.user;
+  },
+
   toggleDetail: function () {
     var detailName = '.detail' + this.model.id;
     var p = this.$el.parent();
@@ -21,6 +25,10 @@ var ScheduleItem = Backbone.View.extend({
   render: function () {
     this.$el.html(template(this.toJSON()));
     return this;
+  },
+
+  isClientColumnVisible: function () {
+    return this.user.isInternal();
   },
 
   mapToMoment: function (date) {
@@ -60,6 +68,7 @@ var ScheduleItem = Backbone.View.extend({
       'expiry': this.mapReportExpiry(),
       'timeTrigger': this.mapTrigger(),
       'deliveryOptions': this.mapDistributionFormat(),
+      'isClientColumnVisible': this.isClientColumnVisible()
     }, this.model.toJSON());
   }
 });

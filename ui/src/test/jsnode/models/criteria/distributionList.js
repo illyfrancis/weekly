@@ -34,7 +34,7 @@ describe('DistributionList', function () {
 
     expect(query).to.eql({
       'distributionList': {
-        '$contains': VALID_EMAIL_ADDRESS
+        '$containsIgnoreCase': VALID_EMAIL_ADDRESS
       }
     });
   });

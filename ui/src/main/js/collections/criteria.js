@@ -4,7 +4,7 @@ var Criterion = require('../models/criteria/criterion');
 
 var Criteria = Backbone.Collection.extend({
 
-  url: './api/settings',
+  url: './api/settings/filters',
 
   model: Criterion,
 
@@ -16,13 +16,21 @@ var Criteria = Backbone.Collection.extend({
     return criterion.get('displayOrder');
   },
 
+  parse: function(response) {
+    return response.filters;
+  },  
+  
   save: function (options) {
     Backbone.sync('create', this, options);
   },
 
+  toJSON: function() {
+    return {'filters' : this.models};
+  },
+
   toQuery: function () {
     return {
-      'query': this.buildQuery(),
+      'query': JSON.stringify(this.buildQuery()),
       'sorts': this.buildSort()
     };
   },

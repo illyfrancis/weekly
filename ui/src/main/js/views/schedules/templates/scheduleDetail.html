@@ -3,34 +3,32 @@
     <div style="margin: 5px;">
       <div class="btn-toolbar .pull-right">
         <div class="btn-group">
-          <button class="btn btn-primary btn-sm">
+          <button class="btn btn-primary edit {{#if isEditDisabled}} disabled {{/if}}">
             <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</button>
           </button>
         </div>
         <div class="btn-group">
-          <button class="btn btn-primary btn-sm run-schedule">
+          <button class="btn btn-primary run-schedule {{#if isRunNowDisabled}} disabled {{/if}}">
             <span class="glyphicon glyphicon-flash"></span>&nbsp;Run now</button>
           </button>
         </div>
         <div class="btn-group">
-          <button class="btn btn-primary btn-sm view-criteria">
+          <button class="btn btn-primary view-criteria">
             <span class="glyphicon glyphicon-list-alt"></span>&nbsp;View criteria</button>
           </button>
         </div>
-        {{#if isReportOwner}}
         <div class="btn-group">
-          <button class="btn btn-primary btn-sm download">
+          <button class="btn btn-primary download {{#if isDownloadDisabled}} disabled {{/if}}">
             <span class="glyphicon glyphicon-download-alt"></span>&nbsp;Download</button>
           </button>
         </div>
-        {{/if}}
         <div class="btn-group">
-          <button class="btn btn-primary btn-sm">
+          <button class="btn btn-primary share {{#if isShareDisabled}} disabled {{/if}}">
             <span class="glyphicon glyphicon-share"></span>&nbsp;Share</button>
           </button>
         </div>
         <div class="btn-group">
-          <button class="btn btn-primary btn-sm">
+          <button class="btn btn-primary transfer {{#if isTransferDisabled}} disabled {{/if}}">
             <span class="glyphicon glyphicon-transfer"></span>&nbsp;Transfer</button>
           </button>
         </div>

@@ -34,7 +34,7 @@ var DistributionList = Criterion.extend({
     if (filter !== '') {
       query = {};
       query[this.filterWith()] = {
-        '$contains': filter
+        '$containsIgnoreCase': filter
       };
     }
 

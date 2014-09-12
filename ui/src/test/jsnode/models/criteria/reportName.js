@@ -53,7 +53,7 @@ describe('ReportName', function () {
 
       expect(query).to.eql({
         'reportName': {
-          '$startsWith': 'TRANSACT'
+          '$containsIgnoreCase': 'TRANSACT'
         }
       });
     });

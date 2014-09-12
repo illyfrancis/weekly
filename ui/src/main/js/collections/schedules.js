@@ -1,23 +1,25 @@
 var Backbone = require('backbone');
+var Pagination = require('../models/pagination');
 var Schedule = require('../models/schedule');
 
 var Schedules = Backbone.Collection.extend({
 
-  url: './api/schedules',
-
   model: Schedule,
 
-  parse: function (response) {
-    return response.schedules;
+  initialize: function () {
+    this.pagination = new Pagination();
   },
 
-  sync: function (method, model, options) {
-    // hack to force POST when 'fetch' - revise
-    if ('read' === method) {
-      method = 'create';
-    }
+  setPagination: function (attrs) {
+    this.pagination.set(attrs);
+  },
 
-    return Backbone.sync.call(this, method, model, options);
+  offset: function (page) {
+    return this.pagination.offset(page);
+  },
+
+  limit: function () {
+    return this.pagination.limit();
   }
 
 });

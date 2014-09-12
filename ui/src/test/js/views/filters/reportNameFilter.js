@@ -25,7 +25,6 @@ describe('ReportNameFilter', function () {
   });
 
   afterEach(function () {
-    // restore
     ReportNameFilter.prototype.render.restore();
     ReportNameFilter.prototype.showError.restore();
     ReportNameFilter.prototype.clearError.restore();

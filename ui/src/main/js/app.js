@@ -6,12 +6,23 @@ require('bootstrap');
 require('./customize');
 require('./configure');
 
-var AppRouter = require('./router');
 var repository = require('./repository');
-// repository.loadCriteria(function () {
-  Backbone.router = new AppRouter();
-  Backbone.history.start();
+var AppRouter = require('./router');
+Backbone.router = new AppRouter();
+
+var showApp = function () {
   repository.loadSchedules();
-// });
+  Backbone.history.start();
+};
+
+var showError = function () {
+  // show msg - 'could not load defaults'.
+  // console.log('could not load defaults'); // for now
+};
+
+var settings = require('./settings');
+settings.loadDefaults()
+  .fail(showError)
+  .always(showApp);
 
 module.exports = Backbone.$;

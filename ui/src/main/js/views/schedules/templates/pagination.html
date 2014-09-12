@@ -1,18 +1,12 @@
-<div class="text-center">
+<div class="text-right">
   <ul class="pagination">
-    <li><a href="#">&laquo;</a>
-    </li>
-    <li><a href="#">1</a>
-    </li>
-    <li><a href="#">2</a>
-    </li>
-    <li><a href="#">3</a>
-    </li>
-    <li><a href="#">4</a>
-    </li>
-    <li><a href="#">5</a>
-    </li>
-    <li><a href="#">&raquo;</a>
-    </li>
+    <li><span>{{currentPage}} of {{totalPages}}</span></li>
+    <li class="first-page"><span>&laquo;</span></li>
+    <li class="previous-page-set"><span>&lsaquo;</span></li>
+    {{#each pages}}
+      <li id="page{{this}}"><span class="select-page" data-page="{{this}}">{{this}}</span></li>
+    {{/each}}
+    <li class="next-page-set"><span>&rsaquo;</span></li>
+    <li class="last-page"><span>&raquo;</span></li>
   </ul>
 </div>

@@ -7,6 +7,8 @@ var template = require('./templates/scheduleList.html');
 
 var ScheduleList = Backbone.View.extend({
 
+  className: '.table-responsive',
+
   initialize: function (options) {
     // this.collection = schedules.collection
     this.user = options.user;
@@ -31,8 +33,10 @@ var ScheduleList = Backbone.View.extend({
 
   renderHeader: function () {
     var scheduleHeader = this.createSubView(ScheduleHeader, {
-      collection: this.criteria
+      collection: this.criteria,
+      user: this.user
     });
+
     this.$('thead').append(scheduleHeader.render().el);
   },
 
@@ -49,7 +53,8 @@ var ScheduleList = Backbone.View.extend({
 
   appendScheduleItem: function (item) {
     var scheduleItem = this.createSubView(ScheduleItem, {
-      model: item
+      model: item,
+      user: this.user
     });
     this.$('tbody').append(scheduleItem.render().el);
   },

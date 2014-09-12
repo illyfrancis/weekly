@@ -3,7 +3,23 @@ var Client = require('../models/client');
 
 var Clients = Backbone.Collection.extend({
 
+  url: './api/settings/clients',
+
   model: Client,
+
+  toJSON: function () {
+    return {
+      'clients': this.models
+    };
+  },
+
+  save: function (options) {
+    Backbone.sync('create', this, options);
+  },
+
+  parse: function (response) {
+    return response.clients;
+  },
 
   toList: function () {
     var ids = this.map(function (client) {

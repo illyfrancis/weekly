@@ -1,9 +1,8 @@
+var _ = require('underscore');
 var Backbone = require('backbone');
 var template = require('./templates/selectedClient.html');
 
 var SelectedClient = Backbone.View.extend({
-
-  // tagName: 'li',
 
   events: {
     'click .remove': 'removeClient'
@@ -11,6 +10,7 @@ var SelectedClient = Backbone.View.extend({
 
   initialize: function (options) {
     this.clients = options.clients;
+    this.clientsCriterion = options.clientsCriterion;
   },
 
   render: function () {
@@ -19,7 +19,22 @@ var SelectedClient = Backbone.View.extend({
   },
 
   removeClient: function () {
-    this.clients.remove(this.model);
+    var filter = this.clientsCriterion.get('filter');
+
+    if (this.isClientUsedInFilter(filter)) {
+      this.$el.children().popover({
+        content: 'Cannot remove, used for search',  // i18n
+        trigger: 'hover'
+      });
+
+      this.$el.children().popover('show');
+    } else {
+      this.clients.remove(this.model);
+    }
+  },
+
+  isClientUsedInFilter: function (filter) {
+    return _.isArray(filter) ? _.indexOf(filter, this.model.id) > -1 : false;
   }
 
 });

@@ -13,74 +13,18 @@ var Clients = Backbone.View.extend({
   events: {
     'click .apply': 'applyClients',
     'click .add-client': 'addClient',
-    'typeahead:selected': 'onSelect',
+    'typeahead:selected': 'handleSelect',
     'keyup .typeahead.tt-input': 'handleKeyup',
-    'focus .typeahead': 'clearError'
+    'focus .typeahead': 'clearError',
+    'hidden.bs.modal': 'dispose'
   },
 
-  applyClients: function () {
-    Backbone.router.trigger('dashboard:search');
-    this.$('.modal').modal('hide');
-  },
-
-  onSelect: function (event, suggestion) {
-    this.selected = suggestion;
-  },
-
-  handleKeyup: function (event) {
-    if (this.hasError) {
-      this.clearError();
-    }
-
-    if (event.keyCode === 13) {
-      this.addClient();
-    }
-  },
-
-  clearError: function () {
-    if (this.hasError) {
-      this.hasError = false;
-      this.$el.removeClass('has-error');
-      this.$('.help-block').addClass('hidden');
-    }
-  },
-
-  addClient: function () {
-    if (this.hasValidSelection()) {
-      this.collection.add(this.selected); // make it silent? then tirgger only when applied?
-      this.selected = null;
-      this.$('.typeahead').typeahead('val', '');
-    } else {
-      this.showError();
-    }
-  },
-
-  showError: function () {
-    if (!this.hasError) {
-      this.hasError = true;
-      this.$el.addClass('has-error');
-      this.$('.help-block').removeClass('hidden');
-      this.$('.typeahead').typeahead('close');
-    }
-  },
-
-  hasValidSelection: function () {
-    if (_.isObject(this.selected) && _.has(this.selected, 'id')) {
-      var clientId = this.$('.typeahead.tt-input').val();
-      if (this.selected.id === clientId) {
-        return true;
-      }
-    }
-
-    return false;
-  },
-
-
-  initialize: function () {
+  initialize: function (options) {
     this.hasError = false;
 
     this.selectedUsers = this.createSubView(SelectedClients, {
-      collection: this.collection
+      collection: this.collection,
+      criteria: options.criteria
     });
 
     this.initializeTypeaheadEngine();
@@ -118,7 +62,6 @@ var Clients = Backbone.View.extend({
     }, {
       name: 'clients',
       displayKey: function (client) {
-        // return client.id + ' - ' + client.name;
         return client.id;
       },
       source: this.hound.ttAdapter(),
@@ -127,6 +70,64 @@ var Clients = Backbone.View.extend({
         suggestion: clientTemplate
       }
     });
+  },
+
+  applyClients: function () {
+    Backbone.router.trigger('dashboard:search');
+    this.collection.save();
+    this.$('.modal').modal('hide');
+  },
+
+  handleSelect: function (event, suggestion) {
+    this.selected = suggestion;
+  },
+
+  handleKeyup: function (event) {
+    if (this.hasError) {
+      this.clearError();
+    }
+
+    if (event.keyCode === 13) {
+      this.addClient();
+    }
+  },
+
+  clearError: function () {
+    if (this.hasError) {
+      this.hasError = false;
+      this.$el.removeClass('has-error');
+      this.$('.help-block').addClass('hidden');
+    }
+  },
+
+  addClient: function () {
+    if (this.hasValidSelection()) {
+      this.collection.add(this.selected);
+      this.selected = null;
+      this.$('.typeahead').typeahead('val', '');
+    } else {
+      this.showError();
+    }
+  },
+
+  showError: function () {
+    if (!this.hasError) {
+      this.hasError = true;
+      this.$el.addClass('has-error');
+      this.$('.help-block').removeClass('hidden');
+      this.$('.typeahead').typeahead('close');
+    }
+  },
+
+  hasValidSelection: function () {
+    if (_.isObject(this.selected) && _.has(this.selected, 'id')) {
+      var clientId = this.$('.typeahead.tt-input').val();
+      if (this.selected.id === clientId) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
 });

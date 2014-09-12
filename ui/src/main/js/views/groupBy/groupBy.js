@@ -3,20 +3,36 @@ var GroupByOption = require('./groupByOption');
 
 var GroupBy = Backbone.View.extend({
 
+  initialize: function (options) {
+    this.user = options.user;
+  },
+
   render: function () {
 
-    var $dropdown = this.$('.dropdown-menu');
-
-    this.collection.each(function (criterion) {
-      if (criterion.get('isSortable')) {
-        var groupByOption = this.createSubView(GroupByOption, {
-          model: criterion
-        });
-        $dropdown.append(groupByOption.render().el);
-      }
-    }, this);    
+    this.collection.chain()
+      .reject(this.clientCriterionForNonInternalUser, this)
+      .filter(this.sortableCriterion, this)
+      .each(this.appendGroupOption, this);
 
     return this;
+  },
+
+  clientCriterionForNonInternalUser: function (criterion) {
+    return criterion.id === 'clients' && !this.user.isInternal();
+  },
+
+  sortableCriterion: function (criterion) {
+    return criterion.get('isSortable');
+  },
+
+  appendGroupOption: function (criterion) {
+    
+    var groupByOption = this.createSubView(GroupByOption, {
+      model: criterion,
+      user: this.user
+    });
+    
+    this.$('.dropdown-menu').append(groupByOption.render().el);
   }
 
 });

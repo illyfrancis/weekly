@@ -5,21 +5,30 @@ var ScheduleHeader = Backbone.View.extend({
 
   tagName: 'tr',
 
-  initialize: function () {
+  initialize: function (options) {
     // this.collection = Criteria
+    this.user = options.user;
   },
 
   render: function () {
-    var criterionHeader;
-    this.collection.each(function (criterion) {
-      criterionHeader = this.createSubView(CriterionHeader, {
-        model: criterion
-      });
-      this.$el.append(criterionHeader.render().el);
-    }, this);
+    this.collection.chain()
+      .reject(this.clientCriterionForNonInternalUser, this)
+      .each(this.appendHeader, this);
 
     return this;
+  },
+
+  clientCriterionForNonInternalUser: function (criterion) {
+    return criterion.id === 'clients' && !this.user.isInternal();
+  },
+
+  appendHeader: function (criterion) {
+    var criterionHeader = this.createSubView(CriterionHeader, {
+      model: criterion
+    });
+    this.$el.append(criterionHeader.render().el);
   }
+
 });
 
 module.exports = ScheduleHeader;

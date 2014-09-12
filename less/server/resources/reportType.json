@@ -1,0 +1,160 @@
+[{
+    "name": "Cash",
+    "layout": [{
+        "code": "CSHBAL",
+        "name": "Historical Balances"
+    }, {
+        "code": "CSHTRAN",
+        "name": "Historical Transactions"
+    }, {
+        "code": "RTCSHBAL",
+        "name": "Real Time Balances"
+    }, {
+        "code": "RTCSHTRAN",
+        "name": "Real Time Transactions"
+    }, {
+        "code": "WMRTCSHBAL",
+        "name": "WM Real Time Balances"
+    }, {
+        "code": "WMRTCSHTRN",
+        "name": "WM Real Time Transactions"
+    }]
+}, {
+    "name": "Corporate Actions (New)",
+    "layout": [{
+        "code": "CACTION",
+        "name": "Action Research"
+    }, {
+        "code": "FXSTDINST",
+        "name": "FX Standing Instructions"
+    }, {
+        "code": "FACTOR",
+        "name": "Factor Research"
+    }, {
+        "code": "INTREC",
+        "name": "Internal Response Reconciliation"
+    }, {
+        "code": "PDRECPAY",
+        "name": "Past Due Receivable/Payable"
+    }, {
+        "code": "CORPDVPRVP",
+        "name": "RVP/DVP Standing Instruction"
+    }, {
+        "code": "RECPAY",
+        "name": "Receivable/Payable"
+    }, {
+        "code": "RESREC",
+        "name": "Response Reconciliation"
+    }, {
+        "code": "RESRESH",
+        "name": "Response Research"
+    }, {
+        "code": "RSPSTDINST",
+        "name": "Response Standing Instructions"
+    }, {
+        "code": "RESSTAT",
+        "name": "Response Status"
+    }, {
+        "code": "SRECPAY",
+        "name": "Shares Receivable/Payable"
+    }, {
+        "code": "SUBREC",
+        "name": "Sub Group Response Reconciliation"
+    }, {
+        "code": "TXRCLM",
+        "name": "Tax Reclaim"
+    }, {
+        "code": "TXLXN",
+        "name": "Tax Withholding Elections"
+    }]
+}, {
+    "name": "ETF Reporting Profiles",
+    "layout": [{
+        "code": "ETF_RPTG",
+        "name": "ETF Reporting Profiles"
+    }]
+}, {
+    "name": "Golden Source Parent",
+    "layout": [{
+        "code": "GLDNSRCPV",
+        "name": "GS Portfolio Valuation-OFI&BBH Only"
+    }, {
+        "code": "GLDNSRCTDP",
+        "name": "GS Trade Date Position"
+    }, {
+        "code": "GLDNSRCTR",
+        "name": "GS Transactions-OFI&BBH Only"
+    }]
+}, {
+    "name": "Middle Office Reporting",
+    "layout": [{
+        "code": "HOLDVAL",
+        "name": "Trade Date Reporting"
+    }]
+}, {
+    "name": "Portfolio Accounting",
+    "layout": [{
+        "code": "FCTBR",
+        "name": "Broker Reports"
+    }, {
+        "code": "FCTFA",
+        "name": "Fund Administration"
+    }, {
+        "code": "FCTHV",
+        "name": "Holdings and Valuation"
+    }, {
+        "code": "FCTIR",
+        "name": "Income and Receivables"
+    }, {
+        "code": "FCTNTB",
+        "name": "NAV and Trial Balances"
+    }, {
+        "code": "FCTPR",
+        "name": "Pooling Reports"
+    }, {
+        "code": "FCTTGL",
+        "name": "Transactions and Gain/Loss"
+    }]
+}, {
+    "name": "Position Reporting",
+    "layout": [{
+        "code": "POSREPORT_POSITIONS",
+        "name": "Positions Reporting - Positions"
+    }]
+}, {
+    "name": "Securities Lending Reporting",
+    "layout": [{
+        "code": "SLACTVTY",
+        "name": "Activity"
+    }, {
+        "code": "SLBAL",
+        "name": "Balances"
+    }, {
+        "code": "SLCOLL",
+        "name": "Collateral"
+    }, {
+        "code": "SLCOMP",
+        "name": "Compliance"
+    }, {
+        "code": "SLEARN",
+        "name": "Earnings"
+    }, {
+        "code": "SLPERF",
+        "name": "Performance"
+    }, {
+        "code": "SLREPORTS",
+        "name": "Report List"
+    }]
+}, {
+    "name": "Total Expense Ratio Report",
+    "layout": [{
+        "code": "FA_TER_DSH",
+        "name": "Fund Admin TER Reports"
+    }]
+}, {
+    "name": "Transaction Reporting",
+    "layout": [{
+        "code": "TXNREPORT_TRADES",
+        "name": "Transaction Reporting"
+    }]
+}]

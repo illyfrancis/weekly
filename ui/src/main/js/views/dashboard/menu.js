@@ -13,18 +13,26 @@ var Menu = Backbone.View.extend({
 
   initialize: function (options) {
     this.criteria = options.criteria;
+    this.user = options.user;
   },
 
   render: function () {
-    this.$el.html(template());
+    this.$el.html(template({
+      'isClientsSelectionVisible': this.isClientsSelectionVisible()
+    }));
 
     var groupBy = this.createSubView(GroupBy, {
       el: this.$('.group-by'),
-      collection: this.criteria
+      collection: this.criteria,
+      user: this.user
     });
     groupBy.render();
 
     return this;
+  },
+
+  isClientsSelectionVisible: function () {
+    return this.user.isInternal();
   },
 
   showFilters: function () {
