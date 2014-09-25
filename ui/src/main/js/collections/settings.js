@@ -32,7 +32,7 @@ var settings = {
       }),
       new DistributionFormat({
         'id': 'distributionFormat',
-        'title': 'Distribution format',
+        'title': 'Delivery',
         'displayOrder': 10
       }),
       new DistributionList({

@@ -7,6 +7,7 @@ var assert = require('assert');
 describe('PaginationBar', function () {
 
   var pagination, paginationBar;
+  var PAGE_SIZE = 18;
 
   beforeEach(function () {
 
@@ -15,7 +16,7 @@ describe('PaginationBar', function () {
 
     pagination = new Pagination({
       currentPage: 2,
-      totalRecords: 140
+      totalRecords: 7 * PAGE_SIZE
     });
 
     paginationBar = new PaginationBar({

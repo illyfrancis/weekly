@@ -17,6 +17,10 @@ var ReportOwner = Criterion.extend({
     this.set('filter', this.users.toJSON(), { silent: true });
   },
 
+  hasValidFilter: function () {
+    return this.buildQuery().length > 0;
+  },
+
   toQuery: function () {
     var query = this.buildQuery();
     var wrappedQuery = null;

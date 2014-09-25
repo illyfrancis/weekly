@@ -37,6 +37,10 @@ var Criterion = Backbone.Model.extend({
     }
   },
 
+  isSortable: function () {
+    return this.get('isSortable') && !this.isGroupField();
+  },
+
   isDescendingSort: function () {
     return this.get('sortOrder') === -1;
   },
@@ -83,8 +87,16 @@ var Criterion = Backbone.Model.extend({
     };
   },
 
+  hasValidFilter: function () {
+    return this.get('filter') && true;
+  },
+
   toQuery: function () {
     return null;
+  },
+
+  parse: function (response) {
+    return _.omit(response, 'title');
   }
 
 });

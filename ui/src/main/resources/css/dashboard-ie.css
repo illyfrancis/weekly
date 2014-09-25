@@ -1,16 +1,15 @@
-/* fixed widths */
-td.report-name {
-  width: 160px;
+.schedules .table > tbody > tr > td.report-name {
+  width: 150px;
 }
-td.report-category,
-td.report-type {
-  width: 100px;
+.schedules .table > tbody > tr > td.report-category,
+.schedules .table > tbody > tr > td.report-type {
+  width: 90px;
 }
-td.report-owner,
-td.created-by,
-td.modified-by {
+.schedules .table > tbody > tr > td.report-owner,
+.schedules .table > tbody > tr > td.created-by,
+.schedules .table > tbody > tr > td.modified-by {
   width: 80px;
 }
-td.distribution-list {
-  width: 110px;
+.schedules .table > tbody > tr > td.distribution-list {
+  width: 100px;
 }

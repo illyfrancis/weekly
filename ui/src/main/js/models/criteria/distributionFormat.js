@@ -12,11 +12,16 @@ var DistributionFormat = Criterion.extend({
     this.set('filter', triggers);
   },
 
-  toQuery: function () {
+  hasValidFilter: function () {
     var filter = this.get('filter');
+    return _.isArray(filter) && filter.length > 0;
+  },
+
+  toQuery: function () {
     var query = null;
 
-    if (_.isArray(filter) && filter.length > 0) {
+    if (this.hasValidFilter()) {
+      var filter = this.get('filter');
       var queries = _.map(filter, this.selectedElementToQueryCondition);
 
       if (queries.length > 1) {

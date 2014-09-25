@@ -13,10 +13,6 @@ var Clients = Backbone.Collection.extend({
     };
   },
 
-  save: function (options) {
-    Backbone.sync('create', this, options);
-  },
-
   parse: function (response) {
     return response.clients;
   },

@@ -1,6 +1,7 @@
 var _ = require('underscore');
 _.str = require('underscore.string');
 var Criterion = require('./criterion');
+
 var ReportName = Criterion.extend({
 
   initialize: function () {
@@ -23,18 +24,13 @@ var ReportName = Criterion.extend({
     }
   },
 
-  hasValidFilter: function () {
-    var filter = this.get('filter');
-    return filter !== '';
-  },
-
   toQuery: function () {
     var query = null;
 
     if (this.hasValidFilter()) {
       var filter = this.get('filter');
       query = {};
-      query[this.filterWith()] = { '$containsIgnoreCase': filter };
+      query[this.filterWith()] = {'$containsIgnoreCase': filter};
     }
 
     return query;

@@ -9,8 +9,8 @@ describe('ScheduleDetail View', function () {
 
   var testSchedule, testUser, testScheduleDetail;
 
-  var containsDisabledClass = function (selector) {
-    return testScheduleDetail.$el.find(selector).hasClass('disabled');
+  var contains = function (selector) {
+    return testScheduleDetail.$el.find(selector).length === 1;
   };
 
   describe('renders if Report Owner', function () {
@@ -34,20 +34,12 @@ describe('ScheduleDetail View', function () {
     });
 
     it('"edit" button as enabled', function () {
-      expect(containsDisabledClass('.transfer')).to.be.false;
+      expect(contains('.edit')).to.be.true;
     });
 
     it('"run now" button as enabled', function () {
-      expect(containsDisabledClass('.run-schedule')).to.be.false;
+      expect(contains('.run-schedule')).to.be.true;
     });
-
-    it('"share" button as enabled', function () {
-      expect(containsDisabledClass('.share')).to.be.false;
-    });
-
-    it('"transfer" button as enabled', function () {
-      expect(containsDisabledClass('.transfer')).to.be.false;
-    });  
   });
 
   describe('renders if Recipient', function () {
@@ -71,19 +63,11 @@ describe('ScheduleDetail View', function () {
     });
 
     it('"edit" button as disabled', function () {
-      expect(containsDisabledClass('.transfer')).to.be.true;
+      expect(contains('.edit')).to.be.false;
     });
 
     it('"run now" button as disabled', function () {
-      expect(containsDisabledClass('.run-schedule')).to.be.true;
-    });
-
-    it('"share" button as disabled', function () {
-      expect(containsDisabledClass('.share')).to.be.true;
-    });
-
-    it('"transfer" button as disabled', function () {
-      expect(containsDisabledClass('.transfer')).to.be.true;
+      expect(contains('.run-schedule')).to.be.false;
     });  
   });
 
@@ -108,19 +92,11 @@ describe('ScheduleDetail View', function () {
     });
 
     it('"edit" button as disabled', function () {
-      expect(containsDisabledClass('.transfer')).to.be.true;
+      expect(contains('.edit')).to.be.false;
     });
 
     it('"run now" button as disabled', function () {
-      expect(containsDisabledClass('.run-schedule')).to.be.true;
-    });
-
-    it('"share" button as disabled', function () {
-      expect(containsDisabledClass('.share')).to.be.true;
-    });
-
-    it('"transfer" button as disabled', function () {
-      expect(containsDisabledClass('.transfer')).to.be.true;
+      expect(contains('.run-schedule')).to.be.false;
     });
   });
 
@@ -145,19 +121,11 @@ describe('ScheduleDetail View', function () {
     });
 
     it('"edit" button as enabled', function () {
-      expect(containsDisabledClass('.transfer')).to.be.false;
+      expect(contains('.edit')).to.be.true;
     });
 
     it('"run now" button as enabled', function () {
-      expect(containsDisabledClass('.run-schedule')).to.be.false;
-    });
-
-    it('"share" button as disabled', function () {
-      expect(containsDisabledClass('.share')).to.be.true;
-    });
-
-    it('"transfer" button as enabled', function () {
-      expect(containsDisabledClass('.transfer')).to.be.false;
+      expect(contains('.run-schedule')).to.be.true;
     });
   });
 

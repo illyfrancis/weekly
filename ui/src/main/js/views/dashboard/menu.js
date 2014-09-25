@@ -7,8 +7,7 @@ var Menu = Backbone.View.extend({
   className: 'menu',
 
   events: {
-    'click .filters': 'showFilters',
-    'click .clients': 'showClients'
+    'click .filters': 'showFilters'
   },
 
   initialize: function (options) {
@@ -17,9 +16,7 @@ var Menu = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.html(template({
-      'isClientsSelectionVisible': this.isClientsSelectionVisible()
-    }));
+    this.$el.html(template());
 
     var groupBy = this.createSubView(GroupBy, {
       el: this.$('.group-by'),
@@ -31,18 +28,9 @@ var Menu = Backbone.View.extend({
     return this;
   },
 
-  isClientsSelectionVisible: function () {
-    return this.user.isInternal();
-  },
-
   showFilters: function () {
     Backbone.router.showFilters();
-  },
-
-  showClients: function () {
-    Backbone.router.showClients();
   }
-
 });
 
 module.exports = Menu;

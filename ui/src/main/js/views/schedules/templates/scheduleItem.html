@@ -19,7 +19,7 @@
 <td>
   <div class="label label-default">{{frequency}}</div>
 </td>
-<td>
+<td class="text-center">
   {{#if timeTrigger}}
   <span data-toggle="tooltip" title="{{trigger}}" class="glyphicon glyphicon-time"></span>
   {{else}}
@@ -30,9 +30,9 @@
   <div class="truncate" data-toggle="tooltip" title="{{distributionList}}">{{distributionList}}</div>
 </td>
 <td>
-  <div data-toggle="tooltip" title="{{lastExecution}}">{{timeago}}</div>
+  <div class="truncate" data-toggle="tooltip" title="{{lastExecution}}">{{timeago}}</div>
 </td>
-<td>
+<td class="text-center">
   {{#each deliveryOptions}} {{#if ATTACHMENT}}
   <span data-toggle="tooltip" title="{{delivery}}" class="glyphicon glyphicon-paperclip"></span>
   {{/if}} {{#if URL}}
@@ -43,9 +43,9 @@
 </td>
 {{#if isClientColumnVisible}}
 <td class="client">
-  <div data-toggle="tooltip" title="{{clientName}}">{{clientId}}</div>
+  <div class="truncate" data-toggle="tooltip" title="{{clientName}}">{{clientId}}</div>
 </td>
 {{/if}}
 <td>
-  <div data-toggle="tooltip" data-placement="left" title="{{reportExpiry}}">{{expiry}}</div>
+  <div class="truncate" data-toggle="tooltip" title="{{reportExpiry}}">{{expiry}}</div>
 </td>

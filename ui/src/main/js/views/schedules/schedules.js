@@ -21,7 +21,7 @@ var Schedules = Backbone.View.extend({
 
   render: function () {
     this.$el.html(template());
-    this.$('.scheduleList').html(this.scheduleList.render().el);
+    this.$('.schedule-list').html(this.scheduleList.render().el);
     this.$('.page').replaceWith(this.paginationBar.render().el);
     return this;
   }

@@ -95,19 +95,12 @@
   }
 }, {
   "request": {
-    "uri": "/api/reportType",
-    "method": "get"
-  },
-  "response": {
-    "file": "./resources/reportType.json"
-  }
-}, {
-  "request": {
     "uri": "/api/schedules",
     "method": "post"
   },
   "response": {
-    "file": "./resources/schedules.json"
+    "file": "./resources/schedules.json",
+    "latency": 1000
   }
 }, {
   "request": {
@@ -117,7 +110,8 @@
     "method": "post"
   },
   "response": {
-    "file": "./resources/schedules.json"
+    "file": "./resources/schedules.json",
+    "latency": 1000
   }
 }, {
   "request": {

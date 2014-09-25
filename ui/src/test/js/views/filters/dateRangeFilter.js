@@ -9,7 +9,6 @@ describe('DateRangeFilter', function () {
   var filter, dateRange, currentDateRange;
 
   beforeEach(function () {
-
     sinon.spy(DateRangeFilter.prototype, 'render');
     sinon.spy(DateRangeFilter.prototype, 'showError');
     sinon.spy(DateRangeFilter.prototype, 'clearError');
@@ -39,21 +38,17 @@ describe('DateRangeFilter', function () {
   });
 
   it('shows error when filter is invalid', function () {
-
     dateRange.trigger('invalid', dateRange, 'both dates are required');
     assert(filter.showError.calledOnce);
   });
 
   it('clears error when model is updated', function () {
-
     filter.updateModel();
     assert(filter.clearError.calledOnce);
   });
 
   it('sets filter when model is updated', function () {
-
     filter.updateModel();
     assert(dateRange.setFilter.calledOnce);
   });
-
 });

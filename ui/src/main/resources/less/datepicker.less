@@ -1,0 +1,122 @@
+// Mixin
+.date-variant(@color; @background; @border: white) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    color: @color;
+    background-color: @background;
+        border-color: @border;
+  }
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: @background;
+          border-color: @border;
+    }
+  }
+}
+
+// Date picker override
+
+.datepicker {
+  border-radius: 0px;
+
+  table {
+    background-color: white;
+    tr {
+      td, th {
+        padding: 0;
+        text-align: center;
+        width: 25px;
+        height: 25px;
+        border-radius: 0px;
+        border: none;
+      }
+    }
+  }
+  
+  table tbody tr td {
+    background-color: #efefef;
+    border-radius: 0;
+    border: 2px solid white;
+
+    &:first-child,
+    &:last-child {
+      background-color: #e1e1e1;
+    }
+    &.day:hover {
+      background-color: white;
+    }
+    // need to repeat disabled
+    &.disabled,
+    &.disabled:hover {
+      background: none;
+      color: @btn-link-disabled-color;
+      cursor: default;
+    }
+    &.today,
+    &.today:hover,
+    &.today.disabled,
+    &.today.disabled:hover {
+      .date-variant(white, #666);
+    }
+    &.today:hover:hover {
+      color: #000;
+    }
+    &.selected,
+    &.selected:hover,
+    &.selected.disabled,
+    &.selected.disabled:hover {
+      text-shadow: none;
+    }
+    &.active,
+    &.active:hover,
+    &.active.disabled,
+    &.active.disabled:hover {
+      .date-variant(white, @bbh-red);
+      text-shadow: none;
+    }
+    span {
+      border-radius: 0px;
+      background-color: #efefef;
+      &:hover {
+        background: white;
+      }
+      &.active,
+      &.active:hover,
+      &.active.disabled,
+      &.active.disabled:hover {
+        .date-variant(white, @bbh-red);
+        text-shadow: none;
+      }
+    }
+  }
+
+  .datepicker-days {
+    th.datepicker-switch {
+      width: inherit;
+    }
+  }
+  .datepicker-months,
+  .datepicker-years {
+    table tbody tr td {
+      background-color: white;
+    }
+  }
+}

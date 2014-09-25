@@ -44,7 +44,7 @@ var ScheduleItem = Backbone.View.extend({
   mapReportExpiry: function () {
     var reportExpiry = this.model.get('reportExpiry');
     var expiresAt = this.mapToMoment(reportExpiry);
-    return expiresAt.isValid() ? expiresAt.format('MMM Do YYYY') : '';
+    return expiresAt.isValid() ? expiresAt.format('MMM Do YYYY') : 'No expiry';
   },
 
   mapDistributionFormat: function () {

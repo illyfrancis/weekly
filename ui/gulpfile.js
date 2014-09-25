@@ -8,8 +8,10 @@ var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
 var hbsfy = require('hbsfy').configure({extensions: ['html']});
 var jshint = require('gulp-jshint');
+var less = require('gulp-less');
 var minifycss = require('gulp-minify-css');
 var mocha = require('gulp-mocha');
+var prefix = require('gulp-autoprefixer');
 var source = require('vinyl-source-stream');
 var uglify = require('gulp-uglify');
 
@@ -32,8 +34,8 @@ var paths = {
   }
 };
 
-// gulp {task} --env production
-var isProduction = args.env === 'production';
+// set environment variable TARGET_ENVIRONMENT to PRODUCTION to enable production mode
+var isProduction = process.env.TARGET_ENVIRONMENT === 'PRODUCTION';
 
 // gulp {task} --exitOnError
 var errorHandler = function (err) {
@@ -44,28 +46,6 @@ var errorHandler = function (err) {
     this.emit('end');
   }
 };
-
-var less = require('gulp-less');
-var prefix = require('gulp-autoprefixer');
-gulp.task('less', function () {
-  gulp.src('./lib/bootstrap-3.2.0/less/bootstrap.less')
-    .pipe(less({
-        strictMath: true
-      }))
-    .pipe(prefix({
-        browsers: [
-          'Android 2.3',
-          'Android >= 4',
-          'Chrome >= 20',
-          'Firefox >= 24', // Firefox 24 is the latest ESR
-          'Explorer >= 8',
-          'iOS >= 6',
-          'Opera >= 12',
-          'Safari >= 6'
-        ]
-      }))
-    .pipe(gulp.dest('./lib/bootstrap-3.2.0/css/'));
-});
 
 gulp.task('lint', function () {
   var stream = gulp.src(['gulpfile.js', paths.main.js, paths.test.js, paths.test.jsnode])
@@ -102,7 +82,6 @@ gulp.task('concat', ['bundle'], function () {
   var stream = gulp.src([paths.target.app,
       './lib/bootstrap-select/1.5.2/js/bootstrap-select.js',
       './lib/typeahead.js/0.10.2/dist/typeahead.bundle.js',
-      // './lib/typeahead.js/0.10.2/dist/typeahead.bundle.0.10.5.js',
       './lib/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js'
     ])
     .pipe(concat(appjs))
@@ -146,14 +125,35 @@ gulp.task('bundle-core', function () {
     .pipe(gulp.dest(paths.target.base));
 });
 
-gulp.task('css', function () {
+gulp.task('less', function () {
+  return gulp.src([
+      './src/main/resources/less/dashboard.less',
+      './src/main/resources/less/dashboard-ie.less'])
+    .pipe(less({
+        strictMath: true
+      }))
+    .pipe(prefix({
+        browsers: [
+          'Android 2.3',
+          'Android >= 4',
+          'Chrome >= 20',
+          'Firefox >= 24', // Firefox 24 is the latest ESR
+          'Explorer >= 8',
+          'iOS >= 6',
+          'Opera >= 12',
+          'Safari >= 6'
+        ]
+      }))
+    .pipe(gulp.dest('./src/main/resources/css/'));
+});
+
+gulp.task('css', ['less'], function () {
   // copy IE specific styles
   gulp.src('./src/main/resources/css/dashboard-ie.css')
     .pipe(gulp.dest('./target/css'));
 
   var stream = gulp.src([
       './lib/bootstrap-select/1.5.2/css/bootstrap-select.min.css',
-      './lib/bootstrap-3.2.0/css/bootstrap.css',
       './src/main/resources/css/dashboard.css'
     ])
     .pipe(concat('dashboard.css'))
@@ -166,6 +166,7 @@ gulp.task('css', function () {
 gulp.task('resources', ['css'], function () {
   return gulp.src([
       '!./src/main/resources/css/*.css',
+      '!./src/main/resources/less/*.less',
       paths.main.resources,
       paths.test.resources
     ])
@@ -182,7 +183,7 @@ gulp.task('test-build', ['bundle-core', 'bundle-test']);
 gulp.task('watch-build', function () {
   gulp.watch(
     ['.jshintrc', 'gulpfile.js', paths.main.js, paths.main.templates, paths.test.js, './src/main/resources/**/*.css'],
-    ['lint', 'test', 'test-build', 'build', 'resources']);
+    ['resources', 'lint', 'test', 'test-build', 'build']);
 });
 
 gulp.task('ci-default', ['resources', 'lint', 'test', 'build']);

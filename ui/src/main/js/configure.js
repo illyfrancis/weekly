@@ -20,6 +20,13 @@ Backbone.$.ajaxSetup({
   cache: false
 });
 
+// loader
+Backbone.$(document).ajaxStart(function () {
+  Backbone.$('#loader').show();
+}).ajaxStop(function () {
+  Backbone.$('#loader').hide();
+});
+
 // enable tooltips
 Backbone.$('body').tooltip({
   selector: '[data-toggle=tooltip]'

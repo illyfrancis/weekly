@@ -1,6 +1,5 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
-var Clients = require('./views/clients/clients');
 var Dashboard = require('./views/dashboard/dashboard');
 var Filters = require('./views/filters/filters');
 var Query = require('./models/query');
@@ -44,18 +43,7 @@ var AppRouter = Backbone.Router.extend({
 
     Backbone.$('.dashboard-container').append(filters.render().el);
     filters.$('.modal').modal('show');
-  },
-
-  showClients: function () {
-    var clients = new Clients({
-      collection: repository.clients(),
-      criteria: repository.criteria()
-    });
-
-    Backbone.$('.dashboard-container').append(clients.render().el);
-    clients.$('.modal').modal('show');
   }
-
 });
 
 module.exports = AppRouter;

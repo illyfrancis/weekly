@@ -7,51 +7,30 @@ var expect = chai.expect;
 
 describe('Menu View', function () {
 
-  var createMenuFor = function (role) {
+  var testMenu;
 
+  beforeEach(function () {
     var testUser = new User({
-      'id': 'A012345',
-      'roles': [role]
+      'id': 'A012345'
     });
 
-    var testMenu = new Menu({
+    testMenu = new Menu({
       criteria: new Criteria(),
       user: testUser
     });
+  });
 
-    return testMenu;
+  it('renders filter button', function () {
+    testMenu.render();
+    expect(containsElementWithClass(testMenu, '.filters')).to.be.true;
+  });
+
+  it('renders group by button', function () {
+    testMenu.render();
+    expect(containsElementWithClass(testMenu, '.group-by')).to.be.true;
+  });
+
+  var containsElementWithClass = function (menu, className) {
+    return menu.$el.has(className).length === 1;
   };
-
-  var containsClientsSelectionButton = function (menu) {
-    return menu.$el.has('button.clients').length === 1;
-  };
-
-  it('doesnt render clients selection button if Report Owner', function () {
-
-    var testMenu = createMenuFor('REPORT_OWNER');
-
-    testMenu.render();
-
-    expect(containsClientsSelectionButton(testMenu)).to.be.false;
-  });
-
-  it('renders clients selection button if Service Delivery', function () {
-
-    var testMenu = createMenuFor('SERV_DELIVER');
-
-    testMenu.render();
-
-    expect(containsClientsSelectionButton(testMenu)).to.be.true;
-  });
-
-
-  it('renders clients selection button if Admin', function () {
-
-    var testMenu = createMenuFor('ADMIN');
-
-    testMenu.render();
-
-    expect(containsClientsSelectionButton(testMenu)).to.be.true;
-  });
-
 });

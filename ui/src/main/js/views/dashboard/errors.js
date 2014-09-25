@@ -8,23 +8,18 @@ var Errors = Backbone.View.extend({
   },
 
   handleAjaxError: function (event, jqxhr) {
-
+    var message = '';
     if (jqxhr.status === 0) {
-
-      this.displayNotification('Connection to the server is dead / terminated, please try again');
-
+      message = 'Connection to the server is dead / terminated, please try again';
     } else if (jqxhr.status === 401) {
-
-      this.displayNotification('User not logged in / Session expired, please log in');
-
+      message = 'User not logged in / Session expired, please log in';
     } else if (jqxhr.status === 500) {
-
-      this.displayNotification('Error occurred, please try again later');
-
+      message = 'Error occurred, please try again later';
     } else {
-
-      this.displayNotification('Error occurred, please contact support team');
+      message = 'Error occurred, please contact support team';
     }
+
+    this.displayNotification(message);
   },
 
   displayNotification: function (errorMessage) {

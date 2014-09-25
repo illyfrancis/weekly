@@ -28,10 +28,10 @@ var DistributionList = Criterion.extend({
   },
 
   toQuery: function () {
-    var filter = this.get('filter');
     var query = null;
 
-    if (filter !== '') {
+    if (this.hasValidFilter()) {
+      var filter = this.get('filter');
       query = {};
       query[this.filterWith()] = {
         '$containsIgnoreCase': filter

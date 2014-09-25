@@ -1,8 +1,9 @@
 var Backbone = require('backbone');
-var Menu = require('./menu');
-var Schedules = require('../schedules/schedules');
-var Notification = require('./notification');
 var Errors = require('./errors');
+var Loader = require('./loader');
+var Menu = require('./menu');
+var Notification = require('./notification');
+var Schedules = require('../schedules/schedules');
 var template = require('./templates/dashboard.html');
 
 var DashboardView = Backbone.View.extend({
@@ -22,6 +23,7 @@ var DashboardView = Backbone.View.extend({
 
     this.renderMenu();
     this.renderSchedules();
+    this.renderLoader();
     this.renderErrors();
 
     return this;
@@ -52,6 +54,11 @@ var DashboardView = Backbone.View.extend({
     });
 
     this.$('.schedules').replaceWith(schedules.render().el);
+  },
+
+  renderLoader: function () {
+    var loader = this.createSubView(Loader);
+    this.$el.append(loader.render().el);
   },
 
   renderErrors: function () {

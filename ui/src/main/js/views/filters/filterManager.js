@@ -1,4 +1,3 @@
-var ClientsFilter = require('./clientsFilter');
 var DateRangeFilter = require('./dateRangeFilter');
 var DistributionFormatFilter = require('./distributionFormatFilter');
 var DistributionListFilter = require('./distributionListFilter');
@@ -10,7 +9,6 @@ var UserFilter = require('./userFilter');
 var UserLookupFilter = require('./userLookupFilter');
 
 var FilterManager = {
-  clients: ClientsFilter,
   createdBy: UserFilter,
   distributionFormat: DistributionFormatFilter,
   distributionList: DistributionListFilter,

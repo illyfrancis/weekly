@@ -28,13 +28,13 @@ var User = Criterion.extend({
   },
 
   toQuery: function () {
-    var filter = this.get('filter');
     var query = null;
 
-    if (filter !== '') {
+    if (this.hasValidFilter()) {
+      var filter = this.get('filter');
       query = {};
       query[this.filterWith()] = {
-        '$eq': filter
+        '$eqIgnoreCase': filter
       };
     }
 

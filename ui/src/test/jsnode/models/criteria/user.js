@@ -58,7 +58,7 @@ describe('User', function () {
 
       expect(query).to.eql({
         'user': {
-          '$eq': 'a012345'
+          '$eqIgnoreCase': 'a012345'
         }
       });
     });

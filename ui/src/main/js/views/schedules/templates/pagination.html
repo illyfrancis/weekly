@@ -1,12 +1,12 @@
 <div class="text-right">
   <ul class="pagination">
-    <li><span>{{currentPage}} of {{totalPages}}</span></li>
-    <li class="first-page"><span>&laquo;</span></li>
-    <li class="previous-page-set"><span>&lsaquo;</span></li>
+    <li class="page-info"><span>{{currentPage}} of {{totalPages}}</span></li>
+    <li class="first-page"><span><span class="glyphicon glyphicon-step-backward"></span></span></li>
+    <li class="previous-page-set"><span><span class="glyphicon glyphicon-backward"></span></span></li>
     {{#each pages}}
       <li id="page{{this}}"><span class="select-page" data-page="{{this}}">{{this}}</span></li>
     {{/each}}
-    <li class="next-page-set"><span>&rsaquo;</span></li>
-    <li class="last-page"><span>&raquo;</span></li>
+    <li class="next-page-set"><span><span class="glyphicon glyphicon-forward"></span></span></li>
+    <li class="last-page"><span><span class="glyphicon glyphicon-step-forward"></span></span></li>
   </ul>
 </div>

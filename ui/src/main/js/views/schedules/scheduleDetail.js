@@ -23,10 +23,8 @@ var ScheduleDetail = Backbone.View.extend({
   render: function () {
     this.$el.html(template(
       _.defaults({
-        'isEditDisabled': this.isEditDisabled(),
-        'isRunNowDisabled': this.isRunNowDisabled(),
-        'isShareDisabled': this.isShareDisabled(),
-        'isTransferDisabled': this.isTransferDisabled()
+        'isEditEnabled': this.isEditEnabled(),
+        'isRunNowEnabled': this.isRunNowEnabled()
       }, this.model.toJSON())
     ));
 
@@ -37,20 +35,12 @@ var ScheduleDetail = Backbone.View.extend({
     return this;
   },
 
-  isEditDisabled: function () {
-    return !(this.isReportOwnedByUser() || this.user.hasAdminRole());
+  isEditEnabled: function () {
+    return this.isReportOwnedByUser() || this.user.hasAdminRole();
   },
 
-  isRunNowDisabled: function () {
-    return !(this.isReportOwnedByUser() || this.user.hasAdminRole());
-  },
-
-  isShareDisabled: function () {
-    return !this.isReportOwnedByUser();
-  },
-
-  isTransferDisabled: function () {
-    return !(this.isReportOwnedByUser() || this.user.hasAdminRole());
+  isRunNowEnabled: function () {
+    return this.isReportOwnedByUser() || this.user.hasAdminRole();
   },
 
   isReportOwnedByUser: function () {

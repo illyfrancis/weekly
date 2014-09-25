@@ -11,11 +11,16 @@ var Trigger = Criterion.extend({
     this.set('filter', triggers);
   },
 
-  toQuery: function () {
+  hasValidFilter: function () {
     var filter = this.get('filter');
+    return _.isArray(filter) && filter.length > 0;
+  },
+
+  toQuery: function () {
     var query = null;
 
-    if (_.isArray(filter) && filter.length > 0) {
+    if (this.hasValidFilter()) {
+      var filter = this.get('filter');
       query = {};
       query[this.filterWith()] = {
         '$in': this.uppercase(filter)
@@ -26,7 +31,6 @@ var Trigger = Criterion.extend({
   },
 
   uppercase: function (array) {
-
     return _.map(array, function (element) {
       return element.toUpperCase();
     });

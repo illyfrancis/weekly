@@ -28,7 +28,7 @@ var ReportCriteria = Backbone.View.extend({
 
   appendParameters: function (reportCriteriaParameter) {
     var parameterView = this.createSubView(ReportCriteriaParameter, { model: reportCriteriaParameter });
-    this.$('.report-criteria-body').append(parameterView.render().el);
+    this.$('.report-criteria').append(parameterView.render().el);
   },
 
   show: function (reportCriteriaId) {

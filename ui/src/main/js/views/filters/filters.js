@@ -1,4 +1,5 @@
 var _ = require('underscore');
+_.str = require('underscore.string');
 var Backbone = require('backbone');
 var FilterManager = require('./filterManager');
 var template = require('./templates/filters.html');
@@ -30,7 +31,7 @@ var Filters = Backbone.View.extend({
       if (!_.isUndefined(FilterView)) {
         filter = this.createSubView(FilterView, {
           model: criterion,
-          el: this.$('.' + id + 'Filter'),
+          el: this.$('.' + _.str.dasherize(id)),
           user: this.user
         });
         filter.render();
@@ -53,7 +54,7 @@ var Filters = Backbone.View.extend({
   cancelFilters: function () {
     this.$('.modal').modal('hide');
     this.collection.fetch();
-  },
+  }
 
 });
 

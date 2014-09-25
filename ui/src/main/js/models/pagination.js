@@ -8,7 +8,7 @@ var Pagination = Backbone.Model.extend({
     totalRecords: 0
   },
 
-  pageSize: 20,
+  pageSize: 18,
   pagesPerSet: 5,
 
   offset: function (page) {

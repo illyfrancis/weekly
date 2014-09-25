@@ -72,7 +72,7 @@ describe('DateRange', function () {
         to: toDate
       });
 
-      expect(dateRange.validationError).to.equal('\'from\' date can\'t be after the \'to\' date');
+      expect(dateRange.validationError).to.equal('From date can\'t be after the To date');
     });
 
     it('fails validation when only *to* date is set', function () {

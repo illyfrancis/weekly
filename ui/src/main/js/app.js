@@ -21,8 +21,8 @@ var showError = function () {
 };
 
 var settings = require('./settings');
-settings.loadDefaults()
-  .fail(showError)
-  .always(showApp);
+settings.loadDefaults().
+    fail(showError).
+    always(showApp);
 
 module.exports = Backbone.$;

@@ -5,20 +5,18 @@ var _ = require('underscore');
 var DateRangeFilter = Backbone.View.extend({
 
   events: {
-    'changeDate .input-group.date.from': 'changeFromDate',
-    'changeDate .input-group.date.to': 'changeToDate',
-    'change .input-group.date.from>input': 'changeFromDate',
-    'change .input-group.date.to>input': 'changeToDate'
+    'changeDate .date.from': 'changeFromDate',
+    'changeDate .date.to': 'changeToDate',
+    'change .date.from>input': 'changeFromDate',
+    'change .date.to>input': 'changeToDate'
   },
 
   initialize: function () {
-
     this.currentDateRange = {};
     this.listenTo(this.model, 'invalid', this.showError);
   },
 
   showError: function (model, error) {
-
     if (!this.hasError) {
       this.hasError = true;
       this.$el.addClass('has-error');
@@ -36,28 +34,29 @@ var DateRangeFilter = Backbone.View.extend({
   },
 
   changeFromDate: function () {
-
-    this.currentDateRange.from = this.$('.input-group.date.from').datepicker('getDate');
+    this.currentDateRange.from = this.$('.date.from').datepicker('getDate');
     this.updateModel();
+    this.$('.date.to').datepicker('setStartDate', this.currentDateRange.from);
   },
 
   changeToDate: function () {
-
-    this.currentDateRange.to = this.$('.input-group.date.to').datepicker('getDate');
+    this.currentDateRange.to = this.$('.date.to').datepicker('getDate');
     this.updateModel();
   },
 
   updateModel: function () {
-
     this.clearError();
     this.model.setFilter(_.clone(this.currentDateRange));
   },
 
   render: function () {
-
-    this.$el.html(template(this.model.toJSON()));
-    var fromDate = this.$('.input-group.date.from');
-    var toDate = this.$('.input-group.date.to');
+    this.$el.html(
+      template(_.defaults({
+        'viewId': this.cid
+      }, this.model.toJSON()))
+    );
+    var fromDate = this.$('.date.from');
+    var toDate = this.$('.date.to');
 
     _.each([fromDate, toDate], function (item) {
       item.datepicker({
@@ -75,9 +74,7 @@ var DateRangeFilter = Backbone.View.extend({
   },
 
   initializeDatePickers: function (fromDate, toDate) {
-
     if (this.model.hasValidFilter()) {
-
       var filter = this.model.get('filter');
       this.currentDateRange = {
         from: filter.from,

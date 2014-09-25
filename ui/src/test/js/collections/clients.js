@@ -29,20 +29,6 @@ describe('Clients', function () {
       assert.equal(1, requests.length);
       assert(requests[0].url.indexOf(API_URI) > -1);
     });
-
-    it('saves clients using Settings API', function () {
-
-      var clients = new Clients([{
-        "id": "BBH2",
-        "name": "BBH Investor Services"
-      }]);
-      clients.save();
-
-      assert.equal(API_URI, requests[0].url);
-      assert.equal('POST', requests[0].method);
-      assert.equal(JSON.stringify(clients), requests[0].requestBody);
-    });
-
   });
 
 
